@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://co5ia265a1f5q"]
+
+[ext_resource type="Texture2D" uid="uid://dsqplp7a02t60" path="res://sprites/entities/E-Sheet.png" id="1_6rohx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ope74"]
+atlas = ExtResource("1_6rohx")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0kjm"]
+atlas = ExtResource("1_6rohx")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fajtm"]
+atlas = ExtResource("1_6rohx")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhktb"]
+atlas = ExtResource("1_6rohx")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v662x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ope74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0kjm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fajtm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhktb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="E" type="Node2D"]
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_v662x")
+autoplay = "default"
+frame_progress = 0.806126
