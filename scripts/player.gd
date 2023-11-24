@@ -7,8 +7,8 @@ const bullet = preload("res://Scenes/entity scenes/bullet.tscn")
 @export var healthPoints = 200
 @export var maxHealthPoints = 200
 
-@export var stamina = 50
-@export var maxStamina = 50
+@export var stamina = 75
+@export var maxStamina = 75
 
 
 @export var damage = 4
@@ -70,8 +70,8 @@ func updateMousepos():
 	var quadrants = [upLeft, upMiddle, upRight, middleLeft, middleRight, bottomLeft, bottomMiddle, bottomRight]	
 	return quadrants
 
-
-
+var combo = false
+var saved_index = -1
 var global_index = 0
 # I can attack
 func attack():
@@ -110,7 +110,13 @@ func attack_calculation():
 
 func attack_melee(index):
 	#ani maishn :3
-	animations.play("attack_" + attackAnimations[index])
+	if saved_index == index and combo:
+		animations.play_backwards("attack_" + attackAnimations[index])
+		combo = false
+	else:
+		animations.play("attack_" + attackAnimations[index])
+		combo = true
+	$combo.stop()
 	animPlay = true
 	#movement
 	$meleeTimer.start()
@@ -121,9 +127,33 @@ func _on_melee_timer_timeout():
 	move_and_slide()
 	staminaChange("melee")
 	await animations.animation_finished
+	if combo:
+		$combo.start()
+
 	animPlay = false
 	attacking = false
 	action = false
+	saved_index = global_index
+
+
+func _on_combo_timeout():
+	$combo.stop()
+	combo = false
+	match global_index:
+		0, 3, 5:
+			animations.play("walk_left")
+		1:
+			animations.play("walk_up")
+		2, 4, 7:
+			animations.play("walk_right")
+		6:
+			animations.play("walk_down")
+	animPlay = false
+	attacking = false
+	action = false
+	saved_index = global_index
+
+
 
 
 # does the attacking but *pew pew*
@@ -192,14 +222,14 @@ func movementAnimation():
 		elif velocity.y < 0:
 			animations.play("walk_up")
 	else:
-		if animPlay == false and attacking == false:
-			animations.stop()
+		if not animPlay and not attacking:
+			if "walk_" in animations.current_animation:
+				animations.stop()
 
 
 var staminaStop = false
 
 func staminaChange(value):
-	staminaChanged.emit()
 	match value:
 		"melee":
 			staminaSubtract(8)
@@ -208,6 +238,7 @@ func staminaChange(value):
 		"dash":
 			staminaSubtract(12)
 	staminaStop = true
+	staminaChanged.emit()
 	$staminaStop.start()
 
 func _on_stamina_stop_timeout():
@@ -222,9 +253,11 @@ func staminaSubtract(num):
 
 
 
-func staminaRegen(delta):
+func staminaRecovery(delta):
 	if stamina < maxStamina and not staminaStop:
-		stamina += 1 * delta * 15
+		stamina += 1 * delta * 20
+		staminaChanged.emit()
+		
 
 
 func _on_melee_hitboxes_area_entered(area):
@@ -238,5 +271,5 @@ func _physics_process(delta):
 	movementAnimation()
 	attack()
 	littleTrolling()
-	staminaRegen(delta)
+	staminaRecovery(delta)
 

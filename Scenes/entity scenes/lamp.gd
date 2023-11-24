@@ -11,8 +11,9 @@ func _on_interaction_area_entered(area):
 		if not isActivating:
 			inTrigger = true
 			$E/Sprite2D.visible = true
+	interact()
 	
-func _on_interaction_area_exited(area):
+func _on_interaction_area_exited(_area):
 	inTrigger = false
 	$E/Sprite2D.visible = false
 
@@ -28,7 +29,7 @@ func interact():
 		else:
 			print("gg")
 			
-func _physics_process(delta):
+func _physics_process(_delta):
 	interact()
 
 

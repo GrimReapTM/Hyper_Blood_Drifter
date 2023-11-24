@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://cn1bybip4vf4a"]
+
+[ext_resource type="Texture2D" uid="uid://2rl55phhltqc" path="res://sprites/HUD/pause_buttons/menu_inventory_idle.png" id="1_c4rxu"]
+[ext_resource type="Texture2D" uid="uid://cxix0iwwqan40" path="res://sprites/HUD/pause_buttons/menu_inventory_pressed.png" id="2_qq1vt"]
+[ext_resource type="Texture2D" uid="uid://54lepai5bpk3" path="res://sprites/HUD/pause_buttons/menu_inventory_hover.png" id="3_203rw"]
+[ext_resource type="Texture2D" uid="uid://cp3c60uvxssd" path="res://sprites/HUD/pause_buttons/menu_equip_idle.png" id="4_bnh61"]
+[ext_resource type="Texture2D" uid="uid://dmwq4jnjcg0xp" path="res://sprites/HUD/pause_buttons/menu_equip_pressed.png" id="5_g57q8"]
+[ext_resource type="Texture2D" uid="uid://dyxyxl6s8gyhk" path="res://sprites/HUD/pause_buttons/menu_equip_hover.png" id="6_i10i8"]
+[ext_resource type="Texture2D" uid="uid://h0trl2biee0o" path="res://sprites/HUD/pause_buttons/menu_settings_idle.png" id="7_jr6ma"]
+[ext_resource type="Texture2D" uid="uid://bdxbhvaksdur7" path="res://sprites/HUD/pause_buttons/menu_settings_pressed.png" id="8_bwryk"]
+[ext_resource type="Texture2D" uid="uid://cayroi4qf812c" path="res://sprites/HUD/pause_buttons/menu_settings_hover.png" id="9_0tbis"]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(0, 19)
+
+[node name="InventoryButton" type="TextureButton" parent="."]
+offset_left = 5.0
+offset_top = 61.0
+offset_right = 69.0
+offset_bottom = 125.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("1_c4rxu")
+texture_pressed = ExtResource("2_qq1vt")
+texture_hover = ExtResource("3_203rw")
+metadata/_edit_use_anchors_ = true
+
+[node name="EquipedButton" type="TextureButton" parent="."]
+offset_left = 5.0
+offset_top = 253.0
+offset_right = 69.0
+offset_bottom = 317.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("4_bnh61")
+texture_pressed = ExtResource("5_g57q8")
+texture_hover = ExtResource("6_i10i8")
+metadata/_edit_use_anchors_ = true
+
+[node name="SettingsButton" type="TextureButton" parent="."]
+offset_left = 5.0
+offset_top = 445.0
+offset_right = 69.0
+offset_bottom = 509.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("7_jr6ma")
+texture_pressed = ExtResource("8_bwryk")
+texture_hover = ExtResource("9_0tbis")
+metadata/_edit_use_anchors_ = true
