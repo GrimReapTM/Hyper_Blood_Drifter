@@ -10,14 +10,24 @@
 [ext_resource type="Texture2D" uid="uid://bdxbhvaksdur7" path="res://sprites/HUD/pause_buttons/menu_settings_pressed.png" id="8_bwryk"]
 [ext_resource type="Texture2D" uid="uid://cayroi4qf812c" path="res://sprites/HUD/pause_buttons/menu_settings_hover.png" id="9_0tbis"]
 
-[node name="Node2D" type="Node2D"]
-position = Vector2(0, 19)
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 19.0
+offset_bottom = 19.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+self_modulate = Color(0, 0, 0, 0.380392)
+offset_left = -5.0
+offset_top = -22.0
+offset_right = 1285.0
+offset_bottom = 704.0
 
 [node name="InventoryButton" type="TextureButton" parent="."]
-offset_left = 5.0
-offset_top = 61.0
-offset_right = 69.0
-offset_bottom = 125.0
+offset_left = 114.0
+offset_top = 205.0
+offset_right = 178.0
+offset_bottom = 269.0
 scale = Vector2(4, 4)
 texture_normal = ExtResource("1_c4rxu")
 texture_pressed = ExtResource("2_qq1vt")
@@ -25,10 +35,10 @@ texture_hover = ExtResource("3_203rw")
 metadata/_edit_use_anchors_ = true
 
 [node name="EquipedButton" type="TextureButton" parent="."]
-offset_left = 5.0
-offset_top = 253.0
-offset_right = 69.0
-offset_bottom = 317.0
+offset_left = 490.0
+offset_top = 205.0
+offset_right = 554.0
+offset_bottom = 269.0
 scale = Vector2(4, 4)
 texture_normal = ExtResource("4_bnh61")
 texture_pressed = ExtResource("5_g57q8")
@@ -36,12 +46,21 @@ texture_hover = ExtResource("6_i10i8")
 metadata/_edit_use_anchors_ = true
 
 [node name="SettingsButton" type="TextureButton" parent="."]
-offset_left = 5.0
-offset_top = 445.0
-offset_right = 69.0
-offset_bottom = 509.0
+offset_left = 866.0
+offset_top = 205.0
+offset_right = 930.0
+offset_bottom = 269.0
 scale = Vector2(4, 4)
 texture_normal = ExtResource("7_jr6ma")
 texture_pressed = ExtResource("8_bwryk")
 texture_hover = ExtResource("9_0tbis")
 metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 39.0
+offset_right = 501.0
+offset_bottom = 65.0
+scale = Vector2(5, 5)
+text = "Paused lol"

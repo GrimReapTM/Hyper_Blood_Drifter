@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 const bullet = preload("res://Scenes/entity scenes/bullet.tscn")
 
+@export var pauseMenu: Control
+
+var paused = false
 
 #player stats
 @export var healthPoints = 200
@@ -70,19 +73,29 @@ func updateMousepos():
 	var quadrants = [upLeft, upMiddle, upRight, middleLeft, middleRight, bottomLeft, bottomMiddle, bottomRight]	
 	return quadrants
 
+
+#inputs - self explanatory
+func _input(event):
+	if event.is_action_pressed("attackMelee"):
+		if not action and stamina > 5 and not paused:
+			action = true
+			global_index = attack_calculation()
+			attack_melee(global_index)
+	if event.is_action_pressed("attackRanged"):
+		if not action and stamina > 1 and bullets > 0 and not paused:
+			global_index = attack_calculation()
+			attack_ranged(global_index)
+	if event.is_action_pressed("pause"):
+		if not paused:
+			pauseMenu.visible = true
+			paused = true
+		else:
+			pauseMenu.visible = false
+			paused = false
+
 var combo = false
 var saved_index = -1
 var global_index = 0
-# I can attack
-func attack():
-	if Input.is_action_just_pressed("attackMelee") and not action and stamina > 5:
-		action = true
-		global_index = attack_calculation()
-		attack_melee(global_index)
-
-	if Input.is_action_just_pressed("attackRanged") and not action and stamina > 1 and bullets > 0:
-		global_index = attack_calculation()
-		attack_ranged(global_index)
 
 func attack_calculation():
 		# we start attacking and setup the for loop below using the position in function above
@@ -106,8 +119,6 @@ func attack_calculation():
 
 
 # actually does the attacking (the function above is boring af ^^^^)
-
-
 func attack_melee(index):
 	#ani maishn :3
 	if saved_index == index and combo:
@@ -264,12 +275,12 @@ func _on_melee_hitboxes_area_entered(area):
 	if area.name == "enemy_hurtbox":
 		attacked.emit()
 
+
 # this just happens or something
 func _physics_process(delta):
 	movement(delta)
 	move_and_slide()
 	movementAnimation()
-	attack()
 	littleTrolling()
 	staminaRecovery(delta)
 
