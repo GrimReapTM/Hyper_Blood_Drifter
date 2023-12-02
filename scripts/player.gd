@@ -233,9 +233,8 @@ func movementAnimation():
 		elif velocity.y < 0:
 			animations.play("walk_up")
 	else:
-		if not animPlay and not attacking:
-			if "walk_" in animations.current_animation:
-				animations.stop()
+		if not animPlay and not attacking and "walk_" in animations.current_animation:
+			animations.stop()
 
 
 var staminaStop = false
@@ -283,4 +282,5 @@ func _physics_process(delta):
 	movementAnimation()
 	littleTrolling()
 	staminaRecovery(delta)
+
 

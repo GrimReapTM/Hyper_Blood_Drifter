@@ -18,12 +18,14 @@ offset_bottom = 19.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 self_modulate = Color(0, 0, 0, 0.380392)
+layout_mode = 0
 offset_left = -5.0
 offset_top = -22.0
 offset_right = 1285.0
 offset_bottom = 704.0
 
 [node name="InventoryButton" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 114.0
 offset_top = 205.0
 offset_right = 178.0
@@ -35,6 +37,7 @@ texture_hover = ExtResource("3_203rw")
 metadata/_edit_use_anchors_ = true
 
 [node name="EquipedButton" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 490.0
 offset_top = 205.0
 offset_right = 554.0
@@ -46,6 +49,7 @@ texture_hover = ExtResource("6_i10i8")
 metadata/_edit_use_anchors_ = true
 
 [node name="SettingsButton" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 866.0
 offset_top = 205.0
 offset_right = 930.0
