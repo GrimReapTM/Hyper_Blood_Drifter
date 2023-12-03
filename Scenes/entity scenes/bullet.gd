@@ -17,3 +17,4 @@ func _physics_process(delta):
 func _on_bullet_hitbox_body_entered(body):
 	if wait and body.name != "Player":
 		queue_free()
+

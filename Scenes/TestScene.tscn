@@ -13,10 +13,15 @@ layer_1/tile_data = PackedInt32Array(1376297, 196609, 2, 1376296, 131073, 3, 137
 [node name="Player" parent="." index="1"]
 position = Vector2(368, 260)
 
-[node name="enemy" parent="." index="2" instance=ExtResource("3_adpvs")]
+[node name="enemy" parent="." index="2" node_paths=PackedStringArray("defalut_pos", "player") instance=ExtResource("3_adpvs")]
 position = Vector2(1644, 386)
+defalut_pos = NodePath("../enemy_default_pos")
+player = NodePath("../Player")
 hp = 100
 maxHp = 100
 
 [node name="lamp" parent="." index="3" instance=ExtResource("2_84i77")]
 position = Vector2(444, 767)
+
+[node name="enemy_default_pos" type="Marker2D" parent="." index="5"]
+position = Vector2(1643, 386)

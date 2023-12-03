@@ -994,6 +994,21 @@ height = 152.0
 [node name="enemy" type="CharacterBody2D"]
 script = ExtResource("1_0s70u")
 
+[node name="navigation_agent" type="NavigationAgent2D" parent="."]
+
+[node name="pathTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="meleeTimer" type="Timer" parent="."]
+wait_time = 0.15
+
+[node name="rangedTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="combo" type="Timer" parent="."]
+wait_time = 0.8
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
 texture = ExtResource("2_ea3bk")
@@ -1038,7 +1053,6 @@ script = ExtResource("5_s4jqy")
 enemy = NodePath("..")
 
 [node name="distance" type="Node2D" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0.141176)
 
 [node name="keep_aggro" type="Area2D" parent="distance"]
@@ -1061,9 +1075,9 @@ shape = SubResource("CapsuleShape2D_kgkf0")
 [node name="close_range_hitbox" type="CollisionShape2D" parent="distance/close_range"]
 shape = SubResource("CapsuleShape2D_gywlh")
 
-[node name="close_range2" type="Area2D" parent="distance"]
+[node name="mid_range" type="Area2D" parent="distance"]
 
-[node name="mid_range_hitbox" type="CollisionShape2D" parent="distance/close_range2"]
+[node name="mid_range_hitbox" type="CollisionShape2D" parent="distance/mid_range"]
 shape = SubResource("CircleShape2D_v82ys")
 
 [node name="long_range" type="Area2D" parent="distance"]
@@ -1099,6 +1113,18 @@ position = Vector2(0.615229, -1.59798)
 enabled = false
 target_position = Vector2(0.384771, 53.598)
 
+[connection signal="timeout" from="meleeTimer" to="." method="_on_melee_timer_timeout"]
+[connection signal="timeout" from="rangedTimer" to="." method="_on_ranged_timer_timeout"]
+[connection signal="timeout" from="combo" to="." method="_on_combo_timeout"]
 [connection signal="area_entered" from="enemy_hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_exited" from="distance/keep_aggro" to="." method="_on_keep_aggro_body_exited"]
+[connection signal="body_entered" from="distance/aggro_range" to="." method="_on_aggro_range_body_entered"]
+[connection signal="body_entered" from="distance/always_attack" to="." method="_on_always_attack_body_entered"]
+[connection signal="body_exited" from="distance/always_attack" to="." method="_on_always_attack_body_exited"]
+[connection signal="body_entered" from="distance/close_range" to="." method="_on_close_range_body_entered"]
+[connection signal="body_exited" from="distance/close_range" to="." method="_on_close_range_body_exited"]
+[connection signal="body_entered" from="distance/mid_range" to="." method="_on_mid_range_body_entered"]
+[connection signal="body_entered" from="distance/long_range" to="." method="_on_long_range_body_entered"]
+[connection signal="body_exited" from="distance/long_range" to="." method="_on_long_range_body_exited"]
 [connection signal="body_entered" from="combat/vision" to="." method="_on_vision_body_entered"]
 [connection signal="body_exited" from="combat/vision" to="." method="_on_vision_body_exited"]
