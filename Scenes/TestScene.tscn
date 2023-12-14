@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://beak1abcsvtp2"]
+[gd_scene load_steps=5 format=3 uid="uid://beak1abcsvtp2"]
 
 [ext_resource type="PackedScene" uid="uid://brdakdtadahqx" path="res://Scenes/Area.tscn" id="1_vxkws"]
 [ext_resource type="PackedScene" uid="uid://4xw8kh1f8odo" path="res://Scenes/entity scenes/lamp.tscn" id="2_84i77"]
 [ext_resource type="PackedScene" uid="uid://cwyp18u112jkf" path="res://Scenes/entity scenes/enemy.tscn" id="3_adpvs"]
+[ext_resource type="PackedScene" uid="uid://dkcjy0yklpqk2" path="res://Scenes/entity scenes/bath_messengers.tscn" id="4_osi4y"]
 
 [node name="Area" instance=ExtResource("1_vxkws")]
 
@@ -25,3 +26,6 @@ position = Vector2(444, 767)
 
 [node name="enemy_default_pos" type="Marker2D" parent="." index="5"]
 position = Vector2(1643, 386)
+
+[node name="StaticBody2D" parent="." index="6" instance=ExtResource("4_osi4y")]
+position = Vector2(923, 846)

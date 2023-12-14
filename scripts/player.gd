@@ -54,8 +54,6 @@ var dashing = true
 var attackAnimations = ["up_left", "up", "up_right", "left", "right", "down_left", "down", "down_right"]
 var attackVectors = [Vector2(position.x - attackMove, position.y - attackMove), Vector2(position.x, position.y - attackMove), Vector2(position.x + attackMove, position.y - attackMove),Vector2(position.x - attackMove, position.y),Vector2(position.x + attackMove, position.y),Vector2(position.x - attackMove, position.y + attackMove),Vector2(position.x, position.y + attackMove),Vector2(position.x + attackMove, position.y + attackMove)]
 
-
-
 # this is used to update the position of the points around the player used in the attack calculation below 
 #(the attack function is kinda cool tbh)
 func updateMousepos():
@@ -81,11 +79,11 @@ func _input(event):
 			action = true
 			global_index = attack_calculation()
 			attack_melee(global_index)
-	if event.is_action_pressed("attackRanged"):
+	elif event.is_action_pressed("attackRanged"):
 		if not action and stamina > 1 and bullets > 0 and not paused:
 			global_index = attack_calculation()
 			attack_ranged(global_index)
-	if event.is_action_pressed("pause"):
+	elif event.is_action_pressed("pause"):
 		if not paused:
 			pauseMenu.visible = true
 			paused = true
