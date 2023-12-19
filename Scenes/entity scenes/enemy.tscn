@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dui8ab2texftx" path="res://sprites/HUD/enemy_health_progress.png" id="4_y5tx0"]
 [ext_resource type="Script" path="res://Scenes/entity scenes/enemy_health_bar.gd" id="5_s4jqy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v2hyo"]
-size = Vector2(32, 35)
+[sub_resource type="CircleShape2D" id="CircleShape2D_aei5d"]
+radius = 22.0511
 
 [sub_resource type="Animation" id="Animation_2gyc1"]
 length = 0.8
@@ -992,9 +992,12 @@ radius = 54.4472
 height = 152.0
 
 [node name="enemy" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_0s70u")
-
-[node name="navigation_agent" type="NavigationAgent2D" parent="."]
+speed = 9500
 
 [node name="pathTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -1016,8 +1019,14 @@ hframes = 20
 vframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 78.5)
-shape = SubResource("RectangleShape2D_v2hyo")
+position = Vector2(0, 74.5)
+shape = SubResource("CircleShape2D_aei5d")
+
+[node name="navigation_agent" type="NavigationAgent2D" parent="CollisionShape2D"]
+path_desired_distance = 100.0
+target_desired_distance = 100.0
+avoidance_enabled = true
+debug_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1113,6 +1122,7 @@ position = Vector2(0.615229, -1.59798)
 enabled = false
 target_position = Vector2(0.384771, 53.598)
 
+[connection signal="timeout" from="pathTimer" to="." method="_on_path_timer_timeout"]
 [connection signal="timeout" from="meleeTimer" to="." method="_on_melee_timer_timeout"]
 [connection signal="timeout" from="rangedTimer" to="." method="_on_ranged_timer_timeout"]
 [connection signal="timeout" from="combo" to="." method="_on_combo_timeout"]
@@ -1124,6 +1134,7 @@ target_position = Vector2(0.384771, 53.598)
 [connection signal="body_entered" from="distance/close_range" to="." method="_on_close_range_body_entered"]
 [connection signal="body_exited" from="distance/close_range" to="." method="_on_close_range_body_exited"]
 [connection signal="body_entered" from="distance/mid_range" to="." method="_on_mid_range_body_entered"]
+[connection signal="body_exited" from="distance/mid_range" to="." method="_on_mid_range_body_exited"]
 [connection signal="body_entered" from="distance/long_range" to="." method="_on_long_range_body_entered"]
 [connection signal="body_exited" from="distance/long_range" to="." method="_on_long_range_body_exited"]
 [connection signal="body_entered" from="combat/vision" to="." method="_on_vision_body_entered"]
