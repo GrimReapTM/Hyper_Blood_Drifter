@@ -13,6 +13,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(4, 12, 2672, 8, 2672, 1
 [node name="Area" instance=ExtResource("1_vxkws")]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." index="0"]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_4jmfc")
 
 [node name="TileMap" parent="." index="1"]
@@ -22,9 +23,9 @@ layer_1/tile_data = PackedInt32Array(1376297, 196609, 2, 1376296, 131073, 3, 137
 [node name="Player" parent="." index="2"]
 position = Vector2(368, 260)
 
-[node name="enemy" parent="." index="3" node_paths=PackedStringArray("defalut_pos", "player") instance=ExtResource("3_adpvs")]
+[node name="enemy" parent="." index="3" node_paths=PackedStringArray("default_pos", "player") instance=ExtResource("3_adpvs")]
 position = Vector2(1644, 386)
-defalut_pos = NodePath("../enemy_default_pos")
+default_pos = NodePath("../enemy_default_pos")
 player = NodePath("../Player")
 hp = 100
 maxHp = 100

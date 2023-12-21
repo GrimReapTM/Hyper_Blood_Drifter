@@ -2,12 +2,14 @@ extends CharacterBody2D
 
 var aggro = false
 
+var rng = RandomNumberGenerator.new()
+
 const bullet = preload("res://Scenes/entity scenes/bullet.tscn")
 
 @export var speed = 300
 @onready var raycast = $vision_raycast
 
-@export var defalut_pos: Marker2D
+@export var default_pos: Marker2D
 @export var player: CharacterBody2D
 @onready var nav_agent = $CollisionShape2D/navigation_agent as NavigationAgent2D
 @onready var animations = $AnimationPlayer
@@ -15,21 +17,36 @@ const bullet = preload("res://Scenes/entity scenes/bullet.tscn")
 @export var hp = 50
 @export var maxHp = hp
 signal healthChanged
+var damaged = false
+var heavy = false
 
 var queue = null
 var distance = "far"
 
+func knockback(vector, strength):
+	position = position - vector / strength
+
 func _on_hurtbox_area_entered(area):
 	match area.name:
 		"melee_hitbox":
+			aggro = true
+			if not heavy:
+				damaged = true
+			$damagedTimer.start()
 			hp -= globalStats.melee_damage
 			healthChanged.emit()
+			knockback(to_local(player.position), 10)
 		"bullet_hitbox":
+			aggro = true
 			hp -= globalStats.ranged_damage
 			healthChanged.emit()
 			area.owner.queue_free()
+			knockback(to_local(player.position), 30)
 	if hp <= 0:
 		queue_free()
+
+func _on_damaged_timer_timeout():
+	damaged = false
 
 func _on_vision_body_entered(body):
 	if body.name == "Player" and not aggro:
@@ -40,7 +57,6 @@ func _on_vision_body_entered(body):
 func _on_vision_body_exited(body):
 	if body.name == "Player":
 		raycast.enabled = false
-
 
 
 #Beneath lies an indescribable abyss, a realm where shadows whisper untold secrets 
@@ -106,7 +122,6 @@ func attack_melee(index):
 	$combo.stop()
 	global_index = index
 	animPlay = true
-	#movement
 	$meleeTimer.start()
 
 
@@ -148,8 +163,6 @@ func attack_ranged(index):
 	#movement but backwards
 func _on_ranged_timer_timeout():
 	$rangedTimer.stop()
-	velocity = -attackVectors[global_index] * 30
-	move_and_slide()
 	instance_bullet()
 	await animations.animation_finished
 	animPlay = false
@@ -177,6 +190,15 @@ func movementAnimation():
 
 #-----------------------------------------------------
 # direction states
+var target = null
+
+func walk_to(t, delta):
+	if t != null:
+		velocity = to_local(nav_agent.get_next_path_position()).normalized() * speed * delta
+		if nav_agent.is_target_reached():
+			target = null
+			velocity = Vector2(0,0)
+			print("reached")
 
 # enemy keeps aggro if player is inside
 func _on_keep_aggro_body_exited(body):
@@ -184,7 +206,7 @@ func _on_keep_aggro_body_exited(body):
 		if body.name == "Player":
 			distance = "-"
 			aggro = false
-			#nav_agent.target_position = defalut_pos
+			target = default_pos.position
 
 # always starts aggro
 func _on_aggro_range_body_entered(body):
@@ -220,7 +242,7 @@ func _on_mid_range_body_exited(body):
 	if body.name == "Player":
 		distance = "far"
 
-# enemy either shoots (25%), gets even closer (50%) or circles around the player (25%)
+# enemy either shoots, gets even closer or circles around the player
 func _on_long_range_body_entered(body):
 	if body.name == "Player":
 		distance = "far"
@@ -231,39 +253,142 @@ func _on_long_range_body_exited(body):
 		distance = "follow"
 #---------------------------------------------------------------------------------------------
 
-func _on_path_timer_timeout():
-	nav_agent.target_position = player.position
+var circle_vectors1 = [Vector2(position.x - 100, position.y + 50), Vector2(position.x - 100, position.y - 50), Vector2(position.x - 50, position.y - 100), Vector2(position.x - 50, position.y - 100), Vector2(position.x + 50, position.y - 100), Vector2(position.x - 100, position.y - 50), Vector2(position.x - 100, position.y + 50), Vector2(position.x - 50, position.y + 100)]
+var circle_vectors2 = [Vector2(position.x + 50, position.y - 100), Vector2(position.x + 100, position.y - 50), Vector2(position.x + 100, position.y + 50), Vector2(position.x - 50, position.y + 100), Vector2(position.x + 50, position.y + 100), Vector2(position.x + 50, position.y + 100), Vector2(position.x + 100, position.y + 50), Vector2(position.x + 100, position.y - 50)]
+var back_off_vectors = [Vector2(position.x + 100, position.y + 100), Vector2(position.x, position.y + 100), Vector2(position.x - 100, position.y + 100), Vector2(position.x + 100, position.y), Vector2(position.x - 100, position.y), Vector2(position.x + 100, position.y - 100), Vector2(position.x, position.y - 100), Vector2(position.x - 100, position.y - 100)]
 
-func _process(_delta):
+func circle():
+	print("circle")
+	match rng.randi_range(1,2):
+		1:
+			target = position + circle_vectors1[attack_calculation()]
+		2:
+			target = position + circle_vectors2[attack_calculation()]
+	if not nav_agent.is_target_reachable():
+		target = player.position
+
+func back_off():
+	print("back off")
+	target = position + back_off_vectors[attack_calculation()]
+	if not nav_agent.is_target_reachable():
+		match rng.randi_range(1,2):
+			1:
+				circle()
+				print("circle fucked")
+			2:
+				close_range()
+				print("close_fucked")
+		return
+	rounds = 2
+
+func _on_path_timer_timeout():
+	if target != null:
+		nav_agent.target_position = target
+
+var rounds = 0
+
+func dice_roll():
+	var die1 = rng.randi_range(1, 6)
+	var die2 = rng.randi_range(1, 6)
+	return die1 + die2
+
+func _on_action_timer_timeout():
+	new_round(false)
+	if aggro and not attacking and not damaged:
+		print(distance)
+		match distance:
+			"attack":
+				new_round(true)
+				attack_melee(attack_calculation())
+			"close":
+				if rounds > 1:
+					new_round(false)
+				close_range()
+			"mid":
+				if not new_round(false):
+					mid_range()
+			"far":
+				if not new_round(false):
+					long_range()
+			"follow":
+				new_round(true)
+				target = player.position
+
+func new_round(bol):
+	if bol:
+		rounds = 0
+		return false
+	if rounds > 0:
+		rounds -= 1
+		print("rounds: " + str(rounds))
+		return true
+	else:
+		return false
+
+func close_range():
+	print("close")
+	target = null
+	
+	match dice_roll():
+		2,3:
+			circle()
+			print("close - circle")
+		4,5,6,7,8,9,10,11:
+			attack_melee(attack_calculation())
+			print("close - attack")
+		12:
+			back_off()
+			print("close - back off")
+
+func mid_range():
+	print("mid")
+	if target == player.position and dice_roll() >= 11:
+		rounds = 1
+		return
+	else:
+		target = null
+		
+	match dice_roll():
+		2,3:
+			attack_ranged(attack_calculation())
+			print("mid - ranged")
+		4,5,6:
+			circle()
+			print("mid - circle")
+		7,8,9,10,11:
+			target = player.position
+			rounds = 1
+			print("mid - follow")
+		12:
+			back_off()
+			print("mid - back off")
+
+func long_range():
+	print("long")
+	if target == player.position and dice_roll() >= 4:
+		rounds = 3
+		return
+	else:
+		target = null
+	
+	match dice_roll():
+		2,3,4:
+			attack_ranged(attack_calculation())
+			rounds = 1
+		5,6,7:
+			circle()
+		8,9,10,11,12:
+			target = player.position
+			rounds = 2
+
+func _process(delta):
 	if raycast.enabled:
 		raycast.target_position = Vector2(player.position.x, player.position.y + 60) - position
 		if raycast.is_colliding() and "Player" in str(raycast.get_collider()):
 			aggro = true
 			raycast.enabled = false
 
-func _physics_process(delta):
-	velocity = to_local(nav_agent.get_next_path_position()).normalized() * speed * delta
-	if aggro and not attacking:
-		match distance:
-			"attack":
-				pass
-			"close":
-				pass
-			"mid":
-				pass
-			"far":
-				pass
-			"follow":
-				pass
-
+	walk_to(target, delta)
 	move_and_slide()
 	attack_calculation()
-	print("player position: " + str(player.position))
-	print("target position: " + str(nav_agent.target_position))
-	print("velocity: " + str(velocity))
-	print("next path position: " + str(nav_agent.get_next_path_position()))
-	print("position: " + str(position))
-	print("is reachable: " + str(nav_agent.is_target_reachable()))
-	print("is reached: " + str(nav_agent.is_target_reached()))
-	print("is finished: " + str(nav_agent.is_navigation_finished()))
-	print("-----------------------------------")
+	movementAnimation()
