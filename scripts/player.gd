@@ -16,13 +16,14 @@ var paused = false
 
 @export var damage = 4
 @export var bullets = 20
+@export var b_bullets = 0
 @export var maxBullets = 20
 
 signal healthChanged
 signal bulletsChanged
 signal attacked
 signal staminaChanged
-
+signal b_bulletsChanged
 
 func littleTrolling():
 	if Input.is_action_just_pressed("comedy"):
@@ -90,6 +91,15 @@ func _input(event):
 		else:
 			pauseMenu.visible = false
 			paused = false
+	elif event.is_action_pressed("self_harm"):
+		if b_bullets == 0:
+			#animations.play("self_harm")
+			#await animations.animation_finished
+			healthPoints -= 50
+			healthChanged.emit()
+			b_bullets += 5
+			b_bulletsChanged.emit()
+
 
 var combo = false
 var saved_index = -1
@@ -186,10 +196,25 @@ func _on_ranged_timer_timeout():
 	
 func instance_bullet():
 	var instance = bullet.instantiate()
-	owner.add_child(instance)
+	instance.ID = "player"
 	instance.position = position
-	bullets -= 1
-	bulletsChanged.emit()
+	owner.add_child(instance)
+	if b_bullets != 0:
+		b_bullets -= 1
+		b_bulletsChanged.emit()
+	else:
+		bullets -= 1
+		bulletsChanged.emit()
+
+func _on_player_hurtbox_area_entered(area):
+	match area.name:
+		"enemy_attack":
+			healthPoints -= 40
+			healthChanged.emit()
+		"bullet_hitbox":
+			if area.owner.ID == "enemy":
+				healthPoints -= 6
+				healthChanged.emit()
 
 
 # this is how you move
@@ -280,5 +305,3 @@ func _physics_process(delta):
 	movementAnimation()
 	littleTrolling()
 	staminaRecovery(delta)
-
-

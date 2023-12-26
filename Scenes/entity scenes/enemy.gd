@@ -19,6 +19,7 @@ const bullet = preload("res://Scenes/entity scenes/bullet.tscn")
 signal healthChanged
 var damaged = false
 var heavy = false
+var staggered = false
 
 var queue = null
 var distance = "far"
@@ -37,11 +38,11 @@ func _on_hurtbox_area_entered(area):
 			healthChanged.emit()
 			knockback(to_local(player.position), 10)
 		"bullet_hitbox":
-			aggro = true
-			hp -= globalStats.ranged_damage
-			healthChanged.emit()
-			area.owner.queue_free()
-			knockback(to_local(player.position), 30)
+			if area.owner.ID == "player":
+				aggro = true
+				hp -= globalStats.ranged_damage
+				healthChanged.emit()
+				knockback(to_local(player.position), 30)
 	if hp <= 0:
 		queue_free()
 
@@ -171,8 +172,10 @@ func _on_ranged_timer_timeout():
 	
 func instance_bullet():
 	var instance = bullet.instantiate()
-	owner.add_child(instance)
+	instance.ID = "enemy"
 	instance.position = position
+	instance.direction = instance.position.direction_to(player.position)
+	owner.add_child(instance)
 
 func movementAnimation():
 	if velocity.length() != 0:
@@ -198,7 +201,8 @@ func walk_to(t, delta):
 		if nav_agent.is_target_reached():
 			target = null
 			velocity = Vector2(0,0)
-			print("reached")
+	else:
+		velocity = Vector2(0,0)
 
 # enemy keeps aggro if player is inside
 func _on_keep_aggro_body_exited(body):
@@ -252,13 +256,15 @@ func _on_long_range_body_exited(body):
 	if body.name == "Player":
 		distance = "follow"
 #---------------------------------------------------------------------------------------------
+var cir_low = 25
+var cir_high = 50
+var back = 50
 
-var circle_vectors1 = [Vector2(position.x - 100, position.y + 50), Vector2(position.x - 100, position.y - 50), Vector2(position.x - 50, position.y - 100), Vector2(position.x - 50, position.y - 100), Vector2(position.x + 50, position.y - 100), Vector2(position.x - 100, position.y - 50), Vector2(position.x - 100, position.y + 50), Vector2(position.x - 50, position.y + 100)]
-var circle_vectors2 = [Vector2(position.x + 50, position.y - 100), Vector2(position.x + 100, position.y - 50), Vector2(position.x + 100, position.y + 50), Vector2(position.x - 50, position.y + 100), Vector2(position.x + 50, position.y + 100), Vector2(position.x + 50, position.y + 100), Vector2(position.x + 100, position.y + 50), Vector2(position.x + 100, position.y - 50)]
-var back_off_vectors = [Vector2(position.x + 100, position.y + 100), Vector2(position.x, position.y + 100), Vector2(position.x - 100, position.y + 100), Vector2(position.x + 100, position.y), Vector2(position.x - 100, position.y), Vector2(position.x + 100, position.y - 100), Vector2(position.x, position.y - 100), Vector2(position.x - 100, position.y - 100)]
+var circle_vectors1 = [Vector2(position.x - cir_high, position.y + cir_low), Vector2(position.x - cir_high, position.y - cir_low), Vector2(position.x - cir_low, position.y - cir_high), Vector2(position.x - cir_low, position.y - cir_high), Vector2(position.x + cir_low, position.y - cir_high), Vector2(position.x - cir_high, position.y - cir_low), Vector2(position.x - cir_high, position.y + cir_low), Vector2(position.x - cir_low, position.y + cir_high)]
+var circle_vectors2 = [Vector2(position.x + cir_low, position.y - cir_high), Vector2(position.x + cir_high, position.y - cir_low), Vector2(position.x + cir_high, position.y + cir_low), Vector2(position.x - cir_low, position.y + cir_high), Vector2(position.x + cir_low, position.y + cir_high), Vector2(position.x + cir_low, position.y + cir_high), Vector2(position.x + cir_high, position.y + cir_low), Vector2(position.x + cir_high, position.y - cir_low)]
+var back_off_vectors = [Vector2(position.x + back, position.y + back), Vector2(position.x, position.y + back), Vector2(position.x - back, position.y + back), Vector2(position.x + back, position.y), Vector2(position.x - back, position.y), Vector2(position.x + back, position.y - back), Vector2(position.x, position.y - back), Vector2(position.x - back, position.y - back)]
 
 func circle():
-	print("circle")
 	match rng.randi_range(1,2):
 		1:
 			target = position + circle_vectors1[attack_calculation()]
@@ -268,16 +274,13 @@ func circle():
 		target = player.position
 
 func back_off():
-	print("back off")
 	target = position + back_off_vectors[attack_calculation()]
 	if not nav_agent.is_target_reachable():
 		match rng.randi_range(1,2):
 			1:
 				circle()
-				print("circle fucked")
 			2:
 				close_range()
-				print("close_fucked")
 		return
 	rounds = 2
 
@@ -294,8 +297,7 @@ func dice_roll():
 
 func _on_action_timer_timeout():
 	new_round(false)
-	if aggro and not attacking and not damaged:
-		print(distance)
+	if aggro and not attacking and not damaged and not staggered:
 		match distance:
 			"attack":
 				new_round(true)
@@ -320,28 +322,21 @@ func new_round(bol):
 		return false
 	if rounds > 0:
 		rounds -= 1
-		print("rounds: " + str(rounds))
 		return true
 	else:
 		return false
 
 func close_range():
-	print("close")
 	target = null
-	
 	match dice_roll():
 		2,3:
 			circle()
-			print("close - circle")
 		4,5,6,7,8,9,10,11:
 			attack_melee(attack_calculation())
-			print("close - attack")
 		12:
 			back_off()
-			print("close - back off")
 
 func mid_range():
-	print("mid")
 	if target == player.position and dice_roll() >= 11:
 		rounds = 1
 		return
@@ -351,20 +346,15 @@ func mid_range():
 	match dice_roll():
 		2,3:
 			attack_ranged(attack_calculation())
-			print("mid - ranged")
-		4,5,6:
+		4:
 			circle()
-			print("mid - circle")
-		7,8,9,10,11:
+		5,6,7,8,9,10,11:
 			target = player.position
 			rounds = 1
-			print("mid - follow")
 		12:
 			back_off()
-			print("mid - back off")
 
 func long_range():
-	print("long")
 	if target == player.position and dice_roll() >= 4:
 		rounds = 3
 		return
@@ -375,11 +365,14 @@ func long_range():
 		2,3,4:
 			attack_ranged(attack_calculation())
 			rounds = 1
-		5,6,7:
+		5:
 			circle()
-		8,9,10,11,12:
+		6,7,8,9,10,11,12:
 			target = player.position
 			rounds = 2
+
+func _on_stagger_body_entered(body):
+	pass # Replace with function body
 
 func _process(delta):
 	if raycast.enabled:

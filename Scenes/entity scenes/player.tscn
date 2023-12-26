@@ -728,6 +728,7 @@ wait_time = 0.5
 wait_time = 0.8
 
 [connection signal="area_entered" from="Sprite2D/melee_hitbox" to="." method="_on_melee_hitboxes_area_entered"]
+[connection signal="area_entered" from="Sprite2D/player_hurtbox" to="." method="_on_player_hurtbox_area_entered"]
 [connection signal="timeout" from="dashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="meleeTimer" to="." method="_on_melee_timer_timeout"]
 [connection signal="timeout" from="rangedTimer" to="." method="_on_ranged_timer_timeout"]

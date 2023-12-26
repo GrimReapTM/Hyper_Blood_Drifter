@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://brdakdtadahqx"]
+[gd_scene load_steps=21 format=3 uid="uid://brdakdtadahqx"]
 
 [ext_resource type="Texture2D" uid="uid://bodowo5fqv02g" path="res://sprites/tileset.png" id="1_fowpt"]
 [ext_resource type="Texture2D" uid="uid://c1namygqbemua" path="res://sprites/terrain_fence.png" id="2_boaiw"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scenes/RallyBar.gd" id="6_77vkd"]
 [ext_resource type="Texture2D" uid="uid://so3i23trx2op" path="res://sprites/HUD/rally_under.png" id="7_51q1n"]
 [ext_resource type="Texture2D" uid="uid://ce23umlterb35" path="res://sprites/HUD/rally_progress.png" id="9_0ughq"]
+[ext_resource type="Script" path="res://Scenes/Bonus_bullets.gd" id="12_23wbv"]
 [ext_resource type="Texture2D" uid="uid://c6ohwuky7g8r1" path="res://sprites/HUD/stamina_under.png" id="12_i100k"]
 [ext_resource type="Texture2D" uid="uid://d1wdomf07p3dc" path="res://sprites/HUD/stamina_progress.png" id="13_ipx0o"]
 [ext_resource type="Script" path="res://Scenes/StaminaBar.gd" id="14_48s20"]
@@ -312,6 +313,9 @@ terrain_set_0/terrain_0/color = Color(0.819608, 0.635294, 0.517647, 1)
 sources/0 = SubResource("TileSetAtlasSource_y8bg1")
 sources/1 = SubResource("TileSetAtlasSource_atdm0")
 
+[sub_resource type="LabelSettings" id="LabelSettings_rg3hr"]
+font_color = Color(0.979198, 0.186682, 0.168007, 1)
+
 [node name="Area" type="Node2D"]
 y_sort_enabled = true
 
@@ -390,6 +394,16 @@ offset_top = 28.0
 offset_right = 39.0
 offset_bottom = 56.0
 script = ExtResource("6_2yv2p")
+player = NodePath("../../Player")
+
+[node name="Bonus_bullets" type="Label" parent="CanvasLayer" node_paths=PackedStringArray("player")]
+visible = false
+offset_left = 27.0
+offset_top = 15.0
+offset_right = 64.0
+offset_bottom = 41.0
+label_settings = SubResource("LabelSettings_rg3hr")
+script = ExtResource("12_23wbv")
 player = NodePath("../../Player")
 
 [node name="StaminaBar" type="TextureProgressBar" parent="CanvasLayer" node_paths=PackedStringArray("player")]
