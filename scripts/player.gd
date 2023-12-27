@@ -9,6 +9,8 @@ var paused = false
 #player stats
 @export var healthPoints = 200
 @export var maxHealthPoints = 200
+@export var b_vials = 20
+@export var max_b_vials = 20
 
 @export var stamina = 75
 @export var maxStamina = 75
@@ -24,6 +26,7 @@ signal bulletsChanged
 signal attacked
 signal staminaChanged
 signal b_bulletsChanged
+signal vialsChanged
 
 func littleTrolling():
 	if Input.is_action_just_pressed("comedy"):
@@ -44,12 +47,13 @@ func littleTrolling():
 var attackMove = 20
 var moveDirection = 0
 
+
 #uhhh misc idk, this only affects animations
 @onready var animations = $AnimationPlayer
 var animPlay = false
 var attacking = false
 var action = false
-var dashing = true
+var dashing = false
 
 #used for attacks
 var attackAnimations = ["up_left", "up", "up_right", "left", "right", "down_left", "down", "down_right"]
@@ -91,15 +95,27 @@ func _input(event):
 		else:
 			pauseMenu.visible = false
 			paused = false
-	elif event.is_action_pressed("self_harm"):
+	elif event.is_action_pressed("blood_bullet"):
 		if b_bullets == 0:
-			#animations.play("self_harm")
-			#await animations.animation_finished
+			animations.play("blood_bullet")
+			await animations.animation_finished
+			animations.play("RESET")
 			healthPoints -= 50
 			healthChanged.emit()
 			b_bullets += 5
 			b_bulletsChanged.emit()
-
+	elif event.is_action_pressed("heal"):
+		if b_vials > 0:
+			animations.play("heal")
+			await animations.animation_finished
+			animations.play("RESET")
+			if healthPoints + 50 <= maxHealthPoints:
+				healthPoints += 50
+			else:
+				healthPoints = maxHealthPoints
+			healthChanged.emit()
+			b_vials -= 1
+			vialsChanged.emit()
 
 var combo = false
 var saved_index = -1
@@ -220,6 +236,16 @@ func _on_player_hurtbox_area_entered(area):
 # this is how you move
 var savedDirection = Vector2(0,0)
 
+func dash_dir():
+	if savedDirection.x > 0:
+		return "right"
+	elif savedDirection.x < 0:
+		return "left"
+	elif savedDirection.y > 0:
+		return "down"
+	elif savedDirection.y < 0:
+		return "up"
+
 func movement(delta):
 	moveDirection = Input.get_vector("moveLeft", "moveRight", "moveUp", "moveDown")
 	
@@ -229,8 +255,10 @@ func movement(delta):
 	if attacking == false:
 		if Input.is_action_just_pressed("dash") and not action and stamina > 8:
 			action = true
+			dashing = true
 			staminaChange("dash")
 			velocity = savedDirection * speed * 3
+			animations.play("dash_" + dash_dir())
 			$dashTimer.start()
 		else:
 			if action == false:
@@ -242,17 +270,18 @@ func _on_dash_timer_timeout():
 	$dashTimer.stop()
 	velocity = Vector2(0,0)
 	action = false
+	dashing = false
 
 
 # this is how you ✨move✨
 func movementAnimation():
-	if velocity.length() != 0:
-		if velocity.y > 0:
-			animations.play("walk_down")
-		if velocity.x < 0:
-			animations.play("walk_left")
-		elif velocity.x > 0:
+	if velocity.length() != 0 and not dashing:
+		if velocity.x > 0:
 			animations.play("walk_right")
+		elif velocity.x < 0:
+			animations.play("walk_left")
+		elif velocity.y > 0:
+			animations.play("walk_down")
 		elif velocity.y < 0:
 			animations.play("walk_up")
 	else:
