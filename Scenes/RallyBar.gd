@@ -23,7 +23,7 @@ func _on_rally_timer_timeout():
 func _process(delta):
 	if not stop:
 		if value >= healthBar.value:
-			value -= player.maxHealthPoints / 100 * delta * 4
+			value -= player.maxHealthPoints / 100 * delta * 7
 		else:
 			value = healthBar.value
 			stop = true

@@ -7,4 +7,4 @@ func _ready():
 	update()
 
 func update():
-	text = "B: " + str(player.bullets)
+	text = str(player.bullets)

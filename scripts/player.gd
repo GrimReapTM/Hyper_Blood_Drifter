@@ -100,7 +100,7 @@ func _input(event):
 			animations.play("blood_bullet")
 			await animations.animation_finished
 			animations.play("RESET")
-			healthPoints -= 50
+			healthPoints -= 65
 			healthChanged.emit()
 			b_bullets += 5
 			b_bulletsChanged.emit()
@@ -110,7 +110,7 @@ func _input(event):
 			await animations.animation_finished
 			animations.play("RESET")
 			if healthPoints + 50 <= maxHealthPoints:
-				healthPoints += 50
+				healthPoints += 40
 			else:
 				healthPoints = maxHealthPoints
 			healthChanged.emit()
@@ -229,7 +229,7 @@ func _on_player_hurtbox_area_entered(area):
 			healthChanged.emit()
 		"bullet_hitbox":
 			if area.owner.ID == "enemy":
-				healthPoints -= 6
+				healthPoints -= 20
 				healthChanged.emit()
 
 

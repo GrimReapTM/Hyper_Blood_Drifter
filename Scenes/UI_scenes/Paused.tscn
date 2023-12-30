@@ -1,20 +1,28 @@
-[gd_scene load_steps=10 format=3 uid="uid://cn1bybip4vf4a"]
+[gd_scene load_steps=14 format=3 uid="uid://cn1bybip4vf4a"]
 
 [ext_resource type="Texture2D" uid="uid://2rl55phhltqc" path="res://sprites/HUD/pause_buttons/menu_inventory_idle.png" id="1_c4rxu"]
+[ext_resource type="Script" path="res://Scenes/UI_scenes/Paused.gd" id="1_qgrk8"]
 [ext_resource type="Texture2D" uid="uid://cxix0iwwqan40" path="res://sprites/HUD/pause_buttons/menu_inventory_pressed.png" id="2_qq1vt"]
 [ext_resource type="Texture2D" uid="uid://54lepai5bpk3" path="res://sprites/HUD/pause_buttons/menu_inventory_hover.png" id="3_203rw"]
 [ext_resource type="Texture2D" uid="uid://cp3c60uvxssd" path="res://sprites/HUD/pause_buttons/menu_equip_idle.png" id="4_bnh61"]
+[ext_resource type="Script" path="res://Scenes/UI_scenes/InventoryButton.gd" id="5_fm1yy"]
 [ext_resource type="Texture2D" uid="uid://dmwq4jnjcg0xp" path="res://sprites/HUD/pause_buttons/menu_equip_pressed.png" id="5_g57q8"]
 [ext_resource type="Texture2D" uid="uid://dyxyxl6s8gyhk" path="res://sprites/HUD/pause_buttons/menu_equip_hover.png" id="6_i10i8"]
+[ext_resource type="Script" path="res://Scenes/UI_scenes/EquipedButton.gd" id="7_4m1mo"]
 [ext_resource type="Texture2D" uid="uid://h0trl2biee0o" path="res://sprites/HUD/pause_buttons/menu_settings_idle.png" id="7_jr6ma"]
 [ext_resource type="Texture2D" uid="uid://bdxbhvaksdur7" path="res://sprites/HUD/pause_buttons/menu_settings_pressed.png" id="8_bwryk"]
 [ext_resource type="Texture2D" uid="uid://cayroi4qf812c" path="res://sprites/HUD/pause_buttons/menu_settings_hover.png" id="9_0tbis"]
+[ext_resource type="Script" path="res://Scenes/UI_scenes/SettingsButton.gd" id="13_npb45"]
 
-[node name="PauseMenu" type="Control"]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("Inventory", "Equipment", "Settings")]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 19.0
 offset_bottom = 19.0
+script = ExtResource("1_qgrk8")
+Inventory = NodePath("InventoryButton")
+Equipment = NodePath("EquipedButton")
+Settings = NodePath("SettingsButton")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 self_modulate = Color(0, 0, 0, 0.380392)
@@ -34,6 +42,7 @@ scale = Vector2(4, 4)
 texture_normal = ExtResource("1_c4rxu")
 texture_pressed = ExtResource("2_qq1vt")
 texture_hover = ExtResource("3_203rw")
+script = ExtResource("5_fm1yy")
 metadata/_edit_use_anchors_ = true
 
 [node name="EquipedButton" type="TextureButton" parent="."]
@@ -46,6 +55,7 @@ scale = Vector2(4, 4)
 texture_normal = ExtResource("4_bnh61")
 texture_pressed = ExtResource("5_g57q8")
 texture_hover = ExtResource("6_i10i8")
+script = ExtResource("7_4m1mo")
 metadata/_edit_use_anchors_ = true
 
 [node name="SettingsButton" type="TextureButton" parent="."]
@@ -58,6 +68,7 @@ scale = Vector2(4, 4)
 texture_normal = ExtResource("7_jr6ma")
 texture_pressed = ExtResource("8_bwryk")
 texture_hover = ExtResource("9_0tbis")
+script = ExtResource("13_npb45")
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="."]
