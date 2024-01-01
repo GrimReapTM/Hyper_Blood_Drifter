@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://brdakdtadahqx"]
+[gd_scene load_steps=35 format=3 uid="uid://brdakdtadahqx"]
 
 [ext_resource type="Texture2D" uid="uid://bodowo5fqv02g" path="res://sprites/tileset.png" id="1_fowpt"]
 [ext_resource type="Texture2D" uid="uid://c1namygqbemua" path="res://sprites/terrain_fence.png" id="2_boaiw"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scenes/HealthBar.gd" id="5_mlqth"]
 [ext_resource type="Texture2D" uid="uid://dshq0un20at12" path="res://sprites/HUD/health_progress.png" id="6_1sjlu"]
 [ext_resource type="Script" path="res://Scenes/Bullets_Label.gd" id="6_2yv2p"]
+[ext_resource type="FontFile" uid="uid://ds4jb1pl6f5a7" path="res://fonts/Georgia.ttf" id="6_5r2ay"]
 [ext_resource type="Script" path="res://Scenes/RallyBar.gd" id="6_77vkd"]
 [ext_resource type="Texture2D" uid="uid://cwq4uhrdmojwm" path="res://sprites/HUD/UI_Vials.png" id="6_hxxsu"]
 [ext_resource type="Texture2D" uid="uid://b5gey53f4b7uv" path="res://sprites/HUD/UI_container.png" id="7_8uq4l"]
@@ -20,6 +21,11 @@
 [ext_resource type="Script" path="res://Scenes/StaminaBar.gd" id="14_48s20"]
 [ext_resource type="PackedScene" uid="uid://cn1bybip4vf4a" path="res://Scenes/UI_scenes/Paused.tscn" id="15_p4no6"]
 [ext_resource type="Texture2D" uid="uid://cat8qydl33pqn" path="res://sprites/HUD/UI_bullets.png" id="18_ri28g"]
+[ext_resource type="Texture2D" uid="uid://dhky2u6sekqy1" path="res://sprites/HUD/inventory/consumable-small-sheet.png" id="22_gpy4t"]
+[ext_resource type="Texture2D" uid="uid://s6cay0bty5i7" path="res://sprites/HUD/insight.png" id="22_gxxrj"]
+[ext_resource type="Script" path="res://Scenes/insight.gd" id="23_hvg7x"]
+[ext_resource type="LabelSettings" uid="uid://crg3mknke8m6b" path="res://Scenes/label themes/HUD.tres" id="23_ol3ab"]
+[ext_resource type="Script" path="res://Scenes/b_echoes.gd" id="24_mwgwg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y8bg1"]
 texture = ExtResource("1_fowpt")
@@ -317,9 +323,43 @@ terrain_set_0/terrain_0/color = Color(0.819608, 0.635294, 0.517647, 1)
 sources/0 = SubResource("TileSetAtlasSource_y8bg1")
 sources/1 = SubResource("TileSetAtlasSource_atdm0")
 
+[sub_resource type="LabelSettings" id="LabelSettings_5qghj"]
+font = ExtResource("6_5r2ay")
+font_size = 80
+font_color = Color(0.996078, 0.988235, 0.964706, 1)
+shadow_size = 13
+shadow_color = Color(0, 0, 0, 0.509804)
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rf8n4"]
+font = ExtResource("6_5r2ay")
+font_size = 80
+font_color = Color(0.996078, 0.988235, 0.964706, 1)
+shadow_size = 13
+shadow_color = Color(0, 0, 0, 0.509804)
+shadow_offset = Vector2(2, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_rg3hr"]
-font_size = 21
+font = ExtResource("6_5r2ay")
+font_size = 65
 font_color = Color(0.979198, 0.186682, 0.168007, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.470588)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xd47t"]
+font = ExtResource("6_5r2ay")
+font_size = 70
+font_color = Color(0.996078, 0.988235, 0.964706, 1)
+shadow_size = 9
+shadow_color = Color(0, 0, 0, 0.627451)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_p1nn2"]
+font = ExtResource("6_5r2ay")
+font_size = 70
+font_color = Color(0.996078, 0.988235, 0.964706, 1)
+shadow_size = 7
+shadow_offset = Vector2(2, 1)
 
 [node name="Area" type="Node2D"]
 y_sort_enabled = true
@@ -341,7 +381,7 @@ layer_1/tile_data = PackedInt32Array()
 
 [node name="Player" parent="." node_paths=PackedStringArray("pauseMenu") instance=ExtResource("3_hbuen")]
 y_sort_enabled = true
-pauseMenu = NodePath("../CanvasLayer/PauseMenu")
+pauseMenu = NodePath("../pause/PauseMenu")
 
 [node name="follow cam" type="Camera2D" parent="Player" node_paths=PackedStringArray("player", "tilemap")]
 limit_left = 0
@@ -351,72 +391,85 @@ script = ExtResource("4_rla5j")
 player = NodePath("..")
 tilemap = NodePath("../../TileMap")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="HUD_canvas" type="CanvasLayer" parent="Player"]
 
-[node name="bullets" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(67, 134)
-scale = Vector2(2, 2)
-texture = ExtResource("18_ri28g")
-hframes = 2
+[node name="HUD" type="Node2D" parent="Player/HUD_canvas"]
 
-[node name="Bullets" type="Label" parent="CanvasLayer/bullets" node_paths=PackedStringArray("player")]
-offset_left = 10.0
-offset_top = -7.5
-offset_right = 68.0
-offset_bottom = 44.5
-scale = Vector2(0.3, 0.3)
-theme_override_font_sizes/font_size = 35
-text = "20"
-script = ExtResource("6_2yv2p")
-player = NodePath("../../../Player")
+[node name="up_left" type="Node2D" parent="Player/HUD_canvas/HUD"]
 
-[node name="Blood_bullets" type="Label" parent="CanvasLayer/bullets" node_paths=PackedStringArray("player", "bullets")]
-offset_left = 19.0
-offset_top = -13.0
-offset_right = 87.0
-offset_bottom = 47.0
-scale = Vector2(0.4, 0.4)
-text = "+5"
-label_settings = SubResource("LabelSettings_rg3hr")
-script = ExtResource("12_23wbv")
-player = NodePath("../../../Player")
-bullets = NodePath("..")
-
-[node name="vials" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(67, 100)
-scale = Vector2(2, 2)
+[node name="vials" type="Sprite2D" parent="Player/HUD_canvas/HUD/up_left"]
+position = Vector2(71, 95)
+scale = Vector2(4, 4)
 texture = ExtResource("6_hxxsu")
 hframes = 6
 
-[node name="Blood_vials" type="Label" parent="CanvasLayer/vials" node_paths=PackedStringArray("player", "vials")]
-offset_left = 10.0
-offset_top = -7.0
-offset_right = 60.0
-offset_bottom = 45.0
-scale = Vector2(0.3, 0.3)
-theme_override_font_sizes/font_size = 35
+[node name="Blood_vials" type="Label" parent="Player/HUD_canvas/HUD/up_left/vials" node_paths=PackedStringArray("player", "vials")]
+offset_left = 6.0
+offset_top = -2.5
+offset_right = 100.0
+offset_bottom = 92.5
+scale = Vector2(0.1, 0.1)
 text = "20"
+label_settings = SubResource("LabelSettings_5qghj")
 script = ExtResource("13_cxkx6")
-player = NodePath("../../../Player")
+player = NodePath("../../../../..")
 vials = NodePath("..")
 
-[node name="container" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(226, 118)
+[node name="bullets" type="Sprite2D" parent="Player/HUD_canvas/HUD/up_left"]
+position = Vector2(71, 139)
+scale = Vector2(4, 4)
+texture = ExtResource("18_ri28g")
+hframes = 2
+
+[node name="Bullets" type="Label" parent="Player/HUD_canvas/HUD/up_left/bullets" node_paths=PackedStringArray("player")]
+offset_left = 5.5
+offset_top = -2.5
+offset_right = 99.5
+offset_bottom = 92.5
+scale = Vector2(0.1, 0.1)
+theme_override_font_sizes/font_size = 35
+text = "20"
+label_settings = SubResource("LabelSettings_rf8n4")
+script = ExtResource("6_2yv2p")
+player = NodePath("../../../../..")
+
+[node name="Blood_bullets" type="Label" parent="Player/HUD_canvas/HUD/up_left/bullets" node_paths=PackedStringArray("player", "bullets")]
+offset_left = 7.75
+offset_top = 4.25001
+offset_right = 75.75
+offset_bottom = 64.25
+scale = Vector2(0.1, 0.1)
+text = "+5"
+label_settings = SubResource("LabelSettings_rg3hr")
+script = ExtResource("12_23wbv")
+player = NodePath("../../../../..")
+bullets = NodePath("..")
+
+[node name="container" type="Sprite2D" parent="Player/HUD_canvas/HUD/up_left"]
+position = Vector2(344, 109)
 scale = Vector2(4, 4)
 texture = ExtResource("7_8uq4l")
 
-[node name="current_item" type="Label" parent="CanvasLayer/container"]
-offset_left = -6.75
-offset_top = -2.0
-offset_right = 320.25
-offset_bottom = 79.0
+[node name="current_item" type="Label" parent="Player/HUD_canvas/HUD/up_left/container"]
+offset_left = -21.75
+offset_top = 5.75
+offset_right = 535.25
+offset_bottom = 161.75
 scale = Vector2(0.1, 0.1)
 theme_override_colors/font_color = Color(0.992157, 0.968627, 0.952941, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 57
-text = "Pebble"
+text = "Hunter's mark"
+label_settings = SubResource("LabelSettings_xd47t")
 
-[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer" node_paths=PackedStringArray("player", "rallyBar")]
+[node name="curent_item" type="Sprite2D" parent="Player/HUD_canvas/HUD/up_left"]
+position = Vector2(200, 129)
+scale = Vector2(4, 4)
+texture = ExtResource("22_gpy4t")
+hframes = 13
+frame = 5
+
+[node name="HealthBar" type="TextureProgressBar" parent="Player/HUD_canvas/HUD/up_left" node_paths=PackedStringArray("player", "rallyBar")]
 z_index = 1
 offset_left = 27.0
 offset_top = 7.0
@@ -431,10 +484,10 @@ stretch_margin_bottom = 8
 texture_over = ExtResource("5_d5ixs")
 texture_progress = ExtResource("6_1sjlu")
 script = ExtResource("5_mlqth")
-player = NodePath("../../Player")
+player = NodePath("../../../..")
 rallyBar = NodePath("../RallyBar")
 
-[node name="RallyBar" type="TextureProgressBar" parent="CanvasLayer" node_paths=PackedStringArray("healthBar", "player")]
+[node name="RallyBar" type="TextureProgressBar" parent="Player/HUD_canvas/HUD/up_left" node_paths=PackedStringArray("healthBar", "player")]
 offset_left = 27.0
 offset_top = 7.0
 offset_right = 126.0
@@ -451,19 +504,19 @@ texture_under = ExtResource("7_51q1n")
 texture_progress = ExtResource("9_0ughq")
 script = ExtResource("6_77vkd")
 healthBar = NodePath("../HealthBar")
-player = NodePath("../../Player")
+player = NodePath("../../../..")
 
-[node name="RallyTimer" type="Timer" parent="CanvasLayer/RallyBar"]
+[node name="RallyTimer" type="Timer" parent="Player/HUD_canvas/HUD/up_left/RallyBar"]
 wait_time = 0.2
 
-[node name="StaminaBar" type="TextureProgressBar" parent="CanvasLayer" node_paths=PackedStringArray("player")]
+[node name="StaminaBar" type="TextureProgressBar" parent="Player/HUD_canvas/HUD/up_left" node_paths=PackedStringArray("player")]
 offset_left = 27.0
-offset_top = 38.0
+offset_top = 27.0
 offset_right = 89.0
-offset_bottom = 54.0
+offset_bottom = 43.0
 scale = Vector2(4, 4)
 step = 0.0
-value = 100.0
+value = 50.0
 nine_patch_stretch = true
 stretch_margin_left = 8
 stretch_margin_top = 8
@@ -472,9 +525,43 @@ stretch_margin_bottom = 8
 texture_under = ExtResource("12_i100k")
 texture_progress = ExtResource("13_ipx0o")
 script = ExtResource("14_48s20")
-player = NodePath("../../Player")
+player = NodePath("../../../..")
 
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("15_p4no6")]
+[node name="up_right" type="Node2D" parent="Player/HUD_canvas/HUD"]
+
+[node name="insight" type="Sprite2D" parent="Player/HUD_canvas/HUD/up_right"]
+position = Vector2(1120, 67)
+scale = Vector2(4, 4)
+texture = ExtResource("22_gxxrj")
+
+[node name="insight" type="Label" parent="Player/HUD_canvas/HUD/up_right/insight" node_paths=PackedStringArray("player")]
+offset_left = 2.0
+offset_top = 2.75
+offset_right = 261.0
+offset_bottom = 86.75
+scale = Vector2(0.1, 0.1)
+text = "0"
+label_settings = ExtResource("23_ol3ab")
+horizontal_alignment = 2
+script = ExtResource("23_hvg7x")
+player = NodePath("../../../../..")
+
+[node name="b_echoes" type="Label" parent="Player/HUD_canvas/HUD/up_right/insight" node_paths=PackedStringArray("player")]
+offset_top = -11.0
+offset_right = 289.0
+offset_bottom = 73.0
+scale = Vector2(0.1, 0.1)
+text = "727"
+label_settings = SubResource("LabelSettings_p1nn2")
+horizontal_alignment = 2
+script = ExtResource("24_mwgwg")
+player = NodePath("../../../../..")
+
+[node name="pause" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="pause" node_paths=PackedStringArray("player", "hud") instance=ExtResource("15_p4no6")]
 visible = false
+player = NodePath("../../Player")
+hud = NodePath("../../Player/HUD_canvas/HUD")
 
-[connection signal="timeout" from="CanvasLayer/RallyBar/RallyTimer" to="CanvasLayer/RallyBar" method="_on_rally_timer_timeout"]
+[connection signal="timeout" from="Player/HUD_canvas/HUD/up_left/RallyBar/RallyTimer" to="Player/HUD_canvas/HUD/up_left/RallyBar" method="_on_rally_timer_timeout"]

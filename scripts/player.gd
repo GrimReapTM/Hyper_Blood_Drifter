@@ -15,6 +15,8 @@ var paused = false
 @export var stamina = 75
 @export var maxStamina = 75
 
+@export var b_echoes = 727
+@export var insight = 0
 
 @export var damage = 4
 @export var bullets = 20
@@ -27,6 +29,9 @@ signal attacked
 signal staminaChanged
 signal b_bulletsChanged
 signal vialsChanged
+signal pause_pressed
+signal insightChanged
+signal b_echoesChanged
 
 func littleTrolling():
 	if Input.is_action_just_pressed("comedy"):
@@ -90,11 +95,13 @@ func _input(event):
 			attack_ranged(global_index)
 	elif event.is_action_pressed("pause"):
 		if not paused:
-			pauseMenu.visible = true
 			paused = true
+			pause_pressed.emit()
+			
 		else:
-			pauseMenu.visible = false
 			paused = false
+			pause_pressed.emit()
+			
 	elif event.is_action_pressed("blood_bullet"):
 		if b_bullets == 0:
 			animations.play("blood_bullet")
