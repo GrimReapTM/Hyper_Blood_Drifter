@@ -33,18 +33,6 @@ signal pause_pressed
 signal insightChanged
 signal b_echoesChanged
 
-func littleTrolling():
-	if Input.is_action_just_pressed("comedy"):
-		healthPoints -= 30
-		healthChanged.emit()
-		print(healthPoints)
-	if Input.is_action_just_pressed("non_comedy"):
-		if healthPoints + 20 <= maxHealthPoints:
-			healthPoints += 20
-			healthChanged.emit()
-			print(healthPoints)
-		else:
-			healthPoints = maxHealthPoints
 
 #variables for movement
 @export var speed = 350
@@ -59,6 +47,10 @@ var animPlay = false
 var attacking = false
 var action = false
 var dashing = false
+
+
+var consumables = []
+
 
 #used for attacks
 var attackAnimations = ["up_left", "up", "up_right", "left", "right", "down_left", "down", "down_right"]
@@ -339,5 +331,4 @@ func _physics_process(delta):
 	movement(delta)
 	move_and_slide()
 	movementAnimation()
-	littleTrolling()
 	staminaRecovery(delta)
