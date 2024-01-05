@@ -1,11 +1,23 @@
 [gd_scene load_steps=7 format=3 uid="uid://ftxp4shodc50"]
 
-[ext_resource type="Texture2D" uid="uid://b2irjih3j1dqy" path="res://sprites/HUD/menu_quit_idle.png" id="1_qh61m"]
-[ext_resource type="Texture2D" uid="uid://cnts6h0214qyx" path="res://sprites/HUD/pause_buttons/menu_quit_hover.png" id="2_kpr0v"]
+[ext_resource type="Texture2D" uid="uid://k0iffxp6fqkw" path="res://sprites/HUD/pause_buttons/main_menu_button_hover.png" id="1_urdqv"]
+[ext_resource type="FontFile" uid="uid://cflm7ac265lwi" path="res://fonts/pixelgeorgia.ttf" id="3_e1s5g"]
 [ext_resource type="Script" path="res://Scenes/UI_scenes/play.gd" id="3_umxhl"]
-[ext_resource type="Texture2D" uid="uid://r57swxgcbm4b" path="res://sprites/HUD/pause_buttons/menu_play_idle.png" id="3_xs034"]
-[ext_resource type="Texture2D" uid="uid://cyr3r7mtbuiu2" path="res://sprites/HUD/pause_buttons/menu_play_hover.png" id="4_xdog2"]
 [ext_resource type="Script" path="res://Scenes/UI_scenes/quit.gd" id="6_ml28c"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_318ya"]
+font = ExtResource("3_e1s5g")
+font_size = 10
+font_color = Color(0.996078, 0.988235, 0.964706, 1)
+shadow_size = 7
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mjaw7"]
+font = ExtResource("3_e1s5g")
+font_size = 10
+font_color = Color(0.996078, 0.988235, 0.964706, 1)
+shadow_size = 7
+shadow_offset = Vector2(2, 1)
 
 [node name="Main_Menu" type="Control"]
 layout_mode = 3
@@ -13,22 +25,38 @@ anchors_preset = 0
 
 [node name="play" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 541.0
-offset_top = 145.0
-offset_right = 573.0
-offset_bottom = 161.0
+offset_left = 504.0
+offset_top = 512.0
+offset_right = 568.0
+offset_bottom = 544.0
 scale = Vector2(4, 4)
-texture_normal = ExtResource("3_xs034")
-texture_hover = ExtResource("4_xdog2")
+texture_hover = ExtResource("1_urdqv")
 script = ExtResource("3_umxhl")
+
+[node name="play_label" type="Label" parent="play"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 12.0
+offset_right = 47.0
+offset_bottom = 23.0
+text = "Play"
+label_settings = SubResource("LabelSettings_318ya")
 
 [node name="quit" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 534.0
-offset_top = 434.0
-offset_right = 566.0
-offset_bottom = 450.0
+offset_left = 504.0
+offset_top = 593.0
+offset_right = 568.0
+offset_bottom = 625.0
 scale = Vector2(4, 4)
-texture_normal = ExtResource("1_qh61m")
-texture_hover = ExtResource("2_kpr0v")
+texture_hover = ExtResource("1_urdqv")
 script = ExtResource("6_ml28c")
+
+[node name="quit label" type="Label" parent="quit"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 10.75
+offset_right = 66.0
+offset_bottom = 26.75
+text = "Quit game"
+label_settings = SubResource("LabelSettings_mjaw7")

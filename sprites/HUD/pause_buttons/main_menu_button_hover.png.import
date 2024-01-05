@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://r57swxgcbm4b"
-path="res://.godot/imported/menu_play_idle.png-0f39d163439743500615c0e389307028.ctex"
+uid="uid://k0iffxp6fqkw"
+path="res://.godot/imported/main_menu_button_hover.png-bb1cde303a38fec0226532757d8f5db2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/HUD/pause_buttons/menu_play_idle.png"
-dest_files=["res://.godot/imported/menu_play_idle.png-0f39d163439743500615c0e389307028.ctex"]
+source_file="res://sprites/HUD/pause_buttons/main_menu_button_hover.png"
+dest_files=["res://.godot/imported/main_menu_button_hover.png-bb1cde303a38fec0226532757d8f5db2.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://crg3mknke8m6b"]
 
-[ext_resource type="FontFile" uid="uid://ds4jb1pl6f5a7" path="res://fonts/Georgia.ttf" id="1_bh14j"]
+[ext_resource type="FontFile" uid="uid://cflm7ac265lwi" path="res://fonts/pixelgeorgia.ttf" id="1_45fqh"]
 
 [resource]
-font = ExtResource("1_bh14j")
+font = ExtResource("1_45fqh")
 font_size = 70
 font_color = Color(0.996078, 0.988235, 0.964706, 1)
 shadow_size = 7
