@@ -1,81 +1,328 @@
-[gd_scene load_steps=14 format=3 uid="uid://cn1bybip4vf4a"]
+[gd_scene load_steps=41 format=3 uid="uid://cn1bybip4vf4a"]
 
-[ext_resource type="Texture2D" uid="uid://2rl55phhltqc" path="res://sprites/HUD/pause_buttons/menu_inventory_idle.png" id="1_c4rxu"]
 [ext_resource type="Script" path="res://Scenes/UI_scenes/Paused.gd" id="1_qgrk8"]
-[ext_resource type="Texture2D" uid="uid://cxix0iwwqan40" path="res://sprites/HUD/pause_buttons/menu_inventory_pressed.png" id="2_qq1vt"]
-[ext_resource type="Texture2D" uid="uid://54lepai5bpk3" path="res://sprites/HUD/pause_buttons/menu_inventory_hover.png" id="3_203rw"]
-[ext_resource type="Texture2D" uid="uid://cp3c60uvxssd" path="res://sprites/HUD/pause_buttons/menu_equip_idle.png" id="4_bnh61"]
+[ext_resource type="Texture2D" uid="uid://cwc5djmbg2s43" path="res://sprites/HUD/inventory/inventory.png" id="2_d473i"]
+[ext_resource type="Texture2D" uid="uid://dslevrh5ykwm6" path="res://sprites/HUD/inventory/inventory_item_name.png" id="3_4oykd"]
+[ext_resource type="Texture2D" uid="uid://bdlusa566e306" path="res://sprites/HUD/inventory/buttons/inventory-button.png" id="3_riipk"]
+[ext_resource type="LabelSettings" uid="uid://c5u832t51ewlt" path="res://Scenes/label themes/Inventory_hand.tres" id="4_7xtp4"]
+[ext_resource type="Texture2D" uid="uid://3sj8u7pfo60q" path="res://sprites/HUD/inventory/buttons/inventory-button-hover.png" id="4_8fdqk"]
 [ext_resource type="Script" path="res://Scenes/UI_scenes/InventoryButton.gd" id="5_fm1yy"]
-[ext_resource type="Texture2D" uid="uid://dmwq4jnjcg0xp" path="res://sprites/HUD/pause_buttons/menu_equip_pressed.png" id="5_g57q8"]
-[ext_resource type="Texture2D" uid="uid://dyxyxl6s8gyhk" path="res://sprites/HUD/pause_buttons/menu_equip_hover.png" id="6_i10i8"]
+[ext_resource type="Texture2D" uid="uid://xemdis74yigv" path="res://sprites/HUD/inventory/buttons/stats-button.png" id="6_f4inm"]
+[ext_resource type="Texture2D" uid="uid://jg2xy3mkbidi" path="res://sprites/HUD/inventory/buttons/stats-button-hover.png" id="7_3btgd"]
 [ext_resource type="Script" path="res://Scenes/UI_scenes/EquipedButton.gd" id="7_4m1mo"]
-[ext_resource type="Texture2D" uid="uid://h0trl2biee0o" path="res://sprites/HUD/pause_buttons/menu_settings_idle.png" id="7_jr6ma"]
-[ext_resource type="Texture2D" uid="uid://bdxbhvaksdur7" path="res://sprites/HUD/pause_buttons/menu_settings_pressed.png" id="8_bwryk"]
-[ext_resource type="Texture2D" uid="uid://cayroi4qf812c" path="res://sprites/HUD/pause_buttons/menu_settings_hover.png" id="9_0tbis"]
+[ext_resource type="Texture2D" uid="uid://d4ksqqqj2x2se" path="res://sprites/HUD/inventory/buttons/settings-button.png" id="9_wrabq"]
+[ext_resource type="Texture2D" uid="uid://c7djh7q2xlj7d" path="res://sprites/HUD/inventory/buttons/settings-button-hover.png" id="10_pb6l7"]
+[ext_resource type="Texture2D" uid="uid://cs3yry5v1oe7" path="res://sprites/HUD/inventory/buttons/weaponR1-button.png" id="12_bvxcn"]
+[ext_resource type="Texture2D" uid="uid://c4ceo547jhvcy" path="res://sprites/HUD/inventory/buttons/weaponR1-button-hover.png" id="13_1x50k"]
 [ext_resource type="Script" path="res://Scenes/UI_scenes/SettingsButton.gd" id="13_npb45"]
+[ext_resource type="Texture2D" uid="uid://cprqstsahjsgh" path="res://sprites/HUD/inventory/buttons/button-hover.png" id="14_82u3d"]
+[ext_resource type="Script" path="res://Scenes/UI_scenes/buttonscripts/R1.gd" id="15_0ncww"]
+[ext_resource type="Texture2D" uid="uid://dwg76lreqql0k" path="res://sprites/HUD/inventory/buttons/weaponL1-button.png" id="15_ups3p"]
+[ext_resource type="Texture2D" uid="uid://xmfp8vbiusly" path="res://sprites/HUD/inventory/buttons/weaponL1-button-hover.png" id="16_8am7j"]
+[ext_resource type="Script" path="res://Scenes/UI_scenes/buttonscripts/R2.gd" id="17_16fcv"]
+[ext_resource type="Texture2D" uid="uid://cj3yu3gieov4k" path="res://sprites/HUD/inventory/buttons/armor-head-button.png" id="17_g5vu7"]
+[ext_resource type="Texture2D" uid="uid://c7um2yy2by61a" path="res://sprites/HUD/inventory/buttons/armor-head-button-hover.png" id="18_4was7"]
+[ext_resource type="Texture2D" uid="uid://crspkkh1pa21d" path="res://sprites/HUD/inventory/buttons/armor-torso-button.png" id="19_37lf5"]
+[ext_resource type="Script" path="res://Scenes/UI_scenes/buttonscripts/L1.gd" id="20_m5jwo"]
+[ext_resource type="Texture2D" uid="uid://dyq37gl337h2q" path="res://sprites/HUD/inventory/buttons/armor-torso-button-hover.png" id="20_rdbqy"]
+[ext_resource type="Script" path="res://Scenes/UI_scenes/buttonscripts/L2.gd" id="21_c1ott"]
+[ext_resource type="Texture2D" uid="uid://b0t2b8ihnifq8" path="res://sprites/HUD/inventory/buttons/armor-arms-button.png" id="21_fsiy0"]
+[ext_resource type="Texture2D" uid="uid://op5l4sjm8phq" path="res://sprites/HUD/inventory/buttons/armor-arms-button-hover.png" id="22_tgjrp"]
+[ext_resource type="Texture2D" uid="uid://dqngr5fymyqqa" path="res://sprites/HUD/inventory/buttons/armor-legs-button.png" id="23_8wnk5"]
+[ext_resource type="Script" path="res://Scenes/UI_scenes/buttonscripts/Head.gd" id="24_4d4wi"]
+[ext_resource type="Texture2D" uid="uid://76xipu43624j" path="res://sprites/HUD/inventory/buttons/armor-legs-button-hover.png" id="24_7qv6u"]
+[ext_resource type="Script" path="res://Scenes/UI_scenes/buttonscripts/Shoulders.gd" id="27_vqlor"]
+[ext_resource type="Script" path="res://Scenes/UI_scenes/buttonscripts/Knees.gd" id="30_a8c1f"]
+[ext_resource type="Script" path="res://Scenes/UI_scenes/buttonscripts/Toes.gd" id="33_618rd"]
+[ext_resource type="Script" path="res://Scenes/UI_scenes/buttonscripts/Q1.gd" id="34_eg4i4"]
+[ext_resource type="Script" path="res://Scenes/UI_scenes/buttonscripts/Q2.gd" id="35_6esjm"]
+[ext_resource type="Script" path="res://Scenes/UI_scenes/buttonscripts/Q3.gd" id="36_2pjlq"]
+[ext_resource type="Script" path="res://Scenes/UI_scenes/buttonscripts/Q4.gd" id="37_21e7w"]
+[ext_resource type="Script" path="res://Scenes/UI_scenes/buttonscripts/Q5.gd" id="38_im0bw"]
+[ext_resource type="Script" path="res://Scenes/UI_scenes/buttonscripts/Q6.gd" id="39_sejvn"]
 
-[node name="PauseMenu" type="Control" node_paths=PackedStringArray("Inventory", "Equipment", "Settings")]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("Inventory", "Stats", "Settings", "hand_debug", "hand_weapons", "hand_armor", "hand_quick_items")]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 19.0
 offset_bottom = 19.0
 script = ExtResource("1_qgrk8")
-Inventory = NodePath("InventoryButton")
-Equipment = NodePath("EquipedButton")
-Settings = NodePath("SettingsButton")
+Inventory = NodePath("inventory/Debug/InventoryButton")
+Stats = NodePath("inventory/Debug/StatsButton")
+Settings = NodePath("inventory/Debug/SettingsButton")
+hand_debug = NodePath("inventory/hands/hand_debug")
+hand_weapons = NodePath("inventory/hands/hand_weapons")
+hand_armor = NodePath("inventory/hands/hand_armor")
+hand_quick_items = NodePath("inventory/hands/hand_quick_items")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-self_modulate = Color(0, 0, 0, 0.380392)
 layout_mode = 0
-offset_left = -5.0
+offset_left = -7.0
 offset_top = -22.0
-offset_right = 1285.0
+offset_right = 1283.0
 offset_bottom = 704.0
+color = Color(0, 0, 0, 0.211765)
 
-[node name="InventoryButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 114.0
-offset_top = 205.0
-offset_right = 178.0
-offset_bottom = 269.0
+[node name="inventory" type="Sprite2D" parent="."]
+position = Vector2(632, 455)
 scale = Vector2(4, 4)
-texture_normal = ExtResource("1_c4rxu")
-texture_pressed = ExtResource("2_qq1vt")
-texture_hover = ExtResource("3_203rw")
+texture = ExtResource("2_d473i")
+
+[node name="hands" type="Node2D" parent="inventory"]
+position = Vector2(-134.5, -109.75)
+scale = Vector2(0.25, 0.25)
+
+[node name="hand_debug" type="Sprite2D" parent="inventory/hands"]
+visible = false
+position = Vector2(286, 307)
+scale = Vector2(4, 4)
+texture = ExtResource("3_4oykd")
+
+[node name="debug_label" type="Label" parent="inventory/hands/hand_debug"]
+offset_left = -96.0
+offset_top = -8.5
+offset_right = 204.0
+offset_bottom = 31.5
+scale = Vector2(0.2, 0.2)
+text = "ha"
+label_settings = ExtResource("4_7xtp4")
+horizontal_alignment = 2
+
+[node name="hand_weapons" type="Sprite2D" parent="inventory/hands"]
+visible = false
+position = Vector2(286, 411)
+scale = Vector2(4, 4)
+texture = ExtResource("3_4oykd")
+
+[node name="weapons_label" type="Label" parent="inventory/hands/hand_weapons"]
+offset_left = -90.5
+offset_top = -9.0
+offset_right = 207.5
+offset_bottom = 51.0
+scale = Vector2(0.2, 0.2)
+text = "ha"
+label_settings = ExtResource("4_7xtp4")
+horizontal_alignment = 2
+
+[node name="hand_armor" type="Sprite2D" parent="inventory/hands"]
+visible = false
+position = Vector2(286, 515)
+scale = Vector2(4, 4)
+texture = ExtResource("3_4oykd")
+
+[node name="armor_label" type="Label" parent="inventory/hands/hand_armor"]
+offset_left = -96.0
+offset_top = -9.0
+offset_right = 203.0
+offset_bottom = 57.0
+scale = Vector2(0.2, 0.2)
+text = "ha"
+label_settings = ExtResource("4_7xtp4")
+horizontal_alignment = 2
+
+[node name="hand_quick_items" type="Sprite2D" parent="inventory/hands"]
+visible = false
+position = Vector2(286, 619)
+scale = Vector2(4, 4)
+texture = ExtResource("3_4oykd")
+
+[node name="quick_label" type="Label" parent="inventory/hands/hand_quick_items"]
+offset_left = -103.25
+offset_top = -9.0
+offset_right = 228.75
+offset_bottom = 51.0
+scale = Vector2(0.2, 0.2)
+text = "ha"
+label_settings = ExtResource("4_7xtp4")
+horizontal_alignment = 2
+
+[node name="Debug" type="Node2D" parent="inventory"]
+position = Vector2(-144, -117)
+
+[node name="InventoryButton" type="TextureButton" parent="inventory/Debug" node_paths=PackedStringArray("pause", "label")]
+offset_left = 71.0
+offset_top = 62.0
+offset_right = 89.0
+offset_bottom = 80.0
+texture_normal = ExtResource("3_riipk")
+texture_hover = ExtResource("4_8fdqk")
 script = ExtResource("5_fm1yy")
-metadata/_edit_use_anchors_ = true
+pause = NodePath("../../..")
+label = NodePath("../../hands/hand_debug/debug_label")
 
-[node name="EquipedButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 490.0
-offset_top = 205.0
-offset_right = 554.0
-offset_bottom = 269.0
-scale = Vector2(4, 4)
-texture_normal = ExtResource("4_bnh61")
-texture_pressed = ExtResource("5_g57q8")
-texture_hover = ExtResource("6_i10i8")
+[node name="StatsButton" type="TextureButton" parent="inventory/Debug" node_paths=PackedStringArray("pause", "label")]
+offset_left = 93.0
+offset_top = 62.0
+offset_right = 111.0
+offset_bottom = 80.0
+texture_normal = ExtResource("6_f4inm")
+texture_hover = ExtResource("7_3btgd")
 script = ExtResource("7_4m1mo")
-metadata/_edit_use_anchors_ = true
+pause = NodePath("../../..")
+label = NodePath("../../hands/hand_debug/debug_label")
 
-[node name="SettingsButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 866.0
-offset_top = 205.0
-offset_right = 930.0
-offset_bottom = 269.0
-scale = Vector2(4, 4)
-texture_normal = ExtResource("7_jr6ma")
-texture_pressed = ExtResource("8_bwryk")
-texture_hover = ExtResource("9_0tbis")
+[node name="SettingsButton" type="TextureButton" parent="inventory/Debug" node_paths=PackedStringArray("pause", "label")]
+offset_left = 115.0
+offset_top = 62.0
+offset_right = 133.0
+offset_bottom = 80.0
+texture_normal = ExtResource("9_wrabq")
+texture_hover = ExtResource("10_pb6l7")
 script = ExtResource("13_npb45")
-metadata/_edit_use_anchors_ = true
+pause = NodePath("../../..")
+label = NodePath("../../hands/hand_debug/debug_label")
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 420.0
-offset_top = 39.0
-offset_right = 501.0
-offset_bottom = 65.0
-scale = Vector2(5, 5)
-text = "Paused lol"
+[node name="Weapons" type="Node2D" parent="inventory"]
+position = Vector2(-144, -117)
+
+[node name="R1" type="TextureButton" parent="inventory/Weapons" node_paths=PackedStringArray("pause", "label")]
+offset_left = 71.0
+offset_top = 88.0
+offset_right = 89.0
+offset_bottom = 106.0
+texture_normal = ExtResource("12_bvxcn")
+texture_hover = ExtResource("13_1x50k")
+script = ExtResource("15_0ncww")
+pause = NodePath("../../..")
+label = NodePath("../../hands/hand_weapons/weapons_label")
+
+[node name="R2" type="TextureButton" parent="inventory/Weapons" node_paths=PackedStringArray("pause", "label")]
+offset_left = 93.0
+offset_top = 88.0
+offset_right = 111.0
+offset_bottom = 106.0
+texture_hover = ExtResource("14_82u3d")
+script = ExtResource("17_16fcv")
+pause = NodePath("../../..")
+label = NodePath("../../hands/hand_weapons/weapons_label")
+
+[node name="L1" type="TextureButton" parent="inventory/Weapons" node_paths=PackedStringArray("pause", "label")]
+offset_left = 115.0
+offset_top = 88.0
+offset_right = 133.0
+offset_bottom = 106.0
+texture_normal = ExtResource("15_ups3p")
+texture_hover = ExtResource("16_8am7j")
+script = ExtResource("20_m5jwo")
+pause = NodePath("../../..")
+label = NodePath("../../hands/hand_weapons/weapons_label")
+
+[node name="L2" type="TextureButton" parent="inventory/Weapons" node_paths=PackedStringArray("pause", "label")]
+offset_left = 137.0
+offset_top = 88.0
+offset_right = 155.0
+offset_bottom = 106.0
+texture_hover = ExtResource("14_82u3d")
+script = ExtResource("21_c1ott")
+pause = NodePath("../../..")
+label = NodePath("../../hands/hand_weapons/weapons_label")
+
+[node name="Armor" type="Node2D" parent="inventory"]
+position = Vector2(-144, -117)
+
+[node name="Head" type="TextureButton" parent="inventory/Armor" node_paths=PackedStringArray("pause", "label")]
+offset_left = 70.75
+offset_top = 114.25
+offset_right = 88.75
+offset_bottom = 132.25
+texture_normal = ExtResource("17_g5vu7")
+texture_hover = ExtResource("18_4was7")
+script = ExtResource("24_4d4wi")
+pause = NodePath("../../..")
+label = NodePath("../../hands/hand_armor/armor_label")
+
+[node name="Shoulders" type="TextureButton" parent="inventory/Armor" node_paths=PackedStringArray("pause", "label")]
+offset_left = 93.0
+offset_top = 114.0
+offset_right = 111.0
+offset_bottom = 132.0
+texture_normal = ExtResource("19_37lf5")
+texture_hover = ExtResource("20_rdbqy")
+script = ExtResource("27_vqlor")
+pause = NodePath("../../..")
+label = NodePath("../../hands/hand_armor/armor_label")
+
+[node name="Knees" type="TextureButton" parent="inventory/Armor" node_paths=PackedStringArray("pause", "label")]
+offset_left = 115.0
+offset_top = 114.0
+offset_right = 133.0
+offset_bottom = 132.0
+texture_normal = ExtResource("21_fsiy0")
+texture_hover = ExtResource("22_tgjrp")
+script = ExtResource("30_a8c1f")
+pause = NodePath("../../..")
+label = NodePath("../../hands/hand_armor/armor_label")
+
+[node name="Toes" type="TextureButton" parent="inventory/Armor" node_paths=PackedStringArray("pause", "label")]
+offset_left = 137.0
+offset_top = 114.0
+offset_right = 155.0
+offset_bottom = 132.0
+texture_normal = ExtResource("23_8wnk5")
+texture_hover = ExtResource("24_7qv6u")
+script = ExtResource("33_618rd")
+pause = NodePath("../../..")
+label = NodePath("../../hands/hand_armor/armor_label")
+
+[node name="QuickItems" type="Node2D" parent="inventory"]
+position = Vector2(-144, -117)
+
+[node name="Q1" type="TextureButton" parent="inventory/QuickItems" node_paths=PackedStringArray("pause", "label")]
+offset_left = 71.0
+offset_top = 140.0
+offset_right = 89.0
+offset_bottom = 158.0
+texture_hover = ExtResource("14_82u3d")
+script = ExtResource("34_eg4i4")
+pause = NodePath("../../..")
+label = NodePath("../../hands/hand_quick_items/quick_label")
+
+[node name="Q2" type="TextureButton" parent="inventory/QuickItems" node_paths=PackedStringArray("pause", "label")]
+offset_left = 93.0
+offset_top = 140.0
+offset_right = 111.0
+offset_bottom = 158.0
+texture_hover = ExtResource("14_82u3d")
+script = ExtResource("35_6esjm")
+pause = NodePath("../../..")
+label = NodePath("../../hands/hand_quick_items/quick_label")
+
+[node name="Q3" type="TextureButton" parent="inventory/QuickItems" node_paths=PackedStringArray("pause", "label")]
+offset_left = 115.0
+offset_top = 140.0
+offset_right = 133.0
+offset_bottom = 158.0
+texture_hover = ExtResource("14_82u3d")
+script = ExtResource("36_2pjlq")
+pause = NodePath("../../..")
+label = NodePath("../../hands/hand_quick_items/quick_label")
+
+[node name="Q4" type="TextureButton" parent="inventory/QuickItems" node_paths=PackedStringArray("pause", "label")]
+offset_left = 137.0
+offset_top = 140.0
+offset_right = 155.0
+offset_bottom = 158.0
+texture_hover = ExtResource("14_82u3d")
+script = ExtResource("37_21e7w")
+pause = NodePath("../../..")
+label = NodePath("../../hands/hand_quick_items/quick_label")
+
+[node name="Q5" type="TextureButton" parent="inventory/QuickItems" node_paths=PackedStringArray("pause", "label")]
+offset_left = 159.0
+offset_top = 140.0
+offset_right = 177.0
+offset_bottom = 158.0
+texture_hover = ExtResource("14_82u3d")
+script = ExtResource("38_im0bw")
+pause = NodePath("../../..")
+label = NodePath("../../hands/hand_quick_items/quick_label")
+
+[node name="Q6" type="TextureButton" parent="inventory/QuickItems" node_paths=PackedStringArray("pause", "label")]
+offset_left = 181.0
+offset_top = 140.0
+offset_right = 199.0
+offset_bottom = 158.0
+texture_hover = ExtResource("14_82u3d")
+script = ExtResource("39_sejvn")
+pause = NodePath("../../..")
+label = NodePath("../../hands/hand_quick_items/quick_label")
