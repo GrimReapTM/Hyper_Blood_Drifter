@@ -89,7 +89,6 @@ func _input(event):
 		if not paused:
 			paused = true
 			pause_pressed.emit()
-			
 		else:
 			paused = false
 			pause_pressed.emit()
@@ -115,6 +114,7 @@ func _input(event):
 			healthChanged.emit()
 			b_vials -= 1
 			vialsChanged.emit()
+
 
 var combo = false
 var saved_index = -1

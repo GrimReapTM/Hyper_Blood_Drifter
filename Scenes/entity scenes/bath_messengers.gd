@@ -8,6 +8,12 @@ var activated = false
 var isActivating = false
 var inTrigger = false
 
+signal open
+signal disable
+
+func _ready():
+	disable.connect(close)
+
 func _on_interaction_area_entered(area):
 	if area.name == "player_hurtbox":
 		inTrigger = true
@@ -26,11 +32,17 @@ func _on_interaction_area_exited(area):
 		player.paused = false
 
 func interact():
-	if Input.is_action_just_pressed("interact") and inTrigger:
+	if Input.is_action_just_pressed("interact") and inTrigger and not player.paused:
 		$AnimationPlayer.play("interact")
 		$AnimationPlayer.play("interact_idle")
 		$E/Sprite2D.visible = false
 		player.paused = true
+		open.emit()
+
+func close():
+	$E/Sprite2D.visible = true
+	$AnimationPlayer.play("idle")
+
 
 func _physics_process(_delta):
 	interact()

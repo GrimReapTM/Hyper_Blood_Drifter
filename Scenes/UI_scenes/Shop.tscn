@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://dt6mxkqwcdxxv"]
+
+[ext_resource type="Script" path="res://Scenes/UI_scenes/Shop.gd" id="1_f4xth"]
+
+[node name="Shop" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_f4xth")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1281.0
+offset_bottom = 721.0
+color = Color(0, 0, 0, 0.117647)
+metadata/_edit_lock_ = true
+
+[node name="pebble" type="Button" parent="."]
+layout_mode = 0
+offset_left = 489.0
+offset_top = 231.0
+offset_right = 773.0
+offset_bottom = 294.0
+text = "kamínek :)"
+
+[node name="molotov" type="Button" parent="."]
+layout_mode = 0
+offset_left = 487.0
+offset_top = 364.0
+offset_right = 771.0
+offset_bottom = 436.0
+text = "Molotov kohoutocas"
+
+[connection signal="pressed" from="pebble" to="." method="_on_pebble_pressed"]
+[connection signal="pressed" from="molotov" to="." method="_on_molotov_pressed"]

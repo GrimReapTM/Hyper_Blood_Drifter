@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://brdakdtadahqx"]
+[gd_scene load_steps=36 format=3 uid="uid://brdakdtadahqx"]
 
 [ext_resource type="Texture2D" uid="uid://bodowo5fqv02g" path="res://sprites/tileset.png" id="1_fowpt"]
 [ext_resource type="Texture2D" uid="uid://c1namygqbemua" path="res://sprites/terrain_fence.png" id="2_boaiw"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://s6cay0bty5i7" path="res://sprites/HUD/insight.png" id="22_gxxrj"]
 [ext_resource type="Script" path="res://Scenes/insight.gd" id="23_hvg7x"]
 [ext_resource type="Script" path="res://Scenes/b_echoes.gd" id="24_mwgwg"]
+[ext_resource type="PackedScene" uid="uid://dt6mxkqwcdxxv" path="res://Scenes/UI_scenes/Shop.tscn" id="26_ml5kp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y8bg1"]
 texture = ExtResource("1_fowpt")
@@ -462,7 +463,6 @@ scale = Vector2(0.1, 0.1)
 theme_override_colors/font_color = Color(0.992157, 0.968627, 0.952941, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 57
-text = "Hunter's mark"
 label_settings = SubResource("LabelSettings_xd47t")
 
 [node name="curent_item" type="Sprite2D" parent="Player/HUD_canvas/HUD/up_left"]
@@ -470,7 +470,6 @@ position = Vector2(179, 123)
 scale = Vector2(4, 4)
 texture = ExtResource("22_gpy4t")
 hframes = 13
-frame = 1
 
 [node name="HealthBar" type="TextureProgressBar" parent="Player/HUD_canvas/HUD/up_left" node_paths=PackedStringArray("player", "rallyBar")]
 z_index = 1
@@ -563,9 +562,14 @@ player = NodePath("../../../../..")
 
 [node name="pause" type="CanvasLayer" parent="."]
 
-[node name="PauseMenu" parent="pause" node_paths=PackedStringArray("player", "hud") instance=ExtResource("15_p4no6")]
+[node name="PauseMenu" parent="pause" node_paths=PackedStringArray("player", "hud", "Item_name", "Item_sprite") instance=ExtResource("15_p4no6")]
 visible = false
 player = NodePath("../../Player")
 hud = NodePath("../../Player/HUD_canvas/HUD")
+Item_name = NodePath("../../Player/HUD_canvas/HUD/up_left/container/current_item")
+Item_sprite = NodePath("../../Player/HUD_canvas/HUD/up_left/curent_item")
+
+[node name="Shop" parent="pause" instance=ExtResource("26_ml5kp")]
+visible = false
 
 [connection signal="timeout" from="Player/HUD_canvas/HUD/up_left/RallyBar/RallyTimer" to="Player/HUD_canvas/HUD/up_left/RallyBar" method="_on_rally_timer_timeout"]
