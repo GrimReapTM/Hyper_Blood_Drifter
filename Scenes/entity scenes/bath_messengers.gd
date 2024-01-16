@@ -1,7 +1,6 @@
 extends StaticBody2D
 
 @export var ID = "blood"
-
 @export var player: CharacterBody2D
 
 var activated = false
@@ -37,11 +36,14 @@ func interact():
 		$AnimationPlayer.play("interact_idle")
 		$E/Sprite2D.visible = false
 		player.paused = true
+		activated = true
 		open.emit()
 
 func close():
-	$E/Sprite2D.visible = true
-	$AnimationPlayer.play("idle")
+	if activated:
+		$E/Sprite2D.visible = true
+		$AnimationPlayer.play("idle")
+		activated = false
 
 
 func _physics_process(_delta):

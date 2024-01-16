@@ -34,13 +34,13 @@ func _on_hurtbox_area_entered(area):
 			if not heavy:
 				damaged = true
 			$damagedTimer.start()
-			hp -= globalStats.melee_damage
+			hp -= g.melee_damage
 			healthChanged.emit()
 			knockback(to_local(player.position), 10)
 		"bullet_hitbox":
 			if area.owner.ID == "player":
 				aggro = true
-				hp -= globalStats.ranged_damage
+				hp -= g.ranged_damage
 				healthChanged.emit()
 				knockback(to_local(player.position), 30)
 	if hp <= 0:

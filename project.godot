@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-globalStats="*res://scripts/global_stats.gd"
+g="*res://scripts/g.gd"
 
 [display]
 

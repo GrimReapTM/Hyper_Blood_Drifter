@@ -260,6 +260,7 @@ offset_bottom = 41.0
 texture_hover = ExtResource("14_82u3d")
 
 [connection signal="mouse_entered" from="inventory/Debug/InventoryButton" to="." method="_on_inventory_button_mouse_entered"]
+[connection signal="pressed" from="inventory/Debug/InventoryButton" to="." method="_on_inventory_button_pressed"]
 [connection signal="mouse_entered" from="inventory/Debug/StatsButton" to="." method="_on_stats_button_mouse_entered"]
 [connection signal="mouse_entered" from="inventory/Debug/SettingsButton" to="." method="_on_settings_button_mouse_entered"]
 [connection signal="mouse_entered" from="inventory/Weapons/R1" to="." method="_on_r_1_mouse_entered"]

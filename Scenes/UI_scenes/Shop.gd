@@ -2,6 +2,7 @@ extends Control
 
 @export var messengers: StaticBody2D
 @export var player: CharacterBody2D
+@export var Inventory: Control
 
 func _ready():
 	messengers.open.connect(open)
@@ -16,14 +17,16 @@ func close():
 
 func _on_pebble_pressed():
 	add_item("pebble")
+	g.inventoryChanged.emit()
 
 func _on_molotov_pressed():
 	add_item("molotov_cocktail")
-
+	g.inventoryChanged.emit()
 
 func add_item(item):
-	if item in globalStats.inventory:
-		globalStats.inventory[item] += 1
+	if item in g.inventory:
+		g.inventory[item] += 1
 	else:
-		globalStats.inventory[item] = 1
+		g.inventory[item] = 1
+	Inventory.add_item(item)
 

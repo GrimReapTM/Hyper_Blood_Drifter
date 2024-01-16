@@ -1,4 +1,5 @@
 extends Control
+@export var Inventory: Control
 
 @export var player: CharacterBody2D
 @export var hud: Node2D
@@ -198,3 +199,8 @@ func _on_q_6_mouse_entered():
 	label_quick.text = "Empty"
 
 #-----------------------------------------------------------------
+
+
+func _on_inventory_button_pressed():
+	visible = false
+	Inventory.visible = true
