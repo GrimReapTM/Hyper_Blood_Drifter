@@ -3,6 +3,7 @@ extends CharacterBody2D
 const bullet = preload("res://Scenes/entity scenes/bullet.tscn")
 
 @export var pauseMenu: Control
+@export var HUD: Node2D
 
 var paused = false
 
@@ -86,13 +87,7 @@ func _input(event):
 			global_index = attack_calculation()
 			attack_ranged(global_index)
 	elif event.is_action_pressed("pause"):
-		if not paused:
-			paused = true
-			pause_pressed.emit()
-		else:
-			paused = false
-			pause_pressed.emit()
-			
+		pause_pressed.emit()
 	elif event.is_action_pressed("blood_bullet"):
 		if b_bullets == 0:
 			animations.play("blood_bullet")

@@ -6,6 +6,7 @@ const Item = preload("res://Scenes/UI_scenes/inventory_item.tscn")
 @export var Paused: Control
 
 var inventory = []
+var child_inventory = []
 
 func _ready():
 	g.inventoryChanged.connect(add_item)
@@ -15,6 +16,7 @@ func _ready():
 			var instance = Item.instantiate()
 			instance.ID = i
 			instance.item()
+			child_inventory.append(instance)
 			container.add_child(instance)
 
 func is_inventory_empty_by_any_chance():
@@ -33,8 +35,11 @@ func add_item(item):
 		instance.item()
 		container.add_child(instance)
 		inventory.append(item)
+		child_inventory.append(instance)
 
 func close():
-	if player.paused and visible:
+	if visible:
 		visible = false
-		Paused.visible = false
+		Paused.visible = true
+		player.HUD.visible = true
+		player.paused = true

@@ -12,7 +12,7 @@ font_color = Color(0.996078, 0.988235, 0.964706, 1)
 shadow_size = 7
 shadow_color = Color(0, 0, 0, 0.129412)
 
-[node name="Inventory_item" type="Control" node_paths=PackedStringArray("Sprite", "Amount", "Description", "Name")]
+[node name="Inventory_item" type="Control" node_paths=PackedStringArray("Sprite", "Amount", "Description", "Name", "button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,44 +26,61 @@ Sprite = NodePath("item")
 Amount = NodePath("amount")
 Description = NodePath("description")
 Name = NodePath("name")
+button = NodePath("Button")
 metadata/_edit_lock_ = true
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 398.0
+offset_bottom = 138.0
+color = Color(0, 0, 0, 0.745098)
+
 [node name="name" type="Label" parent="."]
-offset_left = 9.0
+layout_mode = 0
+offset_left = 7.0
 offset_top = 8.0
-offset_right = 856.0
+offset_right = 964.0
 offset_bottom = 78.0
-scale = Vector2(0.7, 0.7)
+scale = Vector2(0.4, 0.4)
 text = "Item"
 label_settings = ExtResource("3_driq3")
 
 [node name="item" type="Sprite2D" parent="."]
-position = Vector2(72, 119)
-scale = Vector2(4, 4)
+position = Vector2(54, 83)
+scale = Vector2(3, 3)
 texture = ExtResource("1_2w271")
 hframes = 13
 frame = 1
 
 [node name="amount" type="Label" parent="."]
 layout_mode = 0
-offset_left = 144.0
-offset_top = 138.0
-offset_right = 247.0
-offset_bottom = 208.0
-scale = Vector2(0.6, 0.6)
+offset_left = 99.0
+offset_top = 98.0
+offset_right = 202.0
+offset_bottom = 168.0
+scale = Vector2(0.4, 0.4)
 text = "2"
 label_settings = SubResource("LabelSettings_thnla")
 
 [node name="description" type="Label" parent="."]
 layout_mode = 0
-offset_left = 217.0
-offset_top = 66.0
-offset_right = 1533.0
-offset_bottom = 489.0
-scale = Vector2(0.3, 0.3)
+offset_left = 133.0
+offset_top = 47.0
+offset_right = 1449.0
+offset_bottom = 470.0
+scale = Vector2(0.2, 0.2)
 text = "meow meow meow meow meow 
 meow meow meow meow meow 
 meow meow meow meow meow 
 meow meow meow meow meow 
 meow meow meow meow meow  "
 label_settings = ExtResource("3_driq3")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 399.0
+offset_bottom = 137.0
+disabled = true
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

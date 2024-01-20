@@ -16,6 +16,15 @@ extends Control
 @export var label_armor: Label
 @export var label_quick: Label
 
+@export var Q1Sprite: Sprite2D
+@export var Q2Sprite: Sprite2D
+@export var Q3Sprite: Sprite2D
+@export var Q4Sprite: Sprite2D
+@export var Q5Sprite: Sprite2D
+@export var Q6Sprite: Sprite2D
+var sprites = []
+
+
 signal debug
 signal weapons
 signal armor
@@ -36,38 +45,41 @@ madmans_knowledge - 11
 umbilical_cord - 12
 '''
 
-var quick_slots = [null, null, null, null, null, null]
-var equiped_slot = 0
 
 func _ready():
+	sprites = [Q1Sprite, Q2Sprite, Q3Sprite, Q4Sprite, Q5Sprite, Q6Sprite]
+	g.changeSprite.connect(change_sprite)
+	g.changeSprite.connect(disable_buttons)
 	player.pause_pressed.connect(pause)
-	check_quick(quick_slots[equiped_slot])
+	check_quick(g.quick_slots[g.equiped_slot])
 
 func pause():
-	if player.paused:
+	if not visible and not player.paused:
+		player.paused = true
 		visible = true
 	else:
+		player.paused = false
 		visible = false
 
 
 func _input(event):
 	if event.is_action_pressed("Q1"):
-			check_quick(quick_slots[0])
+			check_quick(g.quick_slots[0])
 	elif event.is_action_pressed("Q2"):
-			check_quick(quick_slots[1])
+			check_quick(g.quick_slots[1])
 	elif event.is_action_pressed("Q3"):
-			check_quick(quick_slots[2])
+			check_quick(g.quick_slots[2])
 	elif event.is_action_pressed("Q4"):
-			check_quick(quick_slots[3])
+			check_quick(g.quick_slots[3])
 	elif event.is_action_pressed("Q5"):
-			check_quick(quick_slots[4])
+			check_quick(g.quick_slots[4])
 	elif event.is_action_pressed("Q6"):
-			check_quick(quick_slots[5])
+			check_quick(g.quick_slots[5])
 
 
 func check_quick(slot):
 	if slot != null:
-		equiped_slot = slot
+		g.equiped_slot = slot
 		match slot:
 			"molotov_cocktail":
 				change_quick("Molotov Cocktail", 1)
@@ -198,9 +210,53 @@ func _on_q_6_mouse_entered():
 	fquickitems()
 	label_quick.text = "Empty"
 
+
+
+func _on_q_1_pressed():
+	add_quick(0)
+
+func _on_q_2_pressed():
+	add_quick(1)
+
+func _on_q_3_pressed():
+	add_quick(2)
+
+func _on_q_4_pressed():
+	add_quick(3)
+
+func _on_q_5_pressed():
+	add_quick(4)
+
+func _on_q_6_pressed():
+	add_quick(5)
 #-----------------------------------------------------------------
+
+func add_quick(slot):
+	if Inventory.is_inventory_empty_by_any_chance():
+		player.paused = true
+		for i in Inventory.child_inventory:
+			i.button.disabled = false
+		visible = false
+		Inventory.visible = true
+		g.next_slot = slot
+
+func disable_buttons():
+		for i in Inventory.child_inventory:
+			i.button.disabled = true
+		visible = true
+		Inventory.visible = false
+
+func change_sprite():
+	if g.old_slot != null:
+		sprites[g.old_slot].frame = 0
+		g.old_slot = null
+	sprites[g.next_slot].frame = g.item_ids[g.quick_slots[g.next_slot]]
 
 
 func _on_inventory_button_pressed():
 	visible = false
 	Inventory.visible = true
+	player.HUD.visible = false
+
+
+

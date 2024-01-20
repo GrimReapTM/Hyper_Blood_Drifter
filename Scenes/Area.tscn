@@ -381,9 +381,10 @@ layer_1/name = "objects"
 layer_1/y_sort_enabled = true
 layer_1/tile_data = PackedInt32Array()
 
-[node name="Player" parent="." node_paths=PackedStringArray("pauseMenu") instance=ExtResource("3_hbuen")]
+[node name="Player" parent="." node_paths=PackedStringArray("pauseMenu", "HUD") instance=ExtResource("3_hbuen")]
 y_sort_enabled = true
 pauseMenu = NodePath("../pause/PauseMenu")
+HUD = NodePath("HUD_canvas/HUD")
 
 [node name="follow cam" type="Camera2D" parent="Player" node_paths=PackedStringArray("player", "tilemap")]
 limit_left = 0

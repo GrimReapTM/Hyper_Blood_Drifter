@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cn1bybip4vf4a"]
+[gd_scene load_steps=25 format=3 uid="uid://cn1bybip4vf4a"]
 
 [ext_resource type="Script" path="res://Scenes/UI_scenes/Paused.gd" id="1_qgrk8"]
 [ext_resource type="Texture2D" uid="uid://cwc5djmbg2s43" path="res://sprites/HUD/inventory/inventory.png" id="2_d473i"]
@@ -23,8 +23,9 @@
 [ext_resource type="Texture2D" uid="uid://op5l4sjm8phq" path="res://sprites/HUD/inventory/buttons/armor-arms-button-hover.png" id="22_tgjrp"]
 [ext_resource type="Texture2D" uid="uid://dqngr5fymyqqa" path="res://sprites/HUD/inventory/buttons/armor-legs-button.png" id="23_8wnk5"]
 [ext_resource type="Texture2D" uid="uid://76xipu43624j" path="res://sprites/HUD/inventory/buttons/armor-legs-button-hover.png" id="24_7qv6u"]
+[ext_resource type="Texture2D" uid="uid://dhky2u6sekqy1" path="res://sprites/HUD/inventory/consumable-small-sheet.png" id="24_8up1n"]
 
-[node name="PauseMenu" type="Control" node_paths=PackedStringArray("hand_debug", "hand_weapons", "hand_armor", "hand_quick_items", "label_debug", "label_weapons", "label_armor", "label_quick")]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("hand_debug", "hand_weapons", "hand_armor", "hand_quick_items", "label_debug", "label_weapons", "label_armor", "label_quick", "Q1Sprite", "Q2Sprite", "Q3Sprite", "Q4Sprite", "Q5Sprite", "Q6Sprite")]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 19.0
@@ -38,6 +39,12 @@ label_debug = NodePath("inventory/hands/hand_debug/debug_label")
 label_weapons = NodePath("inventory/hands/hand_weapons/weapons_label")
 label_armor = NodePath("inventory/hands/hand_armor/armor_label")
 label_quick = NodePath("inventory/hands/hand_quick_items/quick_label")
+Q1Sprite = NodePath("inventory/QuickItems/Q1/Q1Sprite")
+Q2Sprite = NodePath("inventory/QuickItems/Q2/Q2Sprite")
+Q3Sprite = NodePath("inventory/QuickItems/Q3/Q3Sprite")
+Q4Sprite = NodePath("inventory/QuickItems/Q4/Q4Sprite")
+Q5Sprite = NodePath("inventory/QuickItems/Q5/Q5Sprite")
+Q6Sprite = NodePath("inventory/QuickItems/Q6/Q6Sprite")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -46,11 +53,13 @@ offset_top = -22.0
 offset_right = 1283.0
 offset_bottom = 704.0
 color = Color(0, 0, 0, 0.211765)
+metadata/_edit_lock_ = true
 
 [node name="inventory" type="Sprite2D" parent="."]
 position = Vector2(632, 455)
 scale = Vector2(4, 4)
 texture = ExtResource("2_d473i")
+metadata/_edit_lock_ = true
 
 [node name="hands" type="Node2D" parent="inventory"]
 position = Vector2(-134.5, -109.75)
@@ -224,12 +233,22 @@ offset_right = -55.0
 offset_bottom = 41.0
 texture_hover = ExtResource("14_82u3d")
 
+[node name="Q1Sprite" type="Sprite2D" parent="inventory/QuickItems/Q1"]
+position = Vector2(9, 9)
+texture = ExtResource("24_8up1n")
+hframes = 13
+
 [node name="Q2" type="TextureButton" parent="inventory/QuickItems"]
 offset_left = -51.0
 offset_top = 23.0
 offset_right = -33.0
 offset_bottom = 41.0
 texture_hover = ExtResource("14_82u3d")
+
+[node name="Q2Sprite" type="Sprite2D" parent="inventory/QuickItems/Q2"]
+position = Vector2(9, 9)
+texture = ExtResource("24_8up1n")
+hframes = 13
 
 [node name="Q3" type="TextureButton" parent="inventory/QuickItems"]
 offset_left = -29.0
@@ -238,12 +257,22 @@ offset_right = -11.0
 offset_bottom = 41.0
 texture_hover = ExtResource("14_82u3d")
 
+[node name="Q3Sprite" type="Sprite2D" parent="inventory/QuickItems/Q3"]
+position = Vector2(9, 9)
+texture = ExtResource("24_8up1n")
+hframes = 13
+
 [node name="Q4" type="TextureButton" parent="inventory/QuickItems"]
 offset_left = -7.0
 offset_top = 23.0
 offset_right = 11.0
 offset_bottom = 41.0
 texture_hover = ExtResource("14_82u3d")
+
+[node name="Q4Sprite" type="Sprite2D" parent="inventory/QuickItems/Q4"]
+position = Vector2(9, 9)
+texture = ExtResource("24_8up1n")
+hframes = 13
 
 [node name="Q5" type="TextureButton" parent="inventory/QuickItems"]
 offset_left = 15.0
@@ -252,12 +281,22 @@ offset_right = 33.0
 offset_bottom = 41.0
 texture_hover = ExtResource("14_82u3d")
 
+[node name="Q5Sprite" type="Sprite2D" parent="inventory/QuickItems/Q5"]
+position = Vector2(9, 9)
+texture = ExtResource("24_8up1n")
+hframes = 13
+
 [node name="Q6" type="TextureButton" parent="inventory/QuickItems"]
 offset_left = 37.0
 offset_top = 23.0
 offset_right = 55.0
 offset_bottom = 41.0
 texture_hover = ExtResource("14_82u3d")
+
+[node name="Q6Sprite" type="Sprite2D" parent="inventory/QuickItems/Q6"]
+position = Vector2(9, 9)
+texture = ExtResource("24_8up1n")
+hframes = 13
 
 [connection signal="mouse_entered" from="inventory/Debug/InventoryButton" to="." method="_on_inventory_button_mouse_entered"]
 [connection signal="pressed" from="inventory/Debug/InventoryButton" to="." method="_on_inventory_button_pressed"]
@@ -272,8 +311,14 @@ texture_hover = ExtResource("14_82u3d")
 [connection signal="mouse_entered" from="inventory/Armor/Knees" to="." method="_on_knees_mouse_entered"]
 [connection signal="mouse_entered" from="inventory/Armor/Toes" to="." method="_on_toes_mouse_entered"]
 [connection signal="mouse_entered" from="inventory/QuickItems/Q1" to="." method="_on_q_1_mouse_entered"]
+[connection signal="pressed" from="inventory/QuickItems/Q1" to="." method="_on_q_1_pressed"]
 [connection signal="mouse_entered" from="inventory/QuickItems/Q2" to="." method="_on_q_2_mouse_entered"]
+[connection signal="pressed" from="inventory/QuickItems/Q2" to="." method="_on_q_2_pressed"]
 [connection signal="mouse_entered" from="inventory/QuickItems/Q3" to="." method="_on_q_3_mouse_entered"]
+[connection signal="pressed" from="inventory/QuickItems/Q3" to="." method="_on_q_3_pressed"]
 [connection signal="mouse_entered" from="inventory/QuickItems/Q4" to="." method="_on_q_4_mouse_entered"]
+[connection signal="pressed" from="inventory/QuickItems/Q4" to="." method="_on_q_4_pressed"]
 [connection signal="mouse_entered" from="inventory/QuickItems/Q5" to="." method="_on_q_5_mouse_entered"]
+[connection signal="pressed" from="inventory/QuickItems/Q5" to="." method="_on_q_5_pressed"]
 [connection signal="mouse_entered" from="inventory/QuickItems/Q6" to="." method="_on_q_6_mouse_entered"]
+[connection signal="pressed" from="inventory/QuickItems/Q6" to="." method="_on_q_6_pressed"]

@@ -34,9 +34,8 @@ maxHp = 100
 [node name="lamp" parent="." index="4" instance=ExtResource("2_84i77")]
 position = Vector2(444, 767)
 
-[node name="Shop" parent="pause" index="1" node_paths=PackedStringArray("messengers", "player")]
+[node name="Shop" parent="pause" index="1" node_paths=PackedStringArray("messengers")]
 messengers = NodePath("../../bath messengers")
-player = NodePath("../../Player")
 
 [node name="enemy_default_pos" type="Marker2D" parent="." index="6"]
 position = Vector2(1643, 386)
