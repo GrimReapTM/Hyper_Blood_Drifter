@@ -188,29 +188,33 @@ func _on_toes_mouse_entered():
 #quickslots
 func _on_q_1_mouse_entered():
 	fquickitems()
-	label_quick.text = "Empty"
+	label_quick.text = label_quick_check(0)
 
 func _on_q_2_mouse_entered():
 	fquickitems()
-	label_quick.text = "Empty"
+	label_quick.text = label_quick_check(1)
 
 func _on_q_3_mouse_entered():
 	fquickitems()
-	label_quick.text = "Empty"
+	label_quick.text = label_quick_check(2)
 
 func _on_q_4_mouse_entered():
 	fquickitems()
-	label_quick.text = "Empty"
+	label_quick.text = label_quick_check(3)
 
 func _on_q_5_mouse_entered():
 	fquickitems()
-	label_quick.text = "Empty"
+	label_quick.text = label_quick_check(4)
 
 func _on_q_6_mouse_entered():
 	fquickitems()
-	label_quick.text = "Empty"
+	label_quick.text = label_quick_check(5)
 
-
+func label_quick_check(slot):
+	if g.quick_slots[slot] != null:
+		return g.get_item(slot, "name")
+	else:
+		return "Empty"
 
 func _on_q_1_pressed():
 	add_quick(0)

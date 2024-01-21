@@ -72,11 +72,11 @@ scale = Vector2(4, 4)
 texture = ExtResource("3_4oykd")
 
 [node name="debug_label" type="Label" parent="inventory/hands/hand_debug"]
-offset_left = -96.0
-offset_top = -8.5
-offset_right = 204.0
-offset_bottom = 31.5
-scale = Vector2(0.2, 0.2)
+offset_left = -90.75
+offset_top = -7.0
+offset_right = 359.25
+offset_bottom = 41.0
+scale = Vector2(0.15, 0.15)
 text = "ha"
 label_settings = ExtResource("4_7xtp4")
 horizontal_alignment = 2
@@ -88,11 +88,11 @@ scale = Vector2(4, 4)
 texture = ExtResource("3_4oykd")
 
 [node name="weapons_label" type="Label" parent="inventory/hands/hand_weapons"]
-offset_left = -90.5
-offset_top = -9.0
-offset_right = 207.5
-offset_bottom = 51.0
-scale = Vector2(0.2, 0.2)
+offset_left = -92.5
+offset_top = -7.25
+offset_right = 367.5
+offset_bottom = 52.75
+scale = Vector2(0.15, 0.15)
 text = "ha"
 label_settings = ExtResource("4_7xtp4")
 horizontal_alignment = 2
@@ -104,11 +104,11 @@ scale = Vector2(4, 4)
 texture = ExtResource("3_4oykd")
 
 [node name="armor_label" type="Label" parent="inventory/hands/hand_armor"]
-offset_left = -96.0
-offset_top = -9.0
-offset_right = 203.0
-offset_bottom = 57.0
-scale = Vector2(0.2, 0.2)
+offset_left = -92.75
+offset_top = -7.25
+offset_right = 372.25
+offset_bottom = 58.75
+scale = Vector2(0.15, 0.15)
 text = "ha"
 label_settings = ExtResource("4_7xtp4")
 horizontal_alignment = 2
@@ -120,11 +120,11 @@ scale = Vector2(4, 4)
 texture = ExtResource("3_4oykd")
 
 [node name="quick_label" type="Label" parent="inventory/hands/hand_quick_items"]
-offset_left = -103.25
-offset_top = -9.0
-offset_right = 228.75
-offset_bottom = 51.0
-scale = Vector2(0.2, 0.2)
+offset_left = -101.25
+offset_top = -7.25
+offset_right = 420.75
+offset_bottom = 52.75
+scale = Vector2(0.15, 0.15)
 text = "ha"
 label_settings = ExtResource("4_7xtp4")
 horizontal_alignment = 2
