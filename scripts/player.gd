@@ -109,6 +109,36 @@ func _input(event):
 			healthChanged.emit()
 			b_vials -= 1
 			vialsChanged.emit()
+	elif event.is_action_pressed("quick_use") and not paused:
+		if g.equiped_slot != null:
+			if g.equiped_slot != "lantern":
+				g.inventory[g.equiped_slot] -= 1
+				g.itemAmount.emit()
+			match g.equiped_slot:
+				"molotov_cocktail":
+					pass
+				"pebble":
+					pass
+				"throwing_knife":
+					pass
+				"beast_pellet":
+					pass
+				"hunters_mark":
+					pass
+				"bolt_paper":
+					pass
+				"coldblood_dew":
+					pass
+				"fire_paper":
+					pass
+				"lantern":
+					pass
+				"iosefka_blood":
+					pass
+				"madmans_knowledge":
+					pass
+				"umbilical_cord":
+					pass
 
 
 var combo = false

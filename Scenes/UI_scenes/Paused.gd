@@ -48,10 +48,13 @@ umbilical_cord - 12
 
 func _ready():
 	sprites = [Q1Sprite, Q2Sprite, Q3Sprite, Q4Sprite, Q5Sprite, Q6Sprite]
+	g.nullSprite.connect(null_sprite)
 	g.changeSprite.connect(change_sprite)
 	g.changeSprite.connect(disable_buttons)
+	g.equiped_null.connect(equiped_null)
 	player.pause_pressed.connect(pause)
-	check_quick(g.quick_slots[g.equiped_slot])
+	if g.equiped_slot != null:
+		check_quick(g.quick_slots[g.equiped_slot])
 
 func pause():
 	if not visible and not player.paused:
@@ -65,16 +68,22 @@ func pause():
 func _input(event):
 	if event.is_action_pressed("Q1"):
 			check_quick(g.quick_slots[0])
+			g.slot = 0
 	elif event.is_action_pressed("Q2"):
 			check_quick(g.quick_slots[1])
+			g.slot = 1
 	elif event.is_action_pressed("Q3"):
 			check_quick(g.quick_slots[2])
+			g.slot = 2
 	elif event.is_action_pressed("Q4"):
 			check_quick(g.quick_slots[3])
+			g.slot = 3
 	elif event.is_action_pressed("Q5"):
 			check_quick(g.quick_slots[4])
+			g.slot = 4
 	elif event.is_action_pressed("Q6"):
 			check_quick(g.quick_slots[5])
+			g.slot = 5
 
 
 func check_quick(slot):
@@ -109,6 +118,10 @@ func check_quick(slot):
 func change_quick(label, frame):
 	Item_name.text = label
 	Item_sprite.frame = frame
+
+func equiped_null():
+		Item_name.text = ""
+		Item_sprite.frame = 0
 
 #--------------------------------------------------------------------------
 func fdebug():
@@ -238,15 +251,23 @@ func _on_q_6_pressed():
 func add_quick(slot):
 	if Inventory.is_inventory_empty_by_any_chance():
 		player.paused = true
+		var j = 0
 		for i in Inventory.child_inventory:
-			i.button.disabled = false
+			if is_instance_valid(i):
+				i.button.disabled = false
+			else:
+				Inventory.child_inventory.remove_at(j)
+			j += 1
 		visible = false
 		Inventory.visible = true
 		g.next_slot = slot
 
 func disable_buttons():
 		for i in Inventory.child_inventory:
-			i.button.disabled = true
+			if is_instance_valid(i):
+				i.button.disabled = true
+			else:
+				Inventory.child_inventory.remove_at(i)
 		visible = true
 		Inventory.visible = false
 
@@ -256,6 +277,8 @@ func change_sprite():
 		g.old_slot = null
 	sprites[g.next_slot].frame = g.item_ids[g.quick_slots[g.next_slot]]
 
+func null_sprite():
+	sprites[g.slot].frame = 0
 
 func _on_inventory_button_pressed():
 	visible = false
