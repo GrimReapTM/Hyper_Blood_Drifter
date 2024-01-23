@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://brdakdtadahqx"]
+[gd_scene load_steps=38 format=3 uid="uid://brdakdtadahqx"]
 
 [ext_resource type="Texture2D" uid="uid://bodowo5fqv02g" path="res://sprites/tileset.png" id="1_fowpt"]
 [ext_resource type="Texture2D" uid="uid://c1namygqbemua" path="res://sprites/terrain_fence.png" id="2_boaiw"]
@@ -355,6 +355,13 @@ shadow_size = 9
 shadow_color = Color(0, 0, 0, 0.223529)
 shadow_offset = Vector2(2, 2)
 
+[sub_resource type="LabelSettings" id="LabelSettings_6k2qb"]
+font = ExtResource("6_ob3j7")
+font_size = 70
+font_color = Color(0.996078, 0.988235, 0.964706, 1)
+shadow_size = 7
+shadow_offset = Vector2(2, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_cjyqp"]
 font = ExtResource("6_ob3j7")
 font_size = 50
@@ -467,6 +474,14 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 57
 label_settings = SubResource("LabelSettings_xd47t")
 
+[node name="current_item_amount" type="Label" parent="Player/HUD_canvas/HUD/up_left/container"]
+offset_left = -31.0
+offset_top = 8.5
+offset_right = 11.0
+offset_bottom = 78.5
+scale = Vector2(0.1, 0.1)
+label_settings = SubResource("LabelSettings_6k2qb")
+
 [node name="curent_item" type="Sprite2D" parent="Player/HUD_canvas/HUD/up_left"]
 position = Vector2(179, 123)
 scale = Vector2(4, 4)
@@ -564,13 +579,14 @@ player = NodePath("../../../../..")
 
 [node name="pause" type="CanvasLayer" parent="."]
 
-[node name="PauseMenu" parent="pause" node_paths=PackedStringArray("Inventory", "player", "hud", "Item_name", "Item_sprite") instance=ExtResource("15_p4no6")]
+[node name="PauseMenu" parent="pause" node_paths=PackedStringArray("Inventory", "player", "hud", "Item_name", "Item_sprite", "Item_amount") instance=ExtResource("15_p4no6")]
 visible = false
 Inventory = NodePath("../Inventory")
 player = NodePath("../../Player")
 hud = NodePath("../../Player/HUD_canvas/HUD")
 Item_name = NodePath("../../Player/HUD_canvas/HUD/up_left/container/current_item")
 Item_sprite = NodePath("../../Player/HUD_canvas/HUD/up_left/curent_item")
+Item_amount = NodePath("../../Player/HUD_canvas/HUD/up_left/container/current_item_amount")
 
 [node name="Shop" parent="pause" node_paths=PackedStringArray("player", "Inventory") instance=ExtResource("26_ml5kp")]
 visible = false

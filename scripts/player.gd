@@ -34,7 +34,6 @@ signal pause_pressed
 signal insightChanged
 signal b_echoesChanged
 
-
 #variables for movement
 @export var speed = 350
 @export var attSpeed = 10
@@ -77,68 +76,69 @@ func updateMousepos():
 
 #inputs - self explanatory
 func _input(event):
-	if event.is_action_pressed("attackMelee"):
-		if not action and stamina > 5 and not paused:
-			action = true
-			global_index = attack_calculation()
-			attack_melee(global_index)
-	elif event.is_action_pressed("attackRanged"):
-		if not action and stamina > 1 and bullets > 0 and not paused:
-			global_index = attack_calculation()
-			attack_ranged(global_index)
-	elif event.is_action_pressed("pause"):
+	if event.is_action_pressed("pause"):
 		pause_pressed.emit()
-	elif event.is_action_pressed("blood_bullet"):
-		if b_bullets == 0:
-			animations.play("blood_bullet")
-			await animations.animation_finished
-			animations.play("RESET")
-			healthPoints -= 65
-			healthChanged.emit()
-			b_bullets += 5
-			b_bulletsChanged.emit()
-	elif event.is_action_pressed("heal"):
-		if b_vials > 0:
-			animations.play("heal")
-			await animations.animation_finished
-			animations.play("RESET")
-			if healthPoints + 50 <= maxHealthPoints:
-				healthPoints += 40
-			else:
-				healthPoints = maxHealthPoints
-			healthChanged.emit()
-			b_vials -= 1
-			vialsChanged.emit()
-	elif event.is_action_pressed("quick_use") and not paused:
-		if g.equiped_slot != null:
-			if g.equiped_slot != "lantern":
-				g.inventory[g.equiped_slot] -= 1
-				g.itemAmount.emit()
-			match g.equiped_slot:
-				"molotov_cocktail":
-					pass
-				"pebble":
-					pass
-				"throwing_knife":
-					pass
-				"beast_pellet":
-					pass
-				"hunters_mark":
-					pass
-				"bolt_paper":
-					pass
-				"coldblood_dew":
-					pass
-				"fire_paper":
-					pass
-				"lantern":
-					pass
-				"iosefka_blood":
-					pass
-				"madmans_knowledge":
-					pass
-				"umbilical_cord":
-					pass
+	if not paused and not action:
+		if event.is_action_pressed("attackMelee"):
+			if not action and stamina > 5 and not paused:
+				action = true
+				global_index = attack_calculation()
+				attack_melee(global_index)
+		elif event.is_action_pressed("attackRanged"):
+			if not action and stamina > 1 and bullets > 0 and not paused:
+				global_index = attack_calculation()
+				attack_ranged(global_index)
+		elif event.is_action_pressed("blood_bullet"):
+			if b_bullets == 0:
+				animations.play("blood_bullet")
+				await animations.animation_finished
+				animations.play("RESET")
+				healthPoints -= 65
+				healthChanged.emit()
+				b_bullets += 5
+				b_bulletsChanged.emit()
+		elif event.is_action_pressed("heal"):
+			if b_vials > 0:
+				animations.play("heal")
+				await animations.animation_finished
+				animations.play("RESET")
+				if healthPoints + 50 <= maxHealthPoints:
+					healthPoints += 40
+				else:
+					healthPoints = maxHealthPoints
+				healthChanged.emit()
+				b_vials -= 1
+				vialsChanged.emit()
+		elif event.is_action_pressed("quick_use") and not paused:
+			if g.equiped_slot != null:
+				if g.equiped_slot != "lantern":
+					g.inventory[g.equiped_slot] -= 1
+					g.itemAmount.emit()
+				match g.equiped_slot:
+					"molotov_cocktail":
+						pass
+					"pebble":
+						pass
+					"throwing_knife":
+						pass
+					"beast_pellet":
+						pass
+					"hunters_mark":
+						pass
+					"bolt_paper":
+						pass
+					"coldblood_dew":
+						pass
+					"fire_paper":
+						pass
+					"lantern":
+						pass
+					"iosefka_blood":
+						pass
+					"madmans_knowledge":
+						pass
+					"umbilical_cord":
+						pass
 
 
 var combo = false

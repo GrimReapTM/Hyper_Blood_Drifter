@@ -17,11 +17,9 @@ func close():
 
 func _on_pebble_pressed():
 	add_item("pebble")
-	g.inventoryChanged.emit()
 
 func _on_molotov_pressed():
 	add_item("molotov_cocktail")
-	g.inventoryChanged.emit()
 
 func add_item(item):
 	if item in g.inventory:

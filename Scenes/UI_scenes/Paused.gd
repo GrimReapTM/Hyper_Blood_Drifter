@@ -5,6 +5,7 @@ extends Control
 @export var hud: Node2D
 @export var Item_name: Label
 @export var Item_sprite: Sprite2D
+@export var Item_amount: Label
 
 @export var hand_debug: Sprite2D
 @export var hand_weapons: Sprite2D
@@ -48,6 +49,7 @@ umbilical_cord - 12
 
 func _ready():
 	sprites = [Q1Sprite, Q2Sprite, Q3Sprite, Q4Sprite, Q5Sprite, Q6Sprite]
+	g.itemAmount.connect(change_amount)
 	g.nullSprite.connect(null_sprite)
 	g.changeSprite.connect(change_sprite)
 	g.changeSprite.connect(disable_buttons)
@@ -118,6 +120,13 @@ func check_quick(slot):
 func change_quick(label, frame):
 	Item_name.text = label
 	Item_sprite.frame = frame
+	Item_amount.text = str(g.inventory[g.equiped_slot])
+
+func change_amount():
+	if g.equiped_slot != null:
+		Item_amount.text = str(g.inventory[g.equiped_slot])
+	else:
+		Item_amount.text = ""
 
 func equiped_null():
 		Item_name.text = ""
@@ -257,6 +266,7 @@ func add_quick(slot):
 				i.button.disabled = false
 			else:
 				Inventory.child_inventory.remove_at(j)
+				add_quick(slot)
 			j += 1
 		visible = false
 		Inventory.visible = true
@@ -284,6 +294,4 @@ func _on_inventory_button_pressed():
 	visible = false
 	Inventory.visible = true
 	player.HUD.visible = false
-
-
 

@@ -9,7 +9,6 @@ var inventory = []
 var child_inventory = []
 
 func _ready():
-	g.inventoryChanged.connect(add_item)
 	player.pause_pressed.connect(close)
 	if is_inventory_empty_by_any_chance():
 		for i in g.inventory:
@@ -27,15 +26,21 @@ func is_inventory_empty_by_any_chance():
 			return false
 
 func add_item(item):
-	if item in inventory:
-		g.itemAmount.emit()
-	else:
-		var instance = Item.instantiate()
-		instance.ID = item
-		instance.item()
-		container.add_child(instance)
-		inventory.append(item)
-		child_inventory.append(instance)
+	for i in child_inventory:
+		if i.ID == item:
+			g.itemAmount.emit()
+			var child = []
+			for j in container.get_children():
+				child.append(j.ID)
+			print(child)
+			return
+	var instance = Item.instantiate()
+	instance.ID = item
+	instance.item()
+	container.add_child(instance)
+	inventory.append(item)
+	child_inventory.append(instance)
+	print("A")
 
 func close():
 	if visible:
