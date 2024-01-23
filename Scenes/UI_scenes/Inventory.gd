@@ -1,7 +1,7 @@
 extends Control
 
 const Item = preload("res://Scenes/UI_scenes/inventory_item.tscn")
-@export var container: VBoxContainer
+@export var container: Control
 @export var player: CharacterBody2D
 @export var Paused: Control
 
@@ -27,12 +27,11 @@ func is_inventory_empty_by_any_chance():
 
 func add_item(item):
 	for i in child_inventory:
-		if i.ID == item:
+		if is_instance_valid(i) and i.ID == item:
 			g.itemAmount.emit()
 			var child = []
 			for j in container.get_children():
 				child.append(j.ID)
-			print(child)
 			return
 	var instance = Item.instantiate()
 	instance.ID = item
@@ -40,7 +39,6 @@ func add_item(item):
 	container.add_child(instance)
 	inventory.append(item)
 	child_inventory.append(instance)
-	print("A")
 
 func close():
 	if visible:
