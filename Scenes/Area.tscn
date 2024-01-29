@@ -1,7 +1,8 @@
-[gd_scene load_steps=38 format=3 uid="uid://brdakdtadahqx"]
+[gd_scene load_steps=40 format=3 uid="uid://brdakdtadahqx"]
 
 [ext_resource type="Texture2D" uid="uid://bodowo5fqv02g" path="res://sprites/tileset.png" id="1_fowpt"]
 [ext_resource type="Texture2D" uid="uid://c1namygqbemua" path="res://sprites/terrain_fence.png" id="2_boaiw"]
+[ext_resource type="Texture2D" uid="uid://bqy2lfk77rlo4" path="res://sprites/hunters_dream.png" id="3_c4kdp"]
 [ext_resource type="PackedScene" uid="uid://oycliuo8lo5y" path="res://Scenes/entity scenes/player.tscn" id="3_hbuen"]
 [ext_resource type="Script" path="res://scripts/follow cam.gd" id="4_rla5j"]
 [ext_resource type="Texture2D" uid="uid://7hxk6m6d4wo4" path="res://sprites/HUD/health_over.png" id="5_d5ixs"]
@@ -316,6 +317,13 @@ texture = ExtResource("2_boaiw")
 3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(3, -1.5, 3, 6, -5.5, 6, -5.5, -1.5)
 3:3/0/terrains_peering_bit/left_side = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1j5it"]
+texture = ExtResource("3_c4kdp")
+8:22/size_in_atlas = Vector2i(44, 22)
+8:22/0 = 0
+8:22/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+8:22/0/physics_layer_0/angular_velocity = 0.0
+
 [sub_resource type="TileSet" id="TileSet_dy7t6"]
 physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
@@ -323,6 +331,7 @@ terrain_set_0/terrain_0/name = "fence"
 terrain_set_0/terrain_0/color = Color(0.819608, 0.635294, 0.517647, 1)
 sources/0 = SubResource("TileSetAtlasSource_y8bg1")
 sources/1 = SubResource("TileSetAtlasSource_atdm0")
+sources/2 = SubResource("TileSetAtlasSource_1j5it")
 
 [sub_resource type="LabelSettings" id="LabelSettings_5qghj"]
 font = ExtResource("6_ob3j7")
@@ -464,9 +473,9 @@ scale = Vector2(4, 4)
 texture = ExtResource("7_8uq4l")
 
 [node name="current_item" type="Label" parent="Player/HUD_canvas/HUD/up_left/container"]
-offset_left = -22.5
+offset_left = -16.5
 offset_top = 7.25
-offset_right = 534.5
+offset_right = 540.5
 offset_bottom = 163.25
 scale = Vector2(0.1, 0.1)
 theme_override_colors/font_color = Color(0.992157, 0.968627, 0.952941, 1)
@@ -475,11 +484,11 @@ theme_override_font_sizes/font_size = 57
 label_settings = SubResource("LabelSettings_xd47t")
 
 [node name="current_item_amount" type="Label" parent="Player/HUD_canvas/HUD/up_left/container"]
-offset_left = -31.0
-offset_top = 8.5
-offset_right = 11.0
-offset_bottom = 78.5
-scale = Vector2(0.1, 0.1)
+offset_left = -25.0
+offset_top = 7.5
+offset_right = 66.0
+offset_bottom = 77.5
+scale = Vector2(0.08, 0.08)
 label_settings = SubResource("LabelSettings_6k2qb")
 
 [node name="curent_item" type="Sprite2D" parent="Player/HUD_canvas/HUD/up_left"]

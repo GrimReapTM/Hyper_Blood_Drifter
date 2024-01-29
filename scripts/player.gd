@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
 const bullet = preload("res://Scenes/entity scenes/bullet.tscn")
+const molotov = preload("res://Scenes/entity scenes/bullet.tscn")
+const pebble = preload("res://Scenes/entity scenes/bullet.tscn")
+const knife = preload("res://Scenes/entity scenes/bullet.tscn")
 
 @export var pauseMenu: Control
 @export var HUD: Node2D
@@ -116,29 +119,37 @@ func _input(event):
 					g.itemAmount.emit()
 				match g.equiped_slot:
 					"molotov_cocktail":
-						pass
+						throw_item("molotov_cocktail", attack_calculation())
 					"pebble":
-						pass
+						throw_item("pebble", attack_calculation())
 					"throwing_knife":
-						pass
+						throw_item("throwing_knife", attack_calculation())
 					"beast_pellet":
-						pass
+						animations.play("consume")
+						consume("beast_pellet")
 					"hunters_mark":
-						pass
+						animations.play("consume")
+						consume("hunters_mark")
 					"bolt_paper":
-						pass
+						animations.play("paper")
+						consume("bolt_paper")
 					"coldblood_dew":
-						pass
+						animations.play("consume")
+						consume("coldblood_dew")
 					"fire_paper":
-						pass
+						animations.play("paper")
+						consume("fire_paper")
 					"lantern":
-						pass
+						animations.play("lantern")
 					"iosefka_blood":
-						pass
+						animations.play("drink")
+						consume("iosefka_blood")
 					"madmans_knowledge":
-						pass
+						animations.play("consume")
+						consume("madmans_knowledge")
 					"umbilical_cord":
-						pass
+						animations.play("consume")
+						consume("umbilical_cord")
 
 
 var combo = false
@@ -245,6 +256,22 @@ func instance_bullet():
 	else:
 		bullets -= 1
 		bulletsChanged.emit()
+
+func throw_item(item, index):
+	var instance
+	animations.play("throw_" + attackAnimations[index])
+	match item:
+		"molotov_cocktail":
+			instance = molotov.instantiate()
+		"pebble":
+			instance = pebble.instantiate()
+		"throwing_knife":
+			instance = knife.instantiate()
+	instance.position = position
+	owner.add_child(instance)
+
+func consume(item):
+	pass	
 
 func _on_player_hurtbox_area_entered(area):
 	match area.name:

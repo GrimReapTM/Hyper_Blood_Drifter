@@ -50,6 +50,7 @@ umbilical_cord - 12
 func _ready():
 	sprites = [Q1Sprite, Q2Sprite, Q3Sprite, Q4Sprite, Q5Sprite, Q6Sprite]
 	g.itemAmount.connect(change_amount)
+	g.showHud.connect(show_hud)
 	g.nullSprite.connect(null_sprite)
 	g.changeSprite.connect(change_sprite)
 	g.changeSprite.connect(disable_buttons)
@@ -57,6 +58,9 @@ func _ready():
 	player.pause_pressed.connect(pause)
 	if g.equiped_slot != null:
 		check_quick(g.quick_slots[g.equiped_slot])
+
+func show_hud():
+	hud.visible = true
 
 func pause():
 	if not visible and not player.paused:
@@ -166,28 +170,28 @@ func _on_inventory_button_mouse_entered():
 
 func _on_stats_button_mouse_entered():
 	fdebug()
-	label_debug.text = "Stats"
+	label_debug.text = "Status"
 
 func _on_settings_button_mouse_entered():
 	fdebug()
-	label_debug.text = "Settings"
+	label_debug.text = "System"
 
 #weapons
 func _on_r_1_mouse_entered():
 	fweapons()
-	label_weapons.text = "Right Hand 1"
+	label_weapons.text = "Right Hand"
 
 func _on_r_2_mouse_entered():
 	fweapons()
-	label_weapons.text = "Right Hand 2"
+	label_weapons.text = "Right Hand"
 
 func _on_l_1_mouse_entered():
 	fweapons()
-	label_weapons.text = "Left Hand 1"
+	label_weapons.text = "Left Hand"
 
 func _on_l_2_mouse_entered():
 	fweapons()
-	label_weapons.text = "Left Hand 2"
+	label_weapons.text = "Left Hand"
 
 
 #armor
@@ -236,7 +240,7 @@ func label_quick_check(slot):
 	if g.quick_slots[slot] != null:
 		return g.get_item(slot, "name")
 	else:
-		return "Empty"
+		return "Quick Items"
 
 func _on_q_1_pressed():
 	add_quick(0)
@@ -270,6 +274,7 @@ func add_quick(slot):
 			j += 1
 		visible = false
 		Inventory.visible = true
+		hud.visible = false
 		g.next_slot = slot
 
 func disable_buttons():

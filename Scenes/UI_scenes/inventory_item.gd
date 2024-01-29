@@ -33,4 +33,4 @@ func _on_button_pressed():
 		g.quick_slots[g.next_slot] = ID
 		g.old_slot = index
 		g.changeSprite.emit()
-		
+	g.showHud.emit()

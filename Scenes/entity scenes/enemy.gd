@@ -45,6 +45,8 @@ func _on_hurtbox_area_entered(area):
 				knockback(to_local(player.position), 30)
 	if hp <= 0:
 		queue_free()
+		player.b_echoes += 52
+		player.b_echoesChanged.emit()
 
 func _on_damaged_timer_timeout():
 	damaged = false

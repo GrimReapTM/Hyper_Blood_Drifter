@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj4wtg2yxabc7"]
+
+[ext_resource type="PackedScene" uid="uid://brdakdtadahqx" path="res://Scenes/Area.tscn" id="1_kvvk4"]
+[ext_resource type="PackedScene" uid="uid://dkcjy0yklpqk2" path="res://Scenes/entity scenes/bath_messengers.tscn" id="2_0n4ii"]
+
+[node name="Area" instance=ExtResource("1_kvvk4")]
+
+[node name="TileMap" parent="." index="0"]
+layer_0/tile_data = PackedInt32Array(-2555934, 0, 0, 3670096, 0, 0, 1245209, 524290, 22)
+
+[node name="Player" parent="." index="1"]
+position = Vector2(1475, 1349)
+
+[node name="current_item" parent="Player/HUD_canvas/HUD/up_left/container" index="0"]
+metadata/_edit_use_anchors_ = true
+
+[node name="current_item_amount" parent="Player/HUD_canvas/HUD/up_left/container" index="1"]
+metadata/_edit_use_anchors_ = true
+
+[node name="HealthBar" parent="Player/HUD_canvas/HUD/up_left" index="4"]
+metadata/_edit_use_anchors_ = true
+
+[node name="RallyBar" parent="Player/HUD_canvas/HUD/up_left" index="5"]
+metadata/_edit_use_anchors_ = true
+
+[node name="StaminaBar" parent="Player/HUD_canvas/HUD/up_left" index="6"]
+metadata/_edit_use_anchors_ = true
+
+[node name="insight" parent="Player/HUD_canvas/HUD/up_right/insight" index="0"]
+metadata/_edit_use_anchors_ = true
+
+[node name="b_echoes" parent="Player/HUD_canvas/HUD/up_right/insight" index="1"]
+metadata/_edit_use_anchors_ = true
+
+[node name="Shop" parent="pause" index="1" node_paths=PackedStringArray("messengers")]
+messengers = NodePath("../../Bath_messenger")
+
+[node name="Bath_messenger" parent="." index="3" node_paths=PackedStringArray("player") instance=ExtResource("2_0n4ii")]
+position = Vector2(1152, 1248)
+player = NodePath("../Player")
