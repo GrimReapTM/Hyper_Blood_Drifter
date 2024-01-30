@@ -4,7 +4,7 @@ extends Node
 var melee_damage = 22
 var ranged_damage = 4
 
-var inventory = {"molotov_cocktail":1, "fire_paper":6, "iosefka_blood":10, "madmans_knowledge":11, "umbilical_cord":12}
+var inventory = {"pebble":6574, "molotov_cocktail":1, "fire_paper":6, "iosefka_blood":10, "madmans_knowledge":11, "umbilical_cord":12}
 var quick_slots = [null, null, null, null, null, null]
 var equiped_slot = null
 var slot = 0

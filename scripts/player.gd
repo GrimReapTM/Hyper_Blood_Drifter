@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const bullet = preload("res://Scenes/entity scenes/bullet.tscn")
 const molotov = preload("res://Scenes/entity scenes/bullet.tscn")
-const pebble = preload("res://Scenes/entity scenes/bullet.tscn")
+const pebble = preload("res://Scenes/entity scenes/pebble.tscn")
 const knife = preload("res://Scenes/entity scenes/bullet.tscn")
 
 @export var pauseMenu: Control
