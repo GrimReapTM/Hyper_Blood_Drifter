@@ -119,11 +119,11 @@ func _input(event):
 					g.itemAmount.emit()
 				match g.equiped_slot:
 					"molotov_cocktail":
-						throw_item("molotov_cocktail", attack_calculation())
+						throw_item(molotov, attack_calculation())
 					"pebble":
-						throw_item("pebble", attack_calculation())
+						throw_item(pebble, attack_calculation())
 					"throwing_knife":
-						throw_item("throwing_knife", attack_calculation())
+						throw_item(knife, attack_calculation())
 					"beast_pellet":
 						animations.play("consume")
 						consume("beast_pellet")
@@ -260,15 +260,10 @@ func instance_bullet():
 func throw_item(item, index):
 	var instance
 	animations.play("throw_" + attackAnimations[index])
-	match item:
-		"molotov_cocktail":
-			instance = molotov.instantiate()
-		"pebble":
-			instance = pebble.instantiate()
-		"throwing_knife":
-			instance = knife.instantiate()
+	instance = item.instance()
 	instance.position = position
 	owner.add_child(instance)
+	attacking = false
 
 func consume(item):
 	pass	

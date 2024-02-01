@@ -16,6 +16,7 @@ signal changeSprite
 signal equiped_null
 signal nullSprite
 signal showHud
+signal sound
 
 func _ready():
 	itemAmount.connect(check_inv)
