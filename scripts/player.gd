@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
 const bullet = preload("res://Scenes/entity scenes/bullet.tscn")
-const molotov = preload("res://Scenes/entity scenes/bullet.tscn")
+const molotov = preload("res://Scenes/entity scenes/molotov.tscn")
 const pebble = preload("res://Scenes/entity scenes/pebble.tscn")
-const knife = preload("res://Scenes/entity scenes/bullet.tscn")
+const knife = preload("res://Scenes/entity scenes/knife.tscn")
 
 @export var pauseMenu: Control
 @export var HUD: Node2D
@@ -260,7 +260,7 @@ func instance_bullet():
 func throw_item(item, index):
 	var instance
 	animations.play("throw_" + attackAnimations[index])
-	instance = item.instance()
+	instance = item.instantiate()
 	instance.position = position
 	owner.add_child(instance)
 	attacking = false

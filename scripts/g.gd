@@ -4,7 +4,7 @@ extends Node
 var melee_damage = 22
 var ranged_damage = 4
 
-var inventory = {"pebble":6574, "molotov_cocktail":1, "fire_paper":6, "iosefka_blood":10, "madmans_knowledge":11, "umbilical_cord":12}
+var inventory = {"throwing_knife":4654, "pebble":425, "molotov_cocktail":45635, "umbilical_cord":12}
 var quick_slots = [null, null, null, null, null, null]
 var equiped_slot = null
 var slot = 0
@@ -17,6 +17,7 @@ signal equiped_null
 signal nullSprite
 signal showHud
 signal sound
+signal onFire
 
 func _ready():
 	itemAmount.connect(check_inv)

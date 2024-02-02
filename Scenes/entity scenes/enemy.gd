@@ -43,6 +43,13 @@ func _on_hurtbox_area_entered(area):
 				hp -= g.ranged_damage
 				healthChanged.emit()
 				knockback(to_local(player.position), 30)
+		"knife_hitbox":
+			aggro = true
+			hp -= 15
+			healthChanged.emit()
+			knockback(to_local(player.position), 30)
+
+
 	if hp <= 0:
 		queue_free()
 		player.b_echoes += 52

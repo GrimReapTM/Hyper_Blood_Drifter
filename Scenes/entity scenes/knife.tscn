@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtfo7b7gfi2m7"]
+
+[ext_resource type="Texture2D" uid="uid://d0tw5s2p10mkn" path="res://sprites/knife_throw.png" id="1_7p60c"]
+[ext_resource type="Script" path="res://Scenes/entity scenes/knife.gd" id="1_v53ry"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gtv60"]
+radius = 12.0208
+height = 48.0833
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jbm17"]
+radius = 8.48528
+height = 32.0
+
+[node name="Area2D" type="Area2D" node_paths=PackedStringArray("marker")]
+script = ExtResource("1_v53ry")
+marker = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Marker2D"]
+rotation = -2.35619
+scale = Vector2(4, 4)
+texture = ExtResource("1_7p60c")
+
+[node name="knife_hitbox" type="Area2D" parent="Marker2D"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="hitbox" type="CollisionShape2D" parent="Marker2D/knife_hitbox"]
+position = Vector2(10, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_gtv60")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_jbm17")
+
+[connection signal="area_entered" from="Marker2D/knife_hitbox" to="." method="_on_knife_hitbox_area_entered"]
+[connection signal="body_entered" from="Marker2D/knife_hitbox" to="." method="_on_knife_hitbox_body_entered"]

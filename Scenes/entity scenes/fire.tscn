@@ -1,0 +1,181 @@
+[gd_scene load_steps=22 format=3 uid="uid://fpdpm2oxcw47"]
+
+[ext_resource type="Script" path="res://Scenes/entity scenes/fire.gd" id="1_4h2eg"]
+[ext_resource type="Texture2D" uid="uid://c0rab0t1qsww4" path="res://sprites/entities/Fire1.png" id="1_6qtsc"]
+[ext_resource type="Texture2D" uid="uid://bqner5wlwx75h" path="res://sprites/entities/Fire2.png" id="2_t0l5u"]
+[ext_resource type="Texture2D" uid="uid://cotp4iwtu0hyr" path="res://sprites/entities/Fire3.png" id="3_db0g4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ffy0"]
+atlas = ExtResource("1_6qtsc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvonr"]
+atlas = ExtResource("1_6qtsc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7vyfr"]
+atlas = ExtResource("1_6qtsc")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bcegu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ffy0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xvonr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7vyfr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrdgx"]
+atlas = ExtResource("2_t0l5u")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_waunc"]
+atlas = ExtResource("2_t0l5u")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6h4p"]
+atlas = ExtResource("2_t0l5u")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hgmop"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrdgx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_waunc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6h4p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5u72u"]
+atlas = ExtResource("3_db0g4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nme3"]
+atlas = ExtResource("3_db0g4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfou4"]
+atlas = ExtResource("3_db0g4")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gpcbj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5u72u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nme3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfou4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_44k1x"]
+radius = 18.0
+height = 52.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ytg5x"]
+radius = 32.0156
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nkbhs"]
+radius = 19.0
+height = 46.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fdwyq"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ksow0"]
+radius = 2.0
+
+[node name="Fire" type="StaticBody2D" node_paths=PackedStringArray("sprite1", "sprite2", "sprite3", "hitbox1", "hitbox2", "hitbox3", "timer")]
+editor_description = "fire"
+script = ExtResource("1_4h2eg")
+sprite1 = NodePath("fire_hitbox/Sprite1")
+sprite2 = NodePath("fire_hitbox/Sprite2")
+sprite3 = NodePath("fire_hitbox/Sprite3")
+hitbox1 = NodePath("fire_hitbox/Hitbox1")
+hitbox2 = NodePath("fire_hitbox/Hitbox2")
+hitbox3 = NodePath("fire_hitbox/Hitbox3")
+timer = NodePath("Timer")
+
+[node name="fire_hitbox" type="Area2D" parent="."]
+
+[node name="Sprite1" type="AnimatedSprite2D" parent="fire_hitbox"]
+visible = false
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_bcegu")
+autoplay = "default"
+frame = 2
+frame_progress = 0.182438
+
+[node name="Sprite2" type="AnimatedSprite2D" parent="fire_hitbox"]
+visible = false
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_hgmop")
+autoplay = "default"
+
+[node name="Sprite3" type="AnimatedSprite2D" parent="fire_hitbox"]
+visible = false
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_gpcbj")
+autoplay = "default"
+
+[node name="Hitbox1" type="CollisionShape2D" parent="fire_hitbox"]
+visible = false
+position = Vector2(2, 11)
+shape = SubResource("CapsuleShape2D_44k1x")
+
+[node name="Hitbox2" type="CollisionShape2D" parent="fire_hitbox"]
+visible = false
+position = Vector2(3, 3)
+shape = SubResource("CircleShape2D_ytg5x")
+
+[node name="Hitbox3" type="CollisionShape2D" parent="fire_hitbox"]
+visible = false
+position = Vector2(-2, 0)
+shape = SubResource("CapsuleShape2D_nkbhs")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fdwyq")
+disabled = true
+
+[node name="Gravity" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="Collision" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
+position = Vector2(3, 9)
+shape = SubResource("CircleShape2D_ksow0")
+
+[connection signal="area_entered" from="fire_hitbox" to="." method="_on_fire_hitbox_area_entered"]
+[connection signal="body_entered" from="fire_hitbox" to="." method="_on_fire_hitbox_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Gravity" to="." method="_on_gravity_timeout"]
+[connection signal="body_entered" from="Collision" to="." method="_on_collision_body_entered"]
