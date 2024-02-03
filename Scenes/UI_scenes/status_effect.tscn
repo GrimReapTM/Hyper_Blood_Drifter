@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5oft67qfb6j"]
+
+[ext_resource type="Texture2D" uid="uid://dm8yobptqtnoo" path="res://sprites/HUD/status_effects.png" id="1_dpnjp"]
+[ext_resource type="Script" path="res://Scenes/UI_scenes/status_effect.gd" id="1_utqtn"]
+
+[node name="Status_Effect" type="Control" node_paths=PackedStringArray("sprite", "durationTimer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_utqtn")
+sprite = NodePath("Sprite")
+durationTimer = NodePath("Duration")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_dpnjp")
+hframes = 5
+
+[node name="Duration" type="Timer" parent="."]
+
+[connection signal="timeout" from="Duration" to="." method="_on_duration_timeout"]

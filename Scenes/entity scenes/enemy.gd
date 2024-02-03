@@ -35,6 +35,9 @@ func _on_hurtbox_area_entered(area):
 				damaged = true
 			$damagedTimer.start()
 			hp -= g.melee_damage
+			if player.fire_damage == true:
+				$Fire.start()
+				$FireDamage.start()
 			healthChanged.emit()
 			knockback(to_local(player.position), 10)
 		"bullet_hitbox":
@@ -48,12 +51,19 @@ func _on_hurtbox_area_entered(area):
 			hp -= 15
 			healthChanged.emit()
 			knockback(to_local(player.position), 30)
+		"fire_hitbox":
+			aggro = true
+			hp -= 1
+			healthChanged.emit()
+			$Fire.start()
+			$FireDamage.start()
 
 
 	if hp <= 0:
 		queue_free()
 		player.b_echoes += 52
 		player.b_echoesChanged.emit()
+
 
 func _on_damaged_timer_timeout():
 	damaged = false
@@ -394,3 +404,12 @@ func _process(delta):
 	move_and_slide()
 	attack_calculation()
 	movementAnimation()
+
+
+func _on_fire_damage_timeout():
+	hp -= 4
+	healthChanged.emit()
+
+func _on_fire_timeout():
+	$Fire.stop()
+	$FireDamage.stop()

@@ -5,8 +5,12 @@ const molotov = preload("res://Scenes/entity scenes/molotov.tscn")
 const pebble = preload("res://Scenes/entity scenes/pebble.tscn")
 const knife = preload("res://Scenes/entity scenes/knife.tscn")
 
+const effect_scene = preload("res://Scenes/UI_scenes/status_effect.tscn")
+
+
 @export var pauseMenu: Control
 @export var HUD: Node2D
+@export var StatusEffectContainer: HBoxContainer
 
 var paused = false
 
@@ -53,7 +57,6 @@ var dashing = false
 
 
 var consumables = []
-
 
 #used for attacks
 var attackAnimations = ["up_left", "up", "up_right", "left", "right", "down_left", "down", "down_right"]
@@ -126,30 +129,61 @@ func _input(event):
 						throw_item(knife, attack_calculation())
 					"beast_pellet":
 						animations.play("consume")
-						consume("beast_pellet")
+						status_effect("beast_pellet", 0, 120)
 					"hunters_mark":
 						animations.play("consume")
-						consume("hunters_mark")
+						#teleport
 					"bolt_paper":
 						animations.play("paper")
-						consume("bolt_paper")
+						status_effect("bolt_paper", 1, 45)
+						paper("bolt")
 					"coldblood_dew":
 						animations.play("consume")
-						consume("coldblood_dew")
+						b_echoes += 1000
+						b_echoesChanged.emit()
 					"fire_paper":
 						animations.play("paper")
-						consume("fire_paper")
+						status_effect("fire_paper", 2, 45)
+						paper("fire")
 					"lantern":
 						animations.play("lantern")
+						#light
 					"iosefka_blood":
 						animations.play("drink")
-						consume("iosefka_blood")
+						healthPoints += 60
+						healthChanged.emit()
 					"madmans_knowledge":
 						animations.play("consume")
-						consume("madmans_knowledge")
+						insight += 1
+						insightChanged.emit()
 					"umbilical_cord":
 						animations.play("consume")
-						consume("umbilical_cord")
+						insight += 3
+						insightChanged.emit() 
+
+func status_effect(effect, frame, duration):
+	var effect_index = 0
+	for i in StatusEffectContainer.get_children():
+		if effect == i.effect or ("_paper" in effect and "_paper" in i.effect):
+			StatusEffectContainer.get_children()[effect_index].queue_free()
+		effect_index += 1
+	var instance = effect_scene.instantiate()
+	instance.effect = effect
+	instance.frame = frame
+	instance.duration = duration
+	StatusEffectContainer.add_child(instance)
+
+
+
+var fire_damage = false
+func paper(effect):
+	
+	match effect:
+		"fire":
+			g.bonus_damage = 3
+			fire_damage = true
+		"bolt":
+			g.bonus_damage = 15
 
 
 var combo = false
@@ -265,9 +299,6 @@ func throw_item(item, index):
 	owner.add_child(instance)
 	attacking = false
 
-func consume(item):
-	pass	
-
 func _on_player_hurtbox_area_entered(area):
 	match area.name:
 		"enemy_attack":
@@ -277,7 +308,12 @@ func _on_player_hurtbox_area_entered(area):
 			if area.owner.ID == "enemy":
 				healthPoints -= 20
 				healthChanged.emit()
-
+		"fire_hitbox":
+			status_effect("fire", 3, 9)
+			healthPoints -= 1
+			healthChanged.emit()
+			$StatusEffects/Fire.start()
+			$StatusEffects/FireDamage.start()
 
 # this is how you move
 var savedDirection = Vector2(0,0)
@@ -372,6 +408,18 @@ func _on_melee_hitboxes_area_entered(area):
 	if area.name == "enemy_hurtbox":
 		attacked.emit()
 
+func _on_fire_timeout():
+	$StatusEffects/Fire.stop()
+	$StatusEffects/FireDamage.stop()
+
+func _on_fire_damage_timeout():
+	healthPoints -= 5
+	healthChanged.emit()
+
+
+func _on_paper_timer_timeout():
+	g.bonus_damage = 0
+	fire_damage = false
 
 # this just happens or something
 func _physics_process(delta):
@@ -379,3 +427,4 @@ func _physics_process(delta):
 	move_and_slide()
 	movementAnimation()
 	staminaRecovery(delta)
+

@@ -57,7 +57,8 @@ func _ready():
 	g.equiped_null.connect(equiped_null)
 	player.pause_pressed.connect(pause)
 	if g.equiped_slot != null:
-		check_quick(g.quick_slots[g.equiped_slot])
+		check_quick(g.quick_slots[g.slot])
+
 
 func show_hud():
 	hud.visible = true

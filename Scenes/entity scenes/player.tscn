@@ -809,8 +809,8 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="attack" type="CollisionShape2D" parent="Sprite2D/melee_hitbox"]
-position = Vector2(-20.5, -19.25)
-rotation = 0.785398
+position = Vector2(-0.75, 21.5)
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_tof3h")
 disabled = true
 
@@ -827,11 +827,6 @@ position = Vector2(2, 70)
 scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_ksr51")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_dbrtl")
-}
-
 [node name="dashTimer" type="Timer" parent="."]
 wait_time = 0.2
 
@@ -847,6 +842,22 @@ wait_time = 0.5
 [node name="combo" type="Timer" parent="."]
 wait_time = 0.8
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dbrtl")
+}
+
+[node name="StatusEffects" type="Node2D" parent="."]
+
+[node name="FireDamage" type="Timer" parent="StatusEffects"]
+wait_time = 1.5
+
+[node name="Fire" type="Timer" parent="StatusEffects"]
+wait_time = 9.0
+
+[node name="PaperTimer" type="Timer" parent="StatusEffects"]
+wait_time = 45.0
+
 [connection signal="area_entered" from="Sprite2D/melee_hitbox" to="." method="_on_melee_hitboxes_area_entered"]
 [connection signal="area_entered" from="Sprite2D/player_hurtbox" to="." method="_on_player_hurtbox_area_entered"]
 [connection signal="timeout" from="dashTimer" to="." method="_on_dash_timer_timeout"]
@@ -854,3 +865,6 @@ wait_time = 0.8
 [connection signal="timeout" from="rangedTimer" to="." method="_on_ranged_timer_timeout"]
 [connection signal="timeout" from="staminaStop" to="." method="_on_stamina_stop_timeout"]
 [connection signal="timeout" from="combo" to="." method="_on_combo_timeout"]
+[connection signal="timeout" from="StatusEffects/FireDamage" to="." method="_on_fire_damage_timeout"]
+[connection signal="timeout" from="StatusEffects/Fire" to="." method="_on_fire_timeout"]
+[connection signal="timeout" from="StatusEffects/PaperTimer" to="." method="_on_paper_timer_timeout"]

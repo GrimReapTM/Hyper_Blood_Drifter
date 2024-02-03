@@ -999,6 +999,13 @@ wall_min_slide_angle = 0.0
 script = ExtResource("1_0s70u")
 speed = 30000
 
+[node name="FireDamage" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="Fire" type="Timer" parent="."]
+wait_time = 9.0
+one_shot = true
+
 [node name="actionTimer" type="Timer" parent="."]
 wait_time = 0.2
 autostart = true
@@ -1040,8 +1047,8 @@ libraries = {
 }
 
 [node name="enemy_hurtbox" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 7
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hurtbox"]
 position = Vector2(1.5, 11.75)
@@ -1128,6 +1135,8 @@ position = Vector2(0.615229, -1.59798)
 enabled = false
 target_position = Vector2(0.384771, 53.598)
 
+[connection signal="timeout" from="FireDamage" to="." method="_on_fire_damage_timeout"]
+[connection signal="timeout" from="Fire" to="." method="_on_fire_timeout"]
 [connection signal="timeout" from="actionTimer" to="." method="_on_action_timer_timeout"]
 [connection signal="timeout" from="pathTimer" to="." method="_on_path_timer_timeout"]
 [connection signal="timeout" from="meleeTimer" to="." method="_on_melee_timer_timeout"]

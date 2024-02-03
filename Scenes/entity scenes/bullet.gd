@@ -20,4 +20,3 @@ func _on_bullet_hitbox_body_entered(body):
 
 func _physics_process(delta):
 	position = position + speed * direction * delta
-	print(get_parent())

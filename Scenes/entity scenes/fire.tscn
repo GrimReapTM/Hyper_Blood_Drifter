@@ -121,6 +121,7 @@ hitbox3 = NodePath("fire_hitbox/Hitbox3")
 timer = NodePath("Timer")
 
 [node name="fire_hitbox" type="Area2D" parent="."]
+editor_description = "fire"
 
 [node name="Sprite1" type="AnimatedSprite2D" parent="fire_hitbox"]
 visible = false

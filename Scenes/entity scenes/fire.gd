@@ -31,8 +31,6 @@ func _ready():
 	
 	direction = Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1))
 
-func _on_fire_hitbox_area_entered(area):
-	g.onFire.emit()
 
 func _on_collision_body_entered(body):
 	if body.name != "enemy" and body.name != "Player":

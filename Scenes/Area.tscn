@@ -397,10 +397,11 @@ layer_1/name = "objects"
 layer_1/y_sort_enabled = true
 layer_1/tile_data = PackedInt32Array()
 
-[node name="Player" parent="." node_paths=PackedStringArray("pauseMenu", "HUD") instance=ExtResource("3_hbuen")]
+[node name="Player" parent="." node_paths=PackedStringArray("pauseMenu", "HUD", "StatusEffectContainer") instance=ExtResource("3_hbuen")]
 y_sort_enabled = true
 pauseMenu = NodePath("../pause/PauseMenu")
 HUD = NodePath("HUD_canvas/HUD")
+StatusEffectContainer = NodePath("HUD_canvas/HUD/up_left/StatusEffects")
 
 [node name="follow cam" type="Camera2D" parent="Player" node_paths=PackedStringArray("player", "tilemap")]
 limit_left = 0
@@ -415,6 +416,13 @@ tilemap = NodePath("../../TileMap")
 [node name="HUD" type="Node2D" parent="Player/HUD_canvas"]
 
 [node name="up_left" type="Node2D" parent="Player/HUD_canvas/HUD"]
+
+[node name="StatusEffects" type="HBoxContainer" parent="Player/HUD_canvas/HUD/up_left"]
+offset_left = 155.0
+offset_top = 184.0
+offset_right = 458.0
+offset_bottom = 222.0
+theme_override_constants/separation = 32
 
 [node name="vials" type="Sprite2D" parent="Player/HUD_canvas/HUD/up_left"]
 position = Vector2(71, 99)
