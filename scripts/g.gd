@@ -1,11 +1,12 @@
 extends Node
 
-
+var beast_damage = 0
+var max_beast_damage = 40
 var bonus_damage = 0
-var melee_damage = 22 + bonus_damage
+var melee_damage = 22 + bonus_damage + beast_damage
 var ranged_damage = 4
 
-var inventory = {"throwing_knife":4654, "pebble":425, "molotov_cocktail":45635, "umbilical_cord":12, "fire_paper":12, "bolt_paper":12}
+var inventory = {"throwing_knife":4, "pebble":2, "molotov_cocktail":5, "beast_pellet":2, "fire_paper":2, "bolt_paper":2}
 var quick_slots = [null, null, null, null, null, null]
 var equiped_slot = null
 var slot = 0

@@ -1,11 +1,48 @@
-[gd_scene load_steps=31 format=3 uid="uid://cwyp18u112jkf"]
+[gd_scene load_steps=37 format=3 uid="uid://cwyp18u112jkf"]
 
 [ext_resource type="Script" path="res://Scenes/entity scenes/enemy.gd" id="1_0s70u"]
 [ext_resource type="Texture2D" uid="uid://c2xqpvnn6t0tj" path="res://sprites/enemies/firstenemy/enemy-Sheet.png" id="2_ea3bk"]
 [ext_resource type="Texture2D" uid="uid://cik3hkfnlhiof" path="res://sprites/HUD/enemy_health_under.png" id="3_k1kle"]
+[ext_resource type="Texture2D" uid="uid://b783vt3ohbfjg" path="res://sprites/FireParticles.png" id="3_tiduh"]
 [ext_resource type="Texture2D" uid="uid://ca3unx6jmotj7" path="res://sprites/HUD/enemy_health_over.png" id="4_rra6t"]
 [ext_resource type="Texture2D" uid="uid://dui8ab2texftx" path="res://sprites/HUD/enemy_health_progress.png" id="4_y5tx0"]
 [ext_resource type="Script" path="res://Scenes/entity scenes/enemy_health_bar.gd" id="5_s4jqy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xaqom"]
+atlas = ExtResource("3_tiduh")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3spkj"]
+atlas = ExtResource("3_tiduh")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_281h1"]
+atlas = ExtResource("3_tiduh")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k318c"]
+atlas = ExtResource("3_tiduh")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_olyrx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xaqom")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3spkj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_281h1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k318c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aei5d"]
 radius = 22.0511
@@ -991,13 +1028,26 @@ size = Vector2(67, 138)
 radius = 54.4472
 height = 152.0
 
-[node name="enemy" type="CharacterBody2D"]
+[node name="enemy" type="CharacterBody2D" node_paths=PackedStringArray("fireParticles")]
 collision_layer = 3
 collision_mask = 3
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_0s70u")
 speed = 30000
+fireParticles = NodePath("FireParticles")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_ea3bk")
+hframes = 20
+vframes = 4
+
+[node name="FireParticles" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_olyrx")
+frame_progress = 0.343311
 
 [node name="FireDamage" type="Timer" parent="."]
 wait_time = 1.5
@@ -1025,12 +1075,6 @@ wait_time = 0.8
 
 [node name="damagedTimer" type="Timer" parent="."]
 wait_time = 0.6
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(4, 4)
-texture = ExtResource("2_ea3bk")
-hframes = 20
-vframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 74.5)

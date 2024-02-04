@@ -1,7 +1,13 @@
-[gd_scene load_steps=34 format=3 uid="uid://oycliuo8lo5y"]
+[gd_scene load_steps=51 format=3 uid="uid://oycliuo8lo5y"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_k8r4x"]
 [ext_resource type="Texture2D" uid="uid://dlo31n37oxrl6" path="res://sprites/player/player-Sheet.png" id="2_xivik"]
+[ext_resource type="Texture2D" uid="uid://bsy6mpsx0xq1" path="res://sprites/BeastBloodParticles.png" id="3_mmygx"]
+[ext_resource type="Texture2D" uid="uid://b783vt3ohbfjg" path="res://sprites/FireParticles.png" id="4_psupx"]
+[ext_resource type="Texture2D" uid="uid://cy36xmdwx771t" path="res://sprites/HUD/Beast_blood_under.png" id="5_5aiak"]
+[ext_resource type="Texture2D" uid="uid://b0qxija5b4lu5" path="res://sprites/HUD/Beast_blood_progress.png" id="6_uc5dl"]
+[ext_resource type="Script" path="res://Scenes/entity scenes/BeastBar.gd" id="7_i8atu"]
+[ext_resource type="Texture2D" uid="uid://bi4l6qxaiy2mo" path="res://sprites/HUD/Beast_icon.png" id="7_nedor"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tof3h"]
 radius = 13.75
@@ -793,10 +799,92 @@ _data = {
 "walk_up": SubResource("Animation_8suel")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ucl4m"]
+atlas = ExtResource("3_mmygx")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xoi26"]
+atlas = ExtResource("3_mmygx")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kjma"]
+atlas = ExtResource("3_mmygx")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ql327"]
+atlas = ExtResource("3_mmygx")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrsbw"]
+atlas = ExtResource("3_mmygx")
+region = Rect2(64, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8dfjl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ucl4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xoi26")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3kjma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ql327")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrsbw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgqpx"]
+atlas = ExtResource("4_psupx")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mmdm"]
+atlas = ExtResource("4_psupx")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lltkq"]
+atlas = ExtResource("4_psupx")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xms2o"]
+atlas = ExtResource("4_psupx")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6vhgk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgqpx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0mmdm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lltkq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xms2o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("beastBar", "fireParticles", "beastBloodParticles")]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_k8r4x")
+beastBar = NodePath("StatusEffects/BeastBloodBar")
+fireParticles = NodePath("StatusEffects/FireParticles")
+beastBloodParticles = NodePath("StatusEffects/BeastBloodParticles")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
@@ -858,6 +946,48 @@ wait_time = 9.0
 [node name="PaperTimer" type="Timer" parent="StatusEffects"]
 wait_time = 45.0
 
+[node name="BeastBloodParticles" type="AnimatedSprite2D" parent="StatusEffects"]
+visible = false
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_8dfjl")
+autoplay = "default"
+frame_progress = 0.255634
+
+[node name="FireParticles" type="AnimatedSprite2D" parent="StatusEffects"]
+visible = false
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_6vhgk")
+autoplay = "default"
+frame_progress = 0.0496199
+
+[node name="BeastBloodTimer" type="Timer" parent="StatusEffects"]
+wait_time = 60.0
+
+[node name="BeastBloodBar" type="Node2D" parent="StatusEffects"]
+visible = false
+
+[node name="BeastBar" type="TextureProgressBar" parent="StatusEffects/BeastBloodBar" node_paths=PackedStringArray("player")]
+offset_left = -43.0
+offset_top = -97.0
+offset_right = -19.0
+offset_bottom = -94.0
+scale = Vector2(4, 4)
+value = 50.0
+nine_patch_stretch = true
+stretch_margin_left = 2
+stretch_margin_top = 1
+stretch_margin_right = 2
+stretch_margin_bottom = 1
+texture_under = ExtResource("5_5aiak")
+texture_progress = ExtResource("6_uc5dl")
+script = ExtResource("7_i8atu")
+player = NodePath("../../..")
+
+[node name="BeastSprite" type="Sprite2D" parent="StatusEffects/BeastBloodBar"]
+position = Vector2(-61, -91)
+scale = Vector2(4, 4)
+texture = ExtResource("7_nedor")
+
 [connection signal="area_entered" from="Sprite2D/melee_hitbox" to="." method="_on_melee_hitboxes_area_entered"]
 [connection signal="area_entered" from="Sprite2D/player_hurtbox" to="." method="_on_player_hurtbox_area_entered"]
 [connection signal="timeout" from="dashTimer" to="." method="_on_dash_timer_timeout"]
@@ -868,3 +998,4 @@ wait_time = 45.0
 [connection signal="timeout" from="StatusEffects/FireDamage" to="." method="_on_fire_damage_timeout"]
 [connection signal="timeout" from="StatusEffects/Fire" to="." method="_on_fire_timeout"]
 [connection signal="timeout" from="StatusEffects/PaperTimer" to="." method="_on_paper_timer_timeout"]
+[connection signal="timeout" from="StatusEffects/BeastBloodTimer" to="." method="_on_beast_blood_timer_timeout"]

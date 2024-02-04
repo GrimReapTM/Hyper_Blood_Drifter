@@ -7,7 +7,9 @@ const knife = preload("res://Scenes/entity scenes/knife.tscn")
 
 const effect_scene = preload("res://Scenes/UI_scenes/status_effect.tscn")
 
-
+@export var beastBar: Node2D
+@export var fireParticles: AnimatedSprite2D
+@export var beastBloodParticles: AnimatedSprite2D
 @export var pauseMenu: Control
 @export var HUD: Node2D
 @export var StatusEffectContainer: HBoxContainer
@@ -40,6 +42,7 @@ signal vialsChanged
 signal pause_pressed
 signal insightChanged
 signal b_echoesChanged
+signal beastBloodChanged
 
 #variables for movement
 @export var speed = 350
@@ -129,7 +132,8 @@ func _input(event):
 						throw_item(knife, attack_calculation())
 					"beast_pellet":
 						animations.play("consume")
-						status_effect("beast_pellet", 0, 120)
+						status_effect("beast_pellet", 0, 60)
+						beast_blood_pellet()
 					"hunters_mark":
 						animations.play("consume")
 						#teleport
@@ -174,6 +178,10 @@ func status_effect(effect, frame, duration):
 	StatusEffectContainer.add_child(instance)
 
 
+func on_fire():
+	fireParticles.visible = true
+	$StatusEffects/Fire.start()
+	$StatusEffects/FireDamage.start()
 
 var fire_damage = false
 func paper(effect):
@@ -184,6 +192,15 @@ func paper(effect):
 			fire_damage = true
 		"bolt":
 			g.bonus_damage = 15
+
+
+var beast_blood = false
+var resist = 0
+func beast_blood_pellet():
+	$StatusEffects/BeastBloodTimer.start()
+	beastBar.visible = true
+	beast_blood = true
+	beastBloodParticles.visible = true
 
 
 var combo = false
@@ -302,18 +319,17 @@ func throw_item(item, index):
 func _on_player_hurtbox_area_entered(area):
 	match area.name:
 		"enemy_attack":
-			healthPoints -= 40
+			healthPoints -= 40 + resist
 			healthChanged.emit()
 		"bullet_hitbox":
 			if area.owner.ID == "enemy":
-				healthPoints -= 20
+				healthPoints -= 20 + resist
 				healthChanged.emit()
 		"fire_hitbox":
 			status_effect("fire", 3, 9)
-			healthPoints -= 1
+			healthPoints -= 1 + resist
 			healthChanged.emit()
-			$StatusEffects/Fire.start()
-			$StatusEffects/FireDamage.start()
+			on_fire()
 
 # this is how you move
 var savedDirection = Vector2(0,0)
@@ -407,13 +423,22 @@ func staminaRecovery(delta):
 func _on_melee_hitboxes_area_entered(area):
 	if area.name == "enemy_hurtbox":
 		attacked.emit()
+		if beast_blood == true:
+			if g.beast_damage + 3 <= g.max_beast_damage:
+				resist -= 3
+				g.beast_damage += 3
+			else:
+				g.beast_damage = g.max_beast_damage
+				resist -= 3
+			beastBloodChanged.emit()
 
 func _on_fire_timeout():
+	fireParticles.visible = false
 	$StatusEffects/Fire.stop()
 	$StatusEffects/FireDamage.stop()
 
 func _on_fire_damage_timeout():
-	healthPoints -= 5
+	healthPoints -= 5 - resist
 	healthChanged.emit()
 
 
@@ -421,10 +446,25 @@ func _on_paper_timer_timeout():
 	g.bonus_damage = 0
 	fire_damage = false
 
+
+func _on_beast_blood_timer_timeout():
+	beast_blood = false
+	beastBloodParticles.visible = false
+	beastBar.visible = false
+	g.beast_damage = 0
+	resist = 0
+	beastBloodChanged.emit()
+
+
 # this just happens or something
 func _physics_process(delta):
 	movement(delta)
 	move_and_slide()
 	movementAnimation()
 	staminaRecovery(delta)
+	
+	if beast_blood == true:
+		resist -= 0.01
+		g.beast_damage -= 0.01
+		beastBloodChanged.emit()
 

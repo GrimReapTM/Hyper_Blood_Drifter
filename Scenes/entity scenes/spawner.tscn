@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c6ivs2wcfsa8s"]
 
-[ext_resource type="Script" path="res://Spawner.gd" id="1_4oe03"]
+[ext_resource type="Script" path="res://Scenes/entity scenes/Spawner.gd" id="1_4oe03"]
 [ext_resource type="Texture2D" uid="uid://bf54kt2sgut8g" path="res://sprites/bullet.png" id="2_8mh42"]
 
 [node name="Spawner" type="Node2D" node_paths=PackedStringArray("timer")]

@@ -9,6 +9,7 @@ const bullet = preload("res://Scenes/entity scenes/bullet.tscn")
 @export var speed = 300
 @onready var raycast = $vision_raycast
 
+@export var fireParticles: AnimatedSprite2D
 @export var default_pos: Marker2D
 @export var player: CharacterBody2D
 @onready var nav_agent = $CollisionShape2D/navigation_agent as NavigationAgent2D
@@ -36,6 +37,7 @@ func _on_hurtbox_area_entered(area):
 			$damagedTimer.start()
 			hp -= g.melee_damage
 			if player.fire_damage == true:
+				fireParticles.visible = true
 				$Fire.start()
 				$FireDamage.start()
 			healthChanged.emit()
@@ -55,6 +57,7 @@ func _on_hurtbox_area_entered(area):
 			aggro = true
 			hp -= 1
 			healthChanged.emit()
+			fireParticles.visible = true
 			$Fire.start()
 			$FireDamage.start()
 
@@ -411,5 +414,6 @@ func _on_fire_damage_timeout():
 	healthChanged.emit()
 
 func _on_fire_timeout():
+	fireParticles.visible = false
 	$Fire.stop()
 	$FireDamage.stop()
