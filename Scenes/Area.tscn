@@ -319,10 +319,10 @@ texture = ExtResource("2_boaiw")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1j5it"]
 texture = ExtResource("3_c4kdp")
-8:22/size_in_atlas = Vector2i(44, 22)
-8:22/0 = 0
-8:22/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-8:22/0/physics_layer_0/angular_velocity = 0.0
+8:8/size_in_atlas = Vector2i(44, 36)
+8:8/0 = 0
+8:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+8:8/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_dy7t6"]
 physics_layer_0/collision_layer = 1
@@ -552,7 +552,7 @@ offset_right = 89.0
 offset_bottom = 43.0
 scale = Vector2(4, 4)
 step = 0.0
-value = 50.0
+value = 100.0
 nine_patch_stretch = true
 stretch_margin_left = 8
 stretch_margin_top = 8

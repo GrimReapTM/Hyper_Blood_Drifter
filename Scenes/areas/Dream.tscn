@@ -6,7 +6,7 @@
 [node name="Area" instance=ExtResource("1_kvvk4")]
 
 [node name="TileMap" parent="." index="0"]
-layer_0/tile_data = PackedInt32Array(-2555934, 0, 0, 3670096, 0, 0, 1245209, 524290, 22)
+layer_0/tile_data = PackedInt32Array(917525, 524290, 8, 2097187, 0, 0, 1, 0, 0)
 
 [node name="Player" parent="." index="1"]
 position = Vector2(1475, 1349)
@@ -17,13 +17,13 @@ metadata/_edit_use_anchors_ = true
 [node name="current_item_amount" parent="Player/HUD_canvas/HUD/up_left/container" index="1"]
 metadata/_edit_use_anchors_ = true
 
-[node name="HealthBar" parent="Player/HUD_canvas/HUD/up_left" index="4"]
+[node name="HealthBar" parent="Player/HUD_canvas/HUD/up_left" index="5"]
 metadata/_edit_use_anchors_ = true
 
-[node name="RallyBar" parent="Player/HUD_canvas/HUD/up_left" index="5"]
+[node name="RallyBar" parent="Player/HUD_canvas/HUD/up_left" index="6"]
 metadata/_edit_use_anchors_ = true
 
-[node name="StaminaBar" parent="Player/HUD_canvas/HUD/up_left" index="6"]
+[node name="StaminaBar" parent="Player/HUD_canvas/HUD/up_left" index="7"]
 metadata/_edit_use_anchors_ = true
 
 [node name="insight" parent="Player/HUD_canvas/HUD/up_right/insight" index="0"]
@@ -36,5 +36,5 @@ metadata/_edit_use_anchors_ = true
 messengers = NodePath("../../Bath_messenger")
 
 [node name="Bath_messenger" parent="." index="3" node_paths=PackedStringArray("player") instance=ExtResource("2_0n4ii")]
-position = Vector2(1152, 1248)
+position = Vector2(890, 1372)
 player = NodePath("../Player")
