@@ -13,6 +13,7 @@ func update():
 	value = player.healthPoints * 100 / player.maxHealthPoints
 	if player.healthPoints < 1:
 		get_tree().change_scene_to_file("res://Scenes/areas/Dream.tscn")
+		player.b_echoes -= player.b_echoes / 2
 
 func rally():
 	if value < rallyBar.value:

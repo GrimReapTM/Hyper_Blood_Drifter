@@ -182,12 +182,12 @@ func attack_ranged(index):
 	animations.play("ranged_" + attackAnimations[index])
 	animPlay = true
 	$rangedTimer.start()
+	await animations.animation_finished
 	
 	#movement but backwards
 func _on_ranged_timer_timeout():
 	$rangedTimer.stop()
 	instance_bullet()
-	await animations.animation_finished
 	animPlay = false
 	attacking = false
 	action = false

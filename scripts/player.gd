@@ -99,6 +99,7 @@ func _input(event):
 				attack_ranged(global_index)
 		elif event.is_action_pressed("blood_bullet"):
 			if b_bullets == 0:
+				action = true
 				animations.play("blood_bullet")
 				await animations.animation_finished
 				animations.play("RESET")
@@ -106,8 +107,10 @@ func _input(event):
 				healthChanged.emit()
 				b_bullets += 5
 				b_bulletsChanged.emit()
+				action = false
 		elif event.is_action_pressed("heal"):
 			if b_vials > 0:
+				action = true
 				animations.play("heal")
 				await animations.animation_finished
 				animations.play("RESET")
@@ -118,6 +121,7 @@ func _input(event):
 				healthChanged.emit()
 				b_vials -= 1
 				vialsChanged.emit()
+				action = false
 		elif event.is_action_pressed("quick_use") and not paused:
 			if g.equiped_slot != null:
 				if g.equiped_slot != "lantern":
@@ -361,6 +365,9 @@ func movement(delta):
 		else:
 			if action == false:
 				velocity = moveDirection * delta * speed * 50
+			else:
+				if not dashing:
+					velocity = Vector2(0,0)
 	else:
 		velocity = Vector2(0,0)
 
@@ -373,7 +380,7 @@ func _on_dash_timer_timeout():
 
 # this is how you ✨move✨
 func movementAnimation():
-	if velocity.length() != 0 and not dashing:
+	if velocity.length() != 0 and not dashing and not action:
 		if velocity.x > 0:
 			animations.play("walk_right")
 		elif velocity.x < 0:

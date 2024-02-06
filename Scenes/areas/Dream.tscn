@@ -9,7 +9,7 @@
 layer_0/tile_data = PackedInt32Array(917525, 524290, 8, 2097187, 0, 0, 1, 0, 0)
 
 [node name="Player" parent="." index="1"]
-position = Vector2(1475, 1349)
+position = Vector2(1424, 1468)
 
 [node name="current_item" parent="Player/HUD_canvas/HUD/up_left/container" index="0"]
 metadata/_edit_use_anchors_ = true
