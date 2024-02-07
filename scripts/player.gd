@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var dead = false
+
 const bullet = preload("res://Scenes/entity scenes/bullet.tscn")
 const molotov = preload("res://Scenes/entity scenes/molotov.tscn")
 const pebble = preload("res://Scenes/entity scenes/pebble.tscn")
@@ -85,89 +87,90 @@ func updateMousepos():
 
 #inputs - self explanatory
 func _input(event):
-	if event.is_action_pressed("pause"):
-		pause_pressed.emit()
-	if not paused and not action:
-		if event.is_action_pressed("attackMelee"):
-			if not action and stamina > 5 and not paused:
-				action = true
-				global_index = attack_calculation()
-				attack_melee(global_index)
-		elif event.is_action_pressed("attackRanged"):
-			if not action and stamina > 1 and bullets > 0 and not paused:
-				global_index = attack_calculation()
-				attack_ranged(global_index)
-		elif event.is_action_pressed("blood_bullet"):
-			if b_bullets == 0:
-				action = true
-				animations.play("blood_bullet")
-				await animations.animation_finished
-				animations.play("RESET")
-				healthPoints -= 65
-				healthChanged.emit()
-				b_bullets += 5
-				b_bulletsChanged.emit()
-				action = false
-		elif event.is_action_pressed("heal"):
-			if b_vials > 0:
-				action = true
-				animations.play("heal")
-				await animations.animation_finished
-				animations.play("RESET")
-				if healthPoints + 50 <= maxHealthPoints:
-					healthPoints += 40
-				else:
-					healthPoints = maxHealthPoints
-				healthChanged.emit()
-				b_vials -= 1
-				vialsChanged.emit()
-				action = false
-		elif event.is_action_pressed("quick_use") and not paused:
-			if g.equiped_slot != null:
-				if g.equiped_slot != "lantern":
-					g.inventory[g.equiped_slot] -= 1
-					g.itemAmount.emit()
-				match g.equiped_slot:
-					"molotov_cocktail":
-						throw_item(molotov, attack_calculation())
-					"pebble":
-						throw_item(pebble, attack_calculation())
-					"throwing_knife":
-						throw_item(knife, attack_calculation())
-					"beast_pellet":
-						animations.play("consume")
-						status_effect("beast_pellet", 0, 60)
-						beast_blood_pellet()
-					"hunters_mark":
-						animations.play("consume")
-						#teleport
-					"bolt_paper":
-						animations.play("paper")
-						status_effect("bolt_paper", 1, 45)
-						paper("bolt")
-					"coldblood_dew":
-						animations.play("consume")
-						b_echoes += 1000
-						b_echoesChanged.emit()
-					"fire_paper":
-						animations.play("paper")
-						status_effect("fire_paper", 2, 45)
-						paper("fire")
-					"lantern":
-						animations.play("lantern")
-						#light
-					"iosefka_blood":
-						animations.play("drink")
-						healthPoints += 60
-						healthChanged.emit()
-					"madmans_knowledge":
-						animations.play("consume")
-						insight += 1
-						insightChanged.emit()
-					"umbilical_cord":
-						animations.play("consume")
-						insight += 3
-						insightChanged.emit() 
+	if not dead:
+		if event.is_action_pressed("pause"):
+			pause_pressed.emit()
+		if not paused and not action:
+			if event.is_action_pressed("attackMelee"):
+				if not action and stamina > 5 and not paused:
+					action = true
+					global_index = attack_calculation()
+					attack_melee(global_index)
+			elif event.is_action_pressed("attackRanged"):
+				if not action and stamina > 1 and bullets > 0 and not paused:
+					global_index = attack_calculation()
+					attack_ranged(global_index)
+			elif event.is_action_pressed("blood_bullet"):
+				if b_bullets == 0:
+					action = true
+					animations.play("blood_bullet")
+					await animations.animation_finished
+					animations.play("RESET")
+					healthPoints -= 65
+					healthChanged.emit()
+					b_bullets += 5
+					b_bulletsChanged.emit()
+					action = false
+			elif event.is_action_pressed("heal"):
+				if b_vials > 0:
+					action = true
+					animations.play("heal")
+					await animations.animation_finished
+					animations.play("RESET")
+					if healthPoints + 50 <= maxHealthPoints:
+						healthPoints += 40
+					else:
+						healthPoints = maxHealthPoints
+					healthChanged.emit()
+					b_vials -= 1
+					vialsChanged.emit()
+					action = false
+			elif event.is_action_pressed("quick_use") and not paused:
+				if g.equiped_slot != null:
+					if g.equiped_slot != "lantern":
+						g.inventory[g.equiped_slot] -= 1
+						g.itemAmount.emit()
+					match g.equiped_slot:
+						"molotov_cocktail":
+							throw_item(molotov, attack_calculation())
+						"pebble":
+							throw_item(pebble, attack_calculation())
+						"throwing_knife":
+							throw_item(knife, attack_calculation())
+						"beast_pellet":
+							animations.play("consume")
+							status_effect("beast_pellet", 0, 60)
+							beast_blood_pellet()
+						"hunters_mark":
+							animations.play("consume")
+							#teleport
+						"bolt_paper":
+							animations.play("paper")
+							status_effect("bolt_paper", 1, 45)
+							paper("bolt")
+						"coldblood_dew":
+							animations.play("consume")
+							b_echoes += 1000
+							b_echoesChanged.emit()
+						"fire_paper":
+							animations.play("paper")
+							status_effect("fire_paper", 2, 45)
+							paper("fire")
+						"lantern":
+							animations.play("lantern")
+							#light
+						"iosefka_blood":
+							animations.play("drink")
+							healthPoints += 60
+							healthChanged.emit()
+						"madmans_knowledge":
+							animations.play("consume")
+							insight += 1
+							insightChanged.emit()
+						"umbilical_cord":
+							animations.play("consume")
+							insight += 3
+							insightChanged.emit() 
 
 func status_effect(effect, frame, duration):
 	var effect_index = 0
@@ -349,27 +352,31 @@ func dash_dir():
 		return "up"
 
 func movement(delta):
-	moveDirection = Input.get_vector("moveLeft", "moveRight", "moveUp", "moveDown")
-	
-	if moveDirection != Vector2(0,0):
-		savedDirection = moveDirection
+	if not dead:
+		moveDirection = Input.get_vector("moveLeft", "moveRight", "moveUp", "moveDown")
 		
-	if attacking == false:
-		if Input.is_action_just_pressed("dash") and not action and stamina > 8:
-			action = true
-			dashing = true
-			staminaChange("dash")
-			velocity = savedDirection * speed * 3
-			animations.play("dash_" + dash_dir())
-			$dashTimer.start()
-		else:
-			if action == false:
-				velocity = moveDirection * delta * speed * 50
+		if moveDirection != Vector2(0,0):
+			savedDirection = moveDirection
+			
+		if attacking == false:
+			if Input.is_action_just_pressed("dash") and not action and stamina > 8:
+				action = true
+				dashing = true
+				staminaChange("dash")
+				velocity = savedDirection * speed * 3
+				animations.play("dash_" + dash_dir())
+				$dashTimer.start()
 			else:
-				if not dashing:
-					velocity = Vector2(0,0)
+				if action == false:
+					velocity = moveDirection * delta * speed * 50
+				else:
+					if not dashing:
+						velocity = Vector2(0,0)
+		else:
+			velocity = Vector2(0,0)
 	else:
 		velocity = Vector2(0,0)
+
 
 func _on_dash_timer_timeout():
 	$dashTimer.stop()
@@ -465,6 +472,7 @@ func _on_beast_blood_timer_timeout():
 
 # this just happens or something
 func _physics_process(delta):
+	g.player_position = position
 	movement(delta)
 	move_and_slide()
 	movementAnimation()

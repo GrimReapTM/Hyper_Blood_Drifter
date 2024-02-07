@@ -1,6 +1,7 @@
-[gd_scene load_steps=51 format=3 uid="uid://oycliuo8lo5y"]
+[gd_scene load_steps=52 format=3 uid="uid://oycliuo8lo5y"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_k8r4x"]
+[ext_resource type="Script" path="res://Scenes/entity scenes/Player_Stats.gd" id="2_vu2d7"]
 [ext_resource type="Texture2D" uid="uid://dlo31n37oxrl6" path="res://sprites/player/player-Sheet.png" id="2_xivik"]
 [ext_resource type="Texture2D" uid="uid://bsy6mpsx0xq1" path="res://sprites/BeastBloodParticles.png" id="3_mmygx"]
 [ext_resource type="Texture2D" uid="uid://b783vt3ohbfjg" path="res://sprites/FireParticles.png" id="4_psupx"]
@@ -885,6 +886,10 @@ script = ExtResource("1_k8r4x")
 beastBar = NodePath("StatusEffects/BeastBloodBar")
 fireParticles = NodePath("StatusEffects/FireParticles")
 beastBloodParticles = NodePath("StatusEffects/BeastBloodParticles")
+
+[node name="Player_Stats" type="Node" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("2_vu2d7")
+player = NodePath("..")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)

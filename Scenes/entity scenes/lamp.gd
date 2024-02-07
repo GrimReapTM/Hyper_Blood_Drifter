@@ -27,7 +27,10 @@ func interact():
 			activated = true
 			isActivating = false
 		else:
-			get_tree().change_scene_to_file("res://Scenes/areas/Dream.tscn")
+			if ID == 0:
+				get_tree().change_scene_to_file("res://Scenes/TestScene.tscn")
+			else:
+				get_tree().change_scene_to_file("res://Scenes/areas/Dream.tscn")
 			
 func _physics_process(_delta):
 	interact()

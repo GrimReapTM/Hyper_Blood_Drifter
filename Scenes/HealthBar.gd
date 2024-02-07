@@ -2,6 +2,7 @@ extends TextureProgressBar
 
 @export var player: CharacterBody2D
 @export var rallyBar: TextureProgressBar
+@export var deathscreen: Control
 
 func _ready():
 	player.healthChanged.connect(update)
@@ -12,7 +13,7 @@ func _ready():
 func update():
 	value = player.healthPoints * 100 / player.maxHealthPoints
 	if player.healthPoints < 1:
-		get_tree().change_scene_to_file("res://Scenes/areas/Dream.tscn")
+		death()
 		player.b_echoes -= player.b_echoes / 2
 
 func rally():
@@ -24,3 +25,9 @@ func rally():
 			value = rallyBar.value
 			player.healthPoints = player.maxHealthPoints / 100 * value
 
+func death():
+	player.dead = true
+	deathscreen.update()
+	player.animations.play("death")
+	#await player.animations.animation_finished
+	deathscreen.visible = true

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cj4wtg2yxabc7"]
+[gd_scene load_steps=4 format=3 uid="uid://cj4wtg2yxabc7"]
 
 [ext_resource type="PackedScene" uid="uid://brdakdtadahqx" path="res://Scenes/Area.tscn" id="1_kvvk4"]
 [ext_resource type="PackedScene" uid="uid://dkcjy0yklpqk2" path="res://Scenes/entity scenes/bath_messengers.tscn" id="2_0n4ii"]
+[ext_resource type="PackedScene" uid="uid://4xw8kh1f8odo" path="res://Scenes/entity scenes/lamp.tscn" id="3_4eu3t"]
 
 [node name="Area" instance=ExtResource("1_kvvk4")]
 
@@ -38,3 +39,6 @@ messengers = NodePath("../../Bath_messenger")
 [node name="Bath_messenger" parent="." index="3" node_paths=PackedStringArray("player") instance=ExtResource("2_0n4ii")]
 position = Vector2(890, 1372)
 player = NodePath("../Player")
+
+[node name="lamp" parent="." index="4" instance=ExtResource("3_4eu3t")]
+position = Vector2(1335, 1339)

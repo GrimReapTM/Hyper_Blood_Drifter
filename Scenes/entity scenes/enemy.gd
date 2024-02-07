@@ -11,7 +11,6 @@ const bullet = preload("res://Scenes/entity scenes/bullet.tscn")
 
 @export var fireParticles: AnimatedSprite2D
 @export var default_pos: Marker2D
-@export var player: CharacterBody2D
 @onready var nav_agent = $CollisionShape2D/navigation_agent as NavigationAgent2D
 @onready var animations = $AnimationPlayer
 
@@ -36,23 +35,23 @@ func _on_hurtbox_area_entered(area):
 				damaged = true
 			$damagedTimer.start()
 			hp -= g.melee_damage
-			if player.fire_damage == true:
+			if g.fire_damage == true:
 				fireParticles.visible = true
 				$Fire.start()
 				$FireDamage.start()
 			healthChanged.emit()
-			knockback(to_local(player.position), 10)
+			knockback(to_local(g.position), 10)
 		"bullet_hitbox":
 			if area.owner.ID == "player":
 				aggro = true
 				hp -= g.ranged_damage
 				healthChanged.emit()
-				knockback(to_local(player.position), 30)
+				knockback(to_local(g.position), 30)
 		"knife_hitbox":
 			aggro = true
 			hp -= 15
 			healthChanged.emit()
-			knockback(to_local(player.position), 30)
+			knockback(to_local(g.position), 30)
 		"fire_hitbox":
 			aggro = true
 			hp -= 1
@@ -64,8 +63,9 @@ func _on_hurtbox_area_entered(area):
 
 	if hp <= 0:
 		queue_free()
-		player.b_echoes += 52
-		player.b_echoesChanged.emit()
+		g.score += 52
+		g.b_echoes += 52
+		g.beChanged.emit()
 
 
 func _on_damaged_timer_timeout():
@@ -74,7 +74,7 @@ func _on_damaged_timer_timeout():
 func _on_vision_body_entered(body):
 	if body.name == "Player" and not aggro:
 		raycast.enabled = true
-		player = body
+
 
 
 func _on_vision_body_exited(body):
@@ -119,7 +119,7 @@ var saved_index = -1
 var global_index = 0
 
 func attack_calculation():
-	var player_pos = player.position
+	var player_pos = g.position
 	var base = 999999999
 	var move_pos = 0
 	var index = 0
@@ -196,8 +196,8 @@ func instance_bullet():
 	var instance = bullet.instantiate()
 	instance.ID = "enemy"
 	instance.position = position
-	instance.direction = instance.position.direction_to(player.position)
-	owner.add_child(instance)
+	instance.direction = instance.position.direction_to(g.position)
+	get_parent().call_deferred("add_child", instance)
 
 func movementAnimation():
 	if velocity.length() != 0:
@@ -232,7 +232,8 @@ func _on_keep_aggro_body_exited(body):
 		if body.name == "Player":
 			distance = "-"
 			aggro = false
-			target = default_pos.position
+			if default_pos != null:
+				target = default_pos.position
 
 # always starts aggro
 func _on_aggro_range_body_entered(body):
@@ -293,7 +294,7 @@ func circle():
 		2:
 			target = position + circle_vectors2[attack_calculation()]
 	if not nav_agent.is_target_reachable():
-		target = player.position
+		target = g.position
 
 func back_off():
 	target = position + back_off_vectors[attack_calculation()]
@@ -336,7 +337,7 @@ func _on_action_timer_timeout():
 					long_range()
 			"follow":
 				new_round(true)
-				target = player.position
+				target = g.position
 
 func new_round(bol):
 	if bol:
@@ -359,7 +360,7 @@ func close_range():
 			back_off()
 
 func mid_range():
-	if target == player.position and dice_roll() >= 11:
+	if target == g.position and dice_roll() >= 11:
 		rounds = 1
 		return
 	else:
@@ -371,13 +372,13 @@ func mid_range():
 		4:
 			circle()
 		5,6,7,8,9,10,11:
-			target = player.position
+			target = g.position
 			rounds = 1
 		12:
 			back_off()
 
 func long_range():
-	if target == player.position and dice_roll() >= 4:
+	if target == g.position and dice_roll() >= 4:
 		rounds = 3
 		return
 	else:
@@ -390,7 +391,7 @@ func long_range():
 		5:
 			circle()
 		6,7,8,9,10,11,12:
-			target = player.position
+			target = g.position
 			rounds = 2
 
 func _on_stagger_body_entered(body):
@@ -398,7 +399,7 @@ func _on_stagger_body_entered(body):
 
 func _process(delta):
 	if raycast.enabled:
-		raycast.target_position = Vector2(player.position.x, player.position.y + 60) - position
+		raycast.target_position = Vector2(g.position.x, g.position.y + 60) - position
 		if raycast.is_colliding() and "Player" in str(raycast.get_collider()):
 			aggro = true
 			raycast.enabled = false

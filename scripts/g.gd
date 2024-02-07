@@ -1,5 +1,8 @@
 extends Node
 
+var score = 0
+var highscore = 0
+
 var beast_damage = 0
 var max_beast_damage = 40
 var bonus_damage = 0
@@ -12,6 +15,7 @@ var equiped_slot = null
 var slot = 0
 var next_slot = 0
 var old_slot = null
+var player_position = Vector2()
 
 signal itemAmount
 signal changeSprite
@@ -19,6 +23,20 @@ signal equiped_null
 signal nullSprite
 signal showHud
 signal sound
+
+
+# player
+var position
+var fire_damage
+var b_echoes
+signal beChanged
+var insight
+signal iChanged
+var hp
+signal hpChanged
+var stamina
+signal stChanged
+
 
 
 func _ready():

@@ -1,0 +1,143 @@
+[gd_scene load_steps=10 format=3 uid="uid://dko3rmb7ykws3"]
+
+[ext_resource type="Script" path="res://Scenes/UI_scenes/death_screen.gd" id="1_r1ae5"]
+[ext_resource type="FontFile" uid="uid://cflm7ac265lwi" path="res://fonts/pixelgeorgia.ttf" id="1_rpgli"]
+[ext_resource type="LabelSettings" uid="uid://crg3mknke8m6b" path="res://Scenes/label themes/HUD.tres" id="2_63x2o"]
+[ext_resource type="Texture2D" uid="uid://k0iffxp6fqkw" path="res://sprites/HUD/pause_buttons/main_menu_button_hover.png" id="3_4te1r"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_t3add"]
+font = ExtResource("1_rpgli")
+font_size = 70
+font_color = Color(1, 0, 0, 1)
+shadow_size = 7
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2c8ad"]
+font = ExtResource("1_rpgli")
+font_size = 70
+font_color = Color(1, 0.27451, 0.392157, 1)
+shadow_size = 7
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6jhci"]
+font = ExtResource("1_rpgli")
+font_size = 70
+font_color = Color(0.643137, 0, 0.0509804, 1)
+shadow_size = 7
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mfekl"]
+font = ExtResource("1_rpgli")
+font_size = 70
+shadow_size = 7
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_iudh8"]
+font = ExtResource("1_rpgli")
+font_size = 70
+shadow_size = 7
+shadow_offset = Vector2(2, 1)
+
+[node name="DeathScreen" type="Control" node_paths=PackedStringArray("score", "highscore", "nhighscore")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r1ae5")
+score = NodePath("score")
+highscore = NodePath("highscore")
+nhighscore = NodePath("new_highscore")
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1278.0
+offset_bottom = 726.0
+color = Color(0, 0, 0, 0.792157)
+metadata/_edit_lock_ = true
+
+[node name="You Died" type="Label" parent="."]
+layout_mode = 0
+offset_left = 289.0
+offset_top = 151.0
+offset_right = 638.0
+offset_bottom = 229.0
+scale = Vector2(2, 2)
+text = "You Died"
+label_settings = SubResource("LabelSettings_t3add")
+
+[node name="new_highscore" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 809.0
+offset_top = 315.0
+offset_right = 1467.0
+offset_bottom = 385.0
+rotation = -0.270526
+scale = Vector2(0.5, 0.5)
+text = "New Highscore!!!!"
+label_settings = SubResource("LabelSettings_2c8ad")
+
+[node name="score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 398.0
+offset_top = 294.0
+offset_right = 685.0
+offset_bottom = 364.0
+scale = Vector2(0.5, 0.5)
+text = "score: 1"
+label_settings = SubResource("LabelSettings_6jhci")
+
+[node name="highscore" type="Label" parent="."]
+layout_mode = 0
+offset_left = 402.0
+offset_top = 346.0
+offset_right = 927.0
+offset_bottom = 416.0
+scale = Vector2(0.2, 0.2)
+text = "highscore: 21"
+label_settings = ExtResource("2_63x2o")
+
+[node name="Restart" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 283.0
+offset_top = 471.0
+offset_right = 347.0
+offset_bottom = 503.0
+scale = Vector2(4, 4)
+texture_hover = ExtResource("3_4te1r")
+
+[node name="Label" type="Label" parent="Restart"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 9.0
+offset_right = 297.0
+offset_bottom = 79.0
+scale = Vector2(0.2, 0.2)
+text = "Restart
+"
+label_settings = SubResource("LabelSettings_mfekl")
+
+[node name="Quit" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 763.0
+offset_top = 472.0
+offset_right = 827.0
+offset_bottom = 504.0
+scale = Vector2(4, 4)
+texture_hover = ExtResource("3_4te1r")
+
+[node name="Label" type="Label" parent="Quit"]
+layout_mode = 0
+offset_left = 14.75
+offset_top = 8.0
+offset_right = 195.75
+offset_bottom = 78.0
+scale = Vector2(0.2, 0.2)
+text = "Quit"
+label_settings = SubResource("LabelSettings_iudh8")
+
+[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
