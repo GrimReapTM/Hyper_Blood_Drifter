@@ -32,5 +32,23 @@ offset_right = 771.0
 offset_bottom = 436.0
 text = "Molotov kohoutocas"
 
+[node name="vial" type="Button" parent="."]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 240.0
+offset_right = 329.0
+offset_bottom = 280.0
+text = "Blood vial"
+
+[node name="bullets" type="Button" parent="."]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 303.0
+offset_right = 302.0
+offset_bottom = 344.0
+text = "Bullets"
+
 [connection signal="pressed" from="pebble" to="." method="_on_pebble_pressed"]
 [connection signal="pressed" from="molotov" to="." method="_on_molotov_pressed"]
+[connection signal="pressed" from="vial" to="." method="_on_vial_pressed"]
+[connection signal="pressed" from="bullets" to="." method="_on_bullets_pressed"]

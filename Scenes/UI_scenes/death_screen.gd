@@ -17,11 +17,13 @@ func update():
 	if g.score >= g.highscore:
 		g.highscore = g.score
 		nhighscore.visible = true
+	g.score = 0
 	highscore.text = "highscore: " + str(g.highscore)
 
 
 func _on_restart_pressed():
 	get_tree().change_scene_to_file("res://Scenes/areas/Dream.tscn")
+	g.dead = false
 
 
 func _on_quit_pressed():

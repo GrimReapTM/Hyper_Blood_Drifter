@@ -22,6 +22,7 @@ func hpsig():
 	player.healthChanged.emit()
 
 func _process(_delta):
+
 	g.position = player.position
 	g.fire_damage = player.fire_damage
 	g.b_echoes = player.b_echoes

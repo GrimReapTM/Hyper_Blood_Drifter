@@ -11,6 +11,16 @@ layer_0/tile_data = PackedInt32Array(917525, 524290, 8, 2097187, 0, 0, 1, 0, 0)
 
 [node name="Player" parent="." index="1"]
 position = Vector2(1424, 1468)
+healthPoints = 200
+maxHealthPoints = 200
+max_b_vials = 20
+stamina = 75
+maxStamina = 75
+damage = 4
+b_bullets = 0
+maxBullets = 20
+speed = 350
+attSpeed = 10
 
 [node name="current_item" parent="Player/HUD_canvas/HUD/up_left/container" index="0"]
 metadata/_edit_use_anchors_ = true

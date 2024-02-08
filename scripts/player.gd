@@ -21,17 +21,17 @@ var paused = false
 #player stats
 @export var healthPoints = 200
 @export var maxHealthPoints = 200
-@export var b_vials = 20
+@export var b_vials = g.vials
 @export var max_b_vials = 20
 
 @export var stamina = 75
 @export var maxStamina = 75
 
-@export var b_echoes = 727
-@export var insight = 0
+@export var b_echoes = g.b_echoes
+@export var insight = g.insight
 
 @export var damage = 4
-@export var bullets = 20
+@export var bullets = g.bullets
 @export var b_bullets = 0
 @export var maxBullets = 20
 
@@ -123,6 +123,7 @@ func _input(event):
 						healthPoints = maxHealthPoints
 					healthChanged.emit()
 					b_vials -= 1
+					g.vials -= 1
 					vialsChanged.emit()
 					action = false
 			elif event.is_action_pressed("quick_use") and not paused:
@@ -313,6 +314,7 @@ func instance_bullet():
 		b_bulletsChanged.emit()
 	else:
 		bullets -= 1
+		g.bullets -= 1
 		bulletsChanged.emit()
 
 func throw_item(item, index):

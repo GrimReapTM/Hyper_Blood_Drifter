@@ -13,14 +13,21 @@ func _ready():
 	timer.start()
 
 func _on_timer_timeout():
-	var enemy
-	match rng.randi_range(0, interval):
-		0:
-			enemy = hunter.instantiate()
-		1: 
-			pass
-			enemy = hunter.instantiate()
-	if enemy != null:
-		enemy.position = position
-		enemy.aggro = true
-		owner.add_child(enemy)
+	if not g.dead:
+		var enemy
+		match rng.randi_range(0, interval):
+			0:
+				enemy = hunter.instantiate()
+			1: 
+				pass
+				enemy = hunter.instantiate()
+		if enemy != null:
+			enemy.position = position
+			enemy.aggro = true
+			owner.add_child(enemy)
+
+
+func _on_wave_timer_timeout():
+	if interval != 1:
+		interval -= 1
+		timer.wait_time = interval

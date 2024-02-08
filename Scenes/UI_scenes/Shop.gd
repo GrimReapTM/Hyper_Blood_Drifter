@@ -28,3 +28,20 @@ func add_item(item):
 		g.inventory[item] = 1
 	Inventory.add_item(item)
 
+
+func _on_vial_pressed():
+	if player.b_echoes - 20 > 0 and player.b_vials != player.max_b_vials:
+		player.b_echoes -= 20
+		player.b_echoesChanged.emit()
+		player.b_vials += 1
+		g.vials += 1
+		player.vialsChanged.emit()
+
+
+func _on_bullets_pressed():
+	if player.b_echoes - 20 > 0 and player.bullets != player.maxBullets:
+		player.b_echoes -= 20
+		player.b_echoesChanged.emit()
+		player.bullets += 1
+		g.bullets += 1
+		player.bulletsChanged.emit()

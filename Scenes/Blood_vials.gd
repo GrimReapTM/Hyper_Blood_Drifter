@@ -11,6 +11,10 @@ func _ready():
 func update():
 	var fifth = int(player.max_b_vials/5)
 	text = str(player.b_vials)
+	if player.b_vials == player.max_b_vials:
+		label_settings.font_color = Color("87b5ed")
+	else:
+		label_settings.font_color = Color("fefcf6")
 	
 	if player.b_vials == 0:
 		vials.frame = 5

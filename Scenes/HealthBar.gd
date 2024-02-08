@@ -27,6 +27,7 @@ func rally():
 
 func death():
 	player.dead = true
+	g.dead = true
 	deathscreen.update()
 	player.animations.play("death")
 	#await player.animations.animation_finished

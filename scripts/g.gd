@@ -1,5 +1,6 @@
 extends Node
 
+var dead = false
 var score = 0
 var highscore = 0
 
@@ -9,13 +10,18 @@ var bonus_damage = 0
 var melee_damage = 22 + bonus_damage + beast_damage
 var ranged_damage = 4
 
-var inventory = {"throwing_knife":4, "pebble":2, "molotov_cocktail":5, "beast_pellet":2, "fire_paper":2, "bolt_paper":2}
+var inventory = {"throwing_knife":42, "pebble":21, "molotov_cocktail":15, "beast_pellet":2, "fire_paper":2, "bolt_paper":2}
 var quick_slots = [null, null, null, null, null, null]
 var equiped_slot = null
 var slot = 0
 var next_slot = 0
 var old_slot = null
 var player_position = Vector2()
+
+var vials = 20
+var bullets = 20
+
+
 
 signal itemAmount
 signal changeSprite
@@ -28,9 +34,9 @@ signal sound
 # player
 var position
 var fire_damage
-var b_echoes
+var b_echoes = 727
 signal beChanged
-var insight
+var insight = 0
 signal iChanged
 var hp
 signal hpChanged

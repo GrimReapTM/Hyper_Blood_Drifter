@@ -14,7 +14,7 @@ const bullet = preload("res://Scenes/entity scenes/bullet.tscn")
 @onready var nav_agent = $CollisionShape2D/navigation_agent as NavigationAgent2D
 @onready var animations = $AnimationPlayer
 
-@export var hp = 50
+@export var hp = 100
 @export var maxHp = hp
 signal healthChanged
 var damaged = false

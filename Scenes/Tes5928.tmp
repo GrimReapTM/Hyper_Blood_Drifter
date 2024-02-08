@@ -24,38 +24,6 @@ layer_1/tile_data = PackedInt32Array(1376297, 196609, 2, 1376296, 131073, 3, 137
 
 [node name="Player" parent="." index="2"]
 position = Vector2(594, 713)
-healthPoints = 200
-maxHealthPoints = 200
-max_b_vials = 20
-stamina = 75
-maxStamina = 75
-damage = 4
-b_bullets = 0
-maxBullets = 20
-speed = 350
-attSpeed = 10
+beastBar = Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"script":null)
 
-[node name="enemy" parent="." index="3" node_paths=PackedStringArray("default_pos") instance=ExtResource("3_adpvs")]
-position = Vector2(1644, 386)
-default_pos = NodePath("../enemy_default_pos")
-maxHp = 100
-
-[node name="lamp" parent="." index="4" instance=ExtResource("2_84i77")]
-position = Vector2(444, 767)
-ID = 1
-
-[node name="Shop" parent="pause" index="1" node_paths=PackedStringArray("messengers")]
-messengers = NodePath("../../bath messengers")
-
-[node name="enemy_default_pos" type="Marker2D" parent="." index="6"]
-position = Vector2(1643, 386)
-
-[node name="bath messengers" parent="." index="7" node_paths=PackedStringArray("player") instance=ExtResource("4_osi4y")]
-position = Vector2(923, 846)
-player = NodePath("../Player")
-
-[node name="Spawner" parent="." index="8" instance=ExtResource("5_rpvmt")]
-position = Vector2(2320, 1025)
-
-[node name="Spawner2" parent="." index="9" instance=ExtResource("5_rpvmt")]
-position = Vector2(2359, 550)
+fireParticles = Object(AnimatedSprite2D,"_import_path":NodePath(""),"un
