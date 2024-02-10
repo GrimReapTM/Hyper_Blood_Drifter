@@ -35,7 +35,6 @@ func add_item(item):
 			return
 	var instance = Item.instantiate()
 	instance.ID = item
-	instance.item()
 	container.add_child(instance)
 	inventory.append(item)
 	child_inventory.append(instance)

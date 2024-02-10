@@ -140,36 +140,45 @@ func _input(event):
 							throw_item(knife, attack_calculation())
 						"beast_pellet":
 							animations.play("consume")
+							await animations.animation_finished
 							status_effect("beast_pellet", 0, 60)
 							beast_blood_pellet()
 						"hunters_mark":
 							animations.play("consume")
+							await animations.animation_finished
 							#teleport
 						"bolt_paper":
 							animations.play("paper")
+							await animations.animation_finished
 							status_effect("bolt_paper", 1, 45)
 							paper("bolt")
 						"coldblood_dew":
 							animations.play("consume")
+							await animations.animation_finished
 							b_echoes += 1000
 							b_echoesChanged.emit()
 						"fire_paper":
 							animations.play("paper")
+							await animations.animation_finished
 							status_effect("fire_paper", 2, 45)
 							paper("fire")
 						"lantern":
 							animations.play("lantern")
+							await animations.animation_finished
 							#light
 						"iosefka_blood":
 							animations.play("drink")
+							await animations.animation_finished
 							healthPoints += 60
 							healthChanged.emit()
 						"madmans_knowledge":
 							animations.play("consume")
+							await animations.animation_finished
 							insight += 1
 							insightChanged.emit()
 						"umbilical_cord":
 							animations.play("consume")
+							await animations.animation_finished
 							insight += 3
 							insightChanged.emit() 
 
@@ -317,13 +326,26 @@ func instance_bullet():
 		g.bullets -= 1
 		bulletsChanged.emit()
 
+var throw_item_
+
 func throw_item(item, index):
-	var instance
+	throw_item_ = item
 	animations.play("throw_" + attackAnimations[index])
-	instance = item.instantiate()
+	animPlay = true
+	$throwTimer.start()
+
+func _on_throw_timer_timeout():
+	$throwTimer.stop()
+	var instance
+	staminaChange("ranged")
+	instance = throw_item_.instantiate()
 	instance.position = position
 	owner.add_child(instance)
+	await animations.animation_finished
 	attacking = false
+	animPlay = false
+
+
 
 func _on_player_hurtbox_area_entered(area):
 	match area.name:

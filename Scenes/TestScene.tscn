@@ -24,16 +24,6 @@ layer_1/tile_data = PackedInt32Array(1376297, 196609, 2, 1376296, 131073, 3, 137
 
 [node name="Player" parent="." index="2"]
 position = Vector2(594, 713)
-healthPoints = 200
-maxHealthPoints = 200
-max_b_vials = 20
-stamina = 75
-maxStamina = 75
-damage = 4
-b_bullets = 0
-maxBullets = 20
-speed = 350
-attSpeed = 10
 
 [node name="enemy" parent="." index="3" node_paths=PackedStringArray("default_pos") instance=ExtResource("3_adpvs")]
 position = Vector2(1644, 386)

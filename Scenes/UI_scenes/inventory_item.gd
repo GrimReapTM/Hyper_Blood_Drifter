@@ -7,8 +7,10 @@ extends Control
 @export var button: Button
 @export var ID = ""
 
+
 func _ready():
 	g.itemAmount.connect(change_amount)
+	item()
 
 func item():
 	Amount.text = str(g.inventory[ID])

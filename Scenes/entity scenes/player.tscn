@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://oycliuo8lo5y"]
+[gd_scene load_steps=65 format=3 uid="uid://oycliuo8lo5y"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_k8r4x"]
 [ext_resource type="Script" path="res://Scenes/entity scenes/Player_Stats.gd" id="2_vu2d7"]
@@ -769,6 +769,227 @@ tracks/0/keys = {
 "values": [Vector2i(1, 0), Vector2i(1, 1), Vector2i(1, 2), Vector2i(1, 3)]
 }
 
+[sub_resource type="Animation" id="Animation_8hj8h"]
+resource_name = "consume"
+length = 0.55
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(26, 0), Vector2i(26, 1), Vector2i(26, 2), Vector2i(26, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_p6rl4"]
+resource_name = "drink"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(27, 0), Vector2i(27, 1), Vector2i(27, 2), Vector2i(27, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_3dk6i"]
+resource_name = "paper"
+length = 0.55
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(28, 0), Vector2i(28, 1), Vector2i(28, 2), Vector2i(28, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_km32o"]
+resource_name = "lantern"
+length = 0.55
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(29, 0), Vector2i(29, 1), Vector2i(29, 2), Vector2i(29, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_aml3c"]
+resource_name = "death"
+length = 0.55
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(30, 0), Vector2i(30, 1), Vector2i(30, 2), Vector2i(30, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_s8ehs"]
+resource_name = "throw_down"
+length = 0.38
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(31, 0), Vector2i(31, 1), Vector2i(31, 2), Vector2i(31, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_lf5t7"]
+resource_name = "throw_up"
+length = 0.38
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(32, 0), Vector2i(32, 1), Vector2i(32, 2), Vector2i(32, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_wyf8y"]
+resource_name = "throw_left"
+length = 0.38
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(33, 0), Vector2i(33, 1), Vector2i(33, 2), Vector2i(33, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_wtg4g"]
+resource_name = "throw_right"
+length = 0.38
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(34, 0), Vector2i(34, 1), Vector2i(34, 2), Vector2i(34, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_8hdfk"]
+resource_name = "throw_up_left"
+length = 0.38
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(35, 0), Vector2i(35, 1), Vector2i(35, 2), Vector2i(35, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_pt0bm"]
+resource_name = "throw_up_right"
+length = 0.38
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(36, 0), Vector2i(36, 1), Vector2i(36, 2), Vector2i(36, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_bplxb"]
+resource_name = "throw_down_left"
+length = 0.38
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(37, 0), Vector2i(37, 1), Vector2i(37, 2), Vector2i(37, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_nb8nf"]
+resource_name = "throw_down_right"
+length = 0.38
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(38, 0), Vector2i(38, 1), Vector2i(38, 2), Vector2i(38, 3)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dbrtl"]
 _data = {
 "RESET": SubResource("Animation_drmbx"),
@@ -781,11 +1002,16 @@ _data = {
 "attack_up_left": SubResource("Animation_j0txg"),
 "attack_up_right": SubResource("Animation_pc0wp"),
 "blood_bullet": SubResource("Animation_pkned"),
+"consume": SubResource("Animation_8hj8h"),
 "dash_down": SubResource("Animation_o3eh5"),
 "dash_left": SubResource("Animation_kidot"),
 "dash_right": SubResource("Animation_e03j0"),
 "dash_up": SubResource("Animation_hyb0c"),
+"death": SubResource("Animation_aml3c"),
+"drink": SubResource("Animation_p6rl4"),
 "heal": SubResource("Animation_ye01t"),
+"lantern": SubResource("Animation_km32o"),
+"paper": SubResource("Animation_3dk6i"),
 "ranged_down": SubResource("Animation_wfeyl"),
 "ranged_down_left": SubResource("Animation_nlne5"),
 "ranged_down_right": SubResource("Animation_nmg2l"),
@@ -794,6 +1020,14 @@ _data = {
 "ranged_up": SubResource("Animation_otabg"),
 "ranged_up_left": SubResource("Animation_22dt3"),
 "ranged_up_right": SubResource("Animation_og7b6"),
+"throw_down": SubResource("Animation_s8ehs"),
+"throw_down_left": SubResource("Animation_bplxb"),
+"throw_down_right": SubResource("Animation_nb8nf"),
+"throw_left": SubResource("Animation_wyf8y"),
+"throw_right": SubResource("Animation_wtg4g"),
+"throw_up": SubResource("Animation_lf5t7"),
+"throw_up_left": SubResource("Animation_8hdfk"),
+"throw_up_right": SubResource("Animation_pt0bm"),
 "walk_down": SubResource("Animation_d8y06"),
 "walk_left": SubResource("Animation_ndaec"),
 "walk_right": SubResource("Animation_62hkw"),
@@ -894,7 +1128,7 @@ player = NodePath("..")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
 texture = ExtResource("2_xivik")
-hframes = 34
+hframes = 39
 vframes = 4
 
 [node name="melee_hitbox" type="Area2D" parent="Sprite2D"]
@@ -919,6 +1153,9 @@ y_sort_enabled = true
 position = Vector2(2, 70)
 scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_ksr51")
+
+[node name="throwTimer" type="Timer" parent="."]
+wait_time = 0.15
 
 [node name="dashTimer" type="Timer" parent="."]
 wait_time = 0.2
@@ -995,6 +1232,7 @@ texture = ExtResource("7_nedor")
 
 [connection signal="area_entered" from="Sprite2D/melee_hitbox" to="." method="_on_melee_hitboxes_area_entered"]
 [connection signal="area_entered" from="Sprite2D/player_hurtbox" to="." method="_on_player_hurtbox_area_entered"]
+[connection signal="timeout" from="throwTimer" to="." method="_on_throw_timer_timeout"]
 [connection signal="timeout" from="dashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="meleeTimer" to="." method="_on_melee_timer_timeout"]
 [connection signal="timeout" from="rangedTimer" to="." method="_on_ranged_timer_timeout"]

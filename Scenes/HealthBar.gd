@@ -4,6 +4,8 @@ extends TextureProgressBar
 @export var rallyBar: TextureProgressBar
 @export var deathscreen: Control
 
+var dead = false
+
 func _ready():
 	player.healthChanged.connect(update)
 	player.attacked.connect(rally)
@@ -12,7 +14,7 @@ func _ready():
 
 func update():
 	value = player.healthPoints * 100 / player.maxHealthPoints
-	if player.healthPoints < 1:
+	if player.healthPoints < 1 and not dead:
 		death()
 		player.b_echoes -= player.b_echoes / 2
 
@@ -28,7 +30,8 @@ func rally():
 func death():
 	player.dead = true
 	g.dead = true
+	dead = true
 	deathscreen.update()
 	player.animations.play("death")
-	#await player.animations.animation_finished
+	await player.animations.animation_finished
 	deathscreen.visible = true

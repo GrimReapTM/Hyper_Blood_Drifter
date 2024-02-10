@@ -403,16 +403,6 @@ y_sort_enabled = true
 pauseMenu = NodePath("../pause/PauseMenu")
 HUD = NodePath("HUD_canvas/HUD")
 StatusEffectContainer = NodePath("HUD_canvas/HUD/up_left/StatusEffects")
-healthPoints = 200
-maxHealthPoints = 200
-max_b_vials = 20
-stamina = 75
-maxStamina = 75
-damage = 4
-b_bullets = 0
-maxBullets = 20
-speed = 350
-attSpeed = 10
 
 [node name="follow cam" type="Camera2D" parent="Player" node_paths=PackedStringArray("player", "tilemap")]
 limit_left = 0
@@ -627,10 +617,11 @@ visible = false
 player = NodePath("../../Player")
 Paused = NodePath("../PauseMenu")
 
-[node name="DeathScreen" parent="pause" node_paths=PackedStringArray("pause", "shop", "inventory") instance=ExtResource("29_gaxrt")]
+[node name="DeathScreen" parent="pause" node_paths=PackedStringArray("pause", "shop", "inventory", "HUD") instance=ExtResource("29_gaxrt")]
 visible = false
 pause = NodePath("../PauseMenu")
 shop = NodePath("../Shop")
 inventory = NodePath("../Inventory")
+HUD = NodePath("../../Player/HUD_canvas/HUD")
 
 [connection signal="timeout" from="Player/HUD_canvas/HUD/up_left/RallyBar/RallyTimer" to="Player/HUD_canvas/HUD/up_left/RallyBar" method="_on_rally_timer_timeout"]
