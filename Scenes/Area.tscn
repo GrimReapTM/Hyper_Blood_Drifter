@@ -607,10 +607,11 @@ Item_name = NodePath("../../Player/HUD_canvas/HUD/up_left/container/current_item
 Item_sprite = NodePath("../../Player/HUD_canvas/HUD/up_left/curent_item")
 Item_amount = NodePath("../../Player/HUD_canvas/HUD/up_left/container/current_item_amount")
 
-[node name="Shop" parent="pause" node_paths=PackedStringArray("player", "Inventory") instance=ExtResource("26_ml5kp")]
+[node name="Shop" parent="pause" node_paths=PackedStringArray("player", "Inventory", "HUD") instance=ExtResource("26_ml5kp")]
 visible = false
 player = NodePath("../../Player")
 Inventory = NodePath("../Inventory")
+HUD = NodePath("../../Player/HUD_canvas/HUD/up_left")
 
 [node name="Inventory" parent="pause" node_paths=PackedStringArray("player", "Paused") instance=ExtResource("27_sc78j")]
 visible = false

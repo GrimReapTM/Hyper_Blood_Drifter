@@ -156,14 +156,6 @@ text = "Quit"
 label_settings = SubResource("LabelSettings_mjaw7")
 horizontal_alignment = 1
 
-[node name="test" type="Button" parent="buttons"]
-offset_left = 915.0
-offset_top = 566.0
-offset_right = 965.0
-offset_bottom = 597.0
-scale = Vector2(2, 2)
-text = "Test"
-
 [node name="Title" type="Sprite2D" parent="." node_paths=PackedStringArray("menu", "buttons")]
 position = Vector2(640, 219)
 scale = Vector2(4, 4)
@@ -191,4 +183,3 @@ label_settings = SubResource("LabelSettings_isgec")
 
 [connection signal="pressed" from="buttons/play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="buttons/quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="buttons/test" to="." method="_on_test_pressed"]

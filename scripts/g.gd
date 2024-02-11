@@ -10,7 +10,7 @@ var bonus_damage = 0
 var melee_damage = 22 + bonus_damage + beast_damage
 var ranged_damage = 4
 
-var inventory = {"throwing_knife":42, "pebble":21, "molotov_cocktail":15, "beast_pellet":2, "fire_paper":2, "bolt_paper":2}
+var inventory = {}
 var quick_slots = [null, null, null, null, null, null]
 var equiped_slot = null
 var slot = 0
@@ -21,7 +21,7 @@ var player_position = Vector2()
 var vials = 20
 var bullets = 20
 
-
+var next_item = ""
 
 signal itemAmount
 signal changeSprite
@@ -29,7 +29,7 @@ signal equiped_null
 signal nullSprite
 signal showHud
 signal sound
-
+signal addItem
 
 # player
 var position
@@ -64,6 +64,7 @@ func get_item(parameter, action):
 	var item_name = ""
 	var item_description = ""
 	var item_frame = 0
+	var price = 0
 	if typeof(parameter) == TYPE_INT:
 		ID = quick_slots[parameter]
 	else:
@@ -74,50 +75,62 @@ func get_item(parameter, action):
 			item_name = "Molotov Cocktail"
 			item_description = "Molotov cocktail that explodes violently when thrown."
 			item_frame = 1
+			price = 80
 		"pebble":
 			item_name = "Pebble"
 			item_description = "Used to get the attention of a single enemy."
 			item_frame = 2
+			price = 30
 		"throwing_knife":
 			item_name = "Throwing Knife"
 			item_description = "Finely serrated throwing knife"
 			item_frame = 3
+			price = 40
 		"beast_pellet":
 			item_name = "Beast Blood Pellet"
-			item_description = "Enables Beasthood, increasing the damage a hunter deals and receives with increasing intensity as they bathe in blood."
+			item_description = "Enables Beasthood, increasing the damage a hunter deals\nand receives with increasing intensity as they bathe in blood."
 			item_frame = 4
+			price = 200
 		"hunters_mark":
 			item_name = "Bold Hunter's Mark"
 			item_description = "Allows you to reawaken at a lamp without losing your Blood Echoes."
 			item_frame = 5
+			price = 400
 		"bolt_paper":
 			item_name = "Bolt Paper"
 			item_description = "Temporarily adds 80 bolt damage to right-hand weapon."
 			item_frame = 6
+			price = 250
 		"coldblood_dew":
 			item_name = "Coldblood Dew"
 			item_description = "Can be consumed to acquire Blood Echoes."
 			item_frame = 7
+			price = 1000
 		"fire_paper":
 			item_name = "Fire Paper"
 			item_description = "Temporarily adds 80 fire damage to right-hand weapon."
 			item_frame = 8
+			price = 250
 		"lantern":
 			item_name = "Hand Lantern"
 			item_description = "Use Weapons in both hands while illuminating the dark."
 			item_frame = 9
+			price = 500
 		"iosefka_blood":
 			item_name = "Iosefka's Blood"
 			item_description = "Consume to gain a larger amount of HP."
 			item_frame = 10
+			price = 150
 		"madmans_knowledge":
 			item_name = "Madman's Knowledge"
 			item_description = "Use to gain 1 Insight"
 			item_frame = 11
+			price = 1000
 		"umbilical_cord":
 			item_name = "One Third of Umbilical Cord"
 			item_description = "Consume to gain insight, so they say, eyes on the inside"
 			item_frame = 12
+			price = 3000
 	
 	match action:
 		"name":
@@ -126,6 +139,8 @@ func get_item(parameter, action):
 			return item_description
 		"frame":
 			return item_frame
+		"price":
+			return price
 
 '''
 molotov_cocktail - 1

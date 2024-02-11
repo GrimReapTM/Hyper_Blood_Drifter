@@ -15,9 +15,6 @@ func _input(event):
 				press.emit()
 
 
-func _on_test_pressed():
-	get_tree().change_scene_to_file("res://Scenes/TestScene.tscn")
-
 
 func _on_play_pressed():
 	get_tree().change_scene_to_file("res://Scenes/areas/Dream.tscn")

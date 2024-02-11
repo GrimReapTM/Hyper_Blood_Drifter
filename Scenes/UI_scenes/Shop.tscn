@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" path="res://Scenes/UI_scenes/Shop.gd" id="1_f4xth"]
 
-[node name="Shop" type="Control"]
+[node name="Shop" type="Control" node_paths=PackedStringArray("container")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_f4xth")
+container = NodePath("ScrollContainer/VBoxContainer")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -16,39 +17,32 @@ offset_bottom = 721.0
 color = Color(0, 0, 0, 0.117647)
 metadata/_edit_lock_ = true
 
-[node name="pebble" type="Button" parent="."]
-layout_mode = 0
-offset_left = 489.0
-offset_top = 231.0
-offset_right = 773.0
-offset_bottom = 294.0
-text = "kamínek :)"
-
-[node name="molotov" type="Button" parent="."]
-layout_mode = 0
-offset_left = 487.0
-offset_top = 364.0
-offset_right = 771.0
-offset_bottom = 436.0
-text = "Molotov kohoutocas"
-
 [node name="vial" type="Button" parent="."]
 layout_mode = 0
-offset_left = 219.0
-offset_top = 240.0
-offset_right = 329.0
-offset_bottom = 280.0
+offset_left = 905.0
+offset_top = 136.0
+offset_right = 1015.0
+offset_bottom = 176.0
 text = "Blood vial"
 
 [node name="bullets" type="Button" parent="."]
 layout_mode = 0
-offset_left = 216.0
-offset_top = 303.0
-offset_right = 302.0
-offset_bottom = 344.0
+offset_left = 918.0
+offset_top = 217.0
+offset_right = 1004.0
+offset_bottom = 258.0
 text = "Bullets"
 
-[connection signal="pressed" from="pebble" to="." method="_on_pebble_pressed"]
-[connection signal="pressed" from="molotov" to="." method="_on_molotov_pressed"]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 79.0
+offset_top = 48.0
+offset_right = 867.0
+offset_bottom = 691.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 105
+
 [connection signal="pressed" from="vial" to="." method="_on_vial_pressed"]
 [connection signal="pressed" from="bullets" to="." method="_on_bullets_pressed"]

@@ -1,32 +1,37 @@
 extends Control
 
+const item = preload("res://Scenes/UI_scenes/inventory_item.tscn")
+
 @export var messengers: StaticBody2D
 @export var player: CharacterBody2D
 @export var Inventory: Control
+@export var container: VBoxContainer
+@export var HUD: Node2D
 
 func _ready():
 	messengers.open.connect(open)
 	player.pause_pressed.connect(close)
+	g.addItem.connect(add_item)
+	
+	var instance
+	for i in g.item_ids:
+		instance = item.instantiate()
+		instance.type = "shop"
+		instance.ID = i
+		container.add_child(instance)
 
 func open():
-	visible = true 
+	visible = true
+	HUD.visible = false
 
 func close():
+	HUD.visible = true
 	messengers.disable.emit()
 	visible = false
 
-func _on_pebble_pressed():
-	add_item("pebble")
 
-func _on_molotov_pressed():
-	add_item("molotov_cocktail")
-
-func add_item(item):
-	if item in g.inventory:
-		g.inventory[item] += 1
-	else:
-		g.inventory[item] = 1
-	Inventory.add_item(item)
+func add_item():
+	Inventory.add_item(g.next_item)
 
 
 func _on_vial_pressed():

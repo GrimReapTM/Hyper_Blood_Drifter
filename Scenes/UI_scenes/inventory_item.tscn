@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://1unf66fmmj27"]
+[gd_scene load_steps=9 format=3 uid="uid://1unf66fmmj27"]
 
 [ext_resource type="Texture2D" uid="uid://cdagsl4j7tie5" path="res://sprites/HUD/inventory/consumables-Sheet.png" id="1_2w271"]
 [ext_resource type="Script" path="res://Scenes/UI_scenes/inventory_item.gd" id="1_s5hrp"]
 [ext_resource type="FontFile" uid="uid://cflm7ac265lwi" path="res://fonts/pixelgeorgia.ttf" id="2_5eid7"]
 [ext_resource type="LabelSettings" uid="uid://crg3mknke8m6b" path="res://Scenes/label themes/HUD.tres" id="3_driq3"]
+[ext_resource type="Texture2D" uid="uid://byulu31xs7hcw" path="res://sprites/HUD/inventory/hunters_mark.png" id="5_3iisp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_m57no"]
 font = ExtResource("2_5eid7")
@@ -19,7 +20,13 @@ font_color = Color(0.996078, 0.988235, 0.964706, 1)
 shadow_size = 7
 shadow_color = Color(0, 0, 0, 0.129412)
 
-[node name="Inventory_item" type="Control" node_paths=PackedStringArray("Sprite", "Amount", "Description", "Name", "button")]
+[sub_resource type="LabelSettings" id="LabelSettings_73wvc"]
+font = ExtResource("2_5eid7")
+font_size = 70
+shadow_size = 7
+shadow_offset = Vector2(2, 1)
+
+[node name="Inventory_item" type="Control" node_paths=PackedStringArray("Sprite", "Amount", "Description", "Name", "button", "Price", "currency")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,6 +41,8 @@ Amount = NodePath("amount")
 Description = NodePath("description")
 Name = NodePath("name")
 button = NodePath("Button")
+Price = NodePath("price")
+currency = NodePath("currency_BE")
 metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -66,7 +75,6 @@ offset_top = 52.0
 offset_right = 136.0
 offset_bottom = 122.0
 scale = Vector2(0.4, 0.4)
-text = "2"
 label_settings = SubResource("LabelSettings_thnla")
 
 [node name="description" type="Label" parent="."]
@@ -85,5 +93,21 @@ offset_right = 781.0
 offset_bottom = 103.0
 disabled = true
 flat = true
+
+[node name="price" type="Label" parent="."]
+layout_mode = 0
+offset_left = 605.0
+offset_top = 9.0
+offset_right = 871.0
+offset_bottom = 79.0
+scale = Vector2(0.5, 0.5)
+label_settings = SubResource("LabelSettings_73wvc")
+horizontal_alignment = 2
+
+[node name="currency_BE" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(754, 21)
+scale = Vector2(3, 3)
+texture = ExtResource("5_3iisp")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
