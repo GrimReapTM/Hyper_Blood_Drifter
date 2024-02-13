@@ -23,6 +23,7 @@ func _ready():
 func open():
 	visible = true
 	HUD.visible = false
+	g.openShop.emit()
 
 func close():
 	HUD.visible = true

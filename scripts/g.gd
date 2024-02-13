@@ -30,6 +30,8 @@ signal nullSprite
 signal showHud
 signal sound
 signal addItem
+signal openShop
+
 
 # player
 var position

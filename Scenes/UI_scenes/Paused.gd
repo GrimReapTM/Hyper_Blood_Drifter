@@ -125,7 +125,8 @@ func check_quick(slot):
 func change_quick(label, frame):
 	Item_name.text = label
 	Item_sprite.frame = frame
-	Item_amount.text = str(g.inventory[g.equiped_slot])
+	if g.inventory[g.equiped_slot] != null:
+		Item_amount.text = str(g.inventory[g.equiped_slot])
 
 func change_amount():
 	if g.equiped_slot != null:

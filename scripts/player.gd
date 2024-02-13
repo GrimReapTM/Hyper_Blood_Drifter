@@ -128,9 +128,6 @@ func _input(event):
 					action = false
 			elif event.is_action_pressed("quick_use") and not paused:
 				if g.equiped_slot != null:
-					if g.equiped_slot != "lantern":
-						g.inventory[g.equiped_slot] -= 1
-						g.itemAmount.emit()
 					match g.equiped_slot:
 						"molotov_cocktail":
 							throw_item(molotov, attack_calculation())
@@ -181,6 +178,9 @@ func _input(event):
 							await animations.animation_finished
 							insight += 3
 							insightChanged.emit() 
+					if g.equiped_slot != "lantern":
+						g.inventory[g.equiped_slot] -= 1
+						g.itemAmount.emit()
 
 func status_effect(effect, frame, duration):
 	var effect_index = 0

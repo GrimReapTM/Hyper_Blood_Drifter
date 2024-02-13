@@ -14,6 +14,8 @@ var price = 0
 func _ready():
 	if type == "inventory":
 		g.itemAmount.connect(change_amount)
+	else:
+		g.openShop.connect(change_amount)
 	item()
 
 func item():
@@ -33,7 +35,10 @@ func change_amount():
 	if ID in g.inventory:
 		Amount.text = str(g.inventory[ID])
 	else:
-		queue_free()
+		if type == "inventory":
+			queue_free()
+		else:
+			Amount.text = ""
 
 
 func _on_button_pressed():
