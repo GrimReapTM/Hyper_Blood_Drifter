@@ -9,6 +9,7 @@ const knife = preload("res://Scenes/entity scenes/knife.tscn")
 
 const effect_scene = preload("res://Scenes/UI_scenes/status_effect.tscn")
 
+@export var sfx: Node2D
 @export var beastBar: Node2D
 @export var fireParticles: AnimatedSprite2D
 @export var beastBloodParticles: AnimatedSprite2D
@@ -104,6 +105,7 @@ func _input(event):
 				if b_bullets == 0:
 					action = true
 					animations.play("blood_bullet")
+					sfx.items("finger")
 					await animations.animation_finished
 					animations.play("RESET")
 					healthPoints -= 65
@@ -115,6 +117,7 @@ func _input(event):
 				if b_vials > 0:
 					action = true
 					animations.play("heal")
+					sfx.items("heal")
 					await animations.animation_finished
 					animations.play("RESET")
 					if healthPoints + 50 <= maxHealthPoints:
@@ -137,25 +140,30 @@ func _input(event):
 							throw_item(knife, attack_calculation())
 						"beast_pellet":
 							animations.play("consume")
+							sfx.items("use_item")
 							await animations.animation_finished
 							status_effect("beast_pellet", 0, 60)
 							beast_blood_pellet()
 						"hunters_mark":
 							animations.play("consume")
+							sfx.items("use_item")
 							await animations.animation_finished
 							#teleport
 						"bolt_paper":
 							animations.play("paper")
+							sfx.items("bolt_paper")
 							await animations.animation_finished
 							status_effect("bolt_paper", 1, 45)
 							paper("bolt")
 						"coldblood_dew":
 							animations.play("consume")
+							sfx.items("cold_blood_dew")
 							await animations.animation_finished
 							b_echoes += 1000
 							b_echoesChanged.emit()
 						"fire_paper":
 							animations.play("paper")
+							sfx.items("use_item")
 							await animations.animation_finished
 							status_effect("fire_paper", 2, 45)
 							paper("fire")
@@ -170,11 +178,13 @@ func _input(event):
 							healthChanged.emit()
 						"madmans_knowledge":
 							animations.play("consume")
+							sfx.items("madmans_knowledge")
 							await animations.animation_finished
 							insight += 1
 							insightChanged.emit()
 						"umbilical_cord":
 							animations.play("consume")
+							sfx.items("madmans_knowledge")
 							await animations.animation_finished
 							insight += 3
 							insightChanged.emit() 
@@ -196,6 +206,7 @@ func status_effect(effect, frame, duration):
 
 
 func on_fire():
+	sfx.effects("burn")
 	fireParticles.visible = true
 	$StatusEffects/Fire.start()
 	$StatusEffects/FireDamage.start()
@@ -258,6 +269,7 @@ func attack_melee(index):
 	animPlay = true
 	#movement
 	$meleeTimer.start()
+	sfx.action("swing")
 
 func _on_melee_timer_timeout():
 	$meleeTimer.stop()
@@ -298,6 +310,7 @@ func _on_combo_timeout():
 func attack_ranged(index):
 	# animation
 	animations.play("ranged_" + attackAnimations[index])
+	sfx.gun("shoot")
 	animPlay = true
 	$rangedTimer.start()
 	
@@ -331,6 +344,7 @@ var throw_item_
 func throw_item(item, index):
 	throw_item_ = item
 	animations.play("throw_" + attackAnimations[index])
+	sfx.action("throw")
 	animPlay = true
 	$throwTimer.start()
 
@@ -494,14 +508,25 @@ func _on_beast_blood_timer_timeout():
 	beastBloodChanged.emit()
 
 
+func _on_walk_timer_timeout():
+	sfx.ground("mud")
+
 # this just happens or something
+var tick = 20
 func _physics_process(delta):
 	g.player_position = position
 	movement(delta)
 	move_and_slide()
 	movementAnimation()
 	staminaRecovery(delta)
-	
+
+	if moveDirection != Vector2(0,0):
+		if tick > 20:
+			sfx.ground("mud")
+			tick = 0
+		tick += 1
+
+
 	if beast_blood == true:
 		resist -= 0.01
 		g.beast_damage -= 0.01

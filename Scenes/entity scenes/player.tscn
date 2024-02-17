@@ -1,6 +1,7 @@
-[gd_scene load_steps=65 format=3 uid="uid://oycliuo8lo5y"]
+[gd_scene load_steps=66 format=3 uid="uid://oycliuo8lo5y"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_k8r4x"]
+[ext_resource type="PackedScene" uid="uid://buy61le6aimhl" path="res://Scenes/sfx.tscn" id="2_4d83n"]
 [ext_resource type="Script" path="res://Scenes/entity scenes/Player_Stats.gd" id="2_vu2d7"]
 [ext_resource type="Texture2D" uid="uid://dlo31n37oxrl6" path="res://sprites/player/player-Sheet.png" id="2_xivik"]
 [ext_resource type="Texture2D" uid="uid://bsy6mpsx0xq1" path="res://sprites/BeastBloodParticles.png" id="3_mmygx"]
@@ -1113,13 +1114,16 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("beastBar", "fireParticles", "beastBloodParticles")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sfx", "beastBar", "fireParticles", "beastBloodParticles")]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_k8r4x")
+sfx = NodePath("SFX")
 beastBar = NodePath("StatusEffects/BeastBloodBar")
 fireParticles = NodePath("StatusEffects/FireParticles")
 beastBloodParticles = NodePath("StatusEffects/BeastBloodParticles")
+
+[node name="SFX" parent="." instance=ExtResource("2_4d83n")]
 
 [node name="Player_Stats" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("2_vu2d7")
@@ -1153,6 +1157,9 @@ y_sort_enabled = true
 position = Vector2(2, 70)
 scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_ksr51")
+
+[node name="walkTimer" type="Timer" parent="."]
+wait_time = 0.3
 
 [node name="throwTimer" type="Timer" parent="."]
 wait_time = 0.15
@@ -1232,6 +1239,7 @@ texture = ExtResource("7_nedor")
 
 [connection signal="area_entered" from="Sprite2D/melee_hitbox" to="." method="_on_melee_hitboxes_area_entered"]
 [connection signal="area_entered" from="Sprite2D/player_hurtbox" to="." method="_on_player_hurtbox_area_entered"]
+[connection signal="timeout" from="walkTimer" to="." method="_on_walk_timer_timeout"]
 [connection signal="timeout" from="throwTimer" to="." method="_on_throw_timer_timeout"]
 [connection signal="timeout" from="dashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="meleeTimer" to="." method="_on_melee_timer_timeout"]

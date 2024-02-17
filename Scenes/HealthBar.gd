@@ -3,6 +3,7 @@ extends TextureProgressBar
 @export var player: CharacterBody2D
 @export var rallyBar: TextureProgressBar
 @export var deathscreen: Control
+@export var sfx: Node2D
 
 var dead = false
 
@@ -32,6 +33,7 @@ func death():
 	g.dead = true
 	dead = true
 	deathscreen.update()
+	sfx.effects("dead")
 	player.animations.play("death")
 	await player.animations.animation_finished
 	deathscreen.visible = true

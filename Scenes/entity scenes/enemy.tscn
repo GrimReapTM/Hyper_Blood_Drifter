@@ -1,7 +1,8 @@
-[gd_scene load_steps=45 format=3 uid="uid://cwyp18u112jkf"]
+[gd_scene load_steps=46 format=3 uid="uid://cwyp18u112jkf"]
 
 [ext_resource type="Script" path="res://Scenes/entity scenes/enemy.gd" id="1_0s70u"]
 [ext_resource type="Texture2D" uid="uid://c2xqpvnn6t0tj" path="res://sprites/enemies/firstenemy/enemy-Sheet.png" id="2_ea3bk"]
+[ext_resource type="PackedScene" uid="uid://buy61le6aimhl" path="res://Scenes/sfx.tscn" id="2_q7ptv"]
 [ext_resource type="Texture2D" uid="uid://cik3hkfnlhiof" path="res://sprites/HUD/enemy_health_under.png" id="3_k1kle"]
 [ext_resource type="Texture2D" uid="uid://b783vt3ohbfjg" path="res://sprites/FireParticles.png" id="3_tiduh"]
 [ext_resource type="Texture2D" uid="uid://ca3unx6jmotj7" path="res://sprites/HUD/enemy_health_over.png" id="4_rra6t"]
@@ -97,7 +98,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -1691,6 +1692,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(-17, -39)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("combat/vision/vision_hitbox:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.14159]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v5uif"]
 _data = {
@@ -1748,14 +1761,17 @@ size = Vector2(67, 138)
 radius = 54.4472
 height = 152.0
 
-[node name="enemy" type="CharacterBody2D" node_paths=PackedStringArray("fireParticles")]
+[node name="enemy" type="CharacterBody2D" node_paths=PackedStringArray("sfx", "fireParticles")]
 collision_layer = 3
 collision_mask = 3
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_0s70u")
 speed = 30000
+sfx = NodePath("SFX")
 fireParticles = NodePath("FireParticles")
+
+[node name="SFX" parent="." instance=ExtResource("2_q7ptv")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
@@ -1768,6 +1784,9 @@ visible = false
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_olyrx")
 frame_progress = 0.343311
+
+[node name="staggerTimer" type="Timer" parent="."]
+wait_time = 3.0
 
 [node name="FireDamage" type="Timer" parent="."]
 wait_time = 1.5
@@ -1878,6 +1897,7 @@ shape = SubResource("CircleShape2D_6acap")
 [node name="stagger_box" type="CollisionShape2D" parent="combat/stagger"]
 position = Vector2(1.5, -8)
 shape = SubResource("RectangleShape2D_bfm3y")
+disabled = true
 
 [node name="enemy_attack" type="Area2D" parent="combat"]
 
@@ -1899,6 +1919,7 @@ position = Vector2(0.615229, -1.59798)
 enabled = false
 target_position = Vector2(0.384771, 53.598)
 
+[connection signal="timeout" from="staggerTimer" to="." method="_on_stagger_timer_timeout"]
 [connection signal="timeout" from="FireDamage" to="." method="_on_fire_damage_timeout"]
 [connection signal="timeout" from="Fire" to="." method="_on_fire_timeout"]
 [connection signal="timeout" from="actionTimer" to="." method="_on_action_timer_timeout"]
@@ -1918,6 +1939,6 @@ target_position = Vector2(0.384771, 53.598)
 [connection signal="body_exited" from="distance/mid_range" to="." method="_on_mid_range_body_exited"]
 [connection signal="body_entered" from="distance/long_range" to="." method="_on_long_range_body_entered"]
 [connection signal="body_exited" from="distance/long_range" to="." method="_on_long_range_body_exited"]
-[connection signal="body_entered" from="combat/stagger" to="." method="_on_stagger_body_entered"]
+[connection signal="area_entered" from="combat/stagger" to="." method="_on_stagger_area_entered"]
 [connection signal="body_entered" from="combat/vision" to="." method="_on_vision_body_entered"]
 [connection signal="body_exited" from="combat/vision" to="." method="_on_vision_body_exited"]

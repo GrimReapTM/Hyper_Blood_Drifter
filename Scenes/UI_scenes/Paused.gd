@@ -26,6 +26,11 @@ extends Control
 var sprites = []
 
 
+
+@export var a_open: AudioStreamPlayer
+@export var a_close: AudioStreamPlayer
+@export var a_move: AudioStreamPlayer
+
 signal debug
 signal weapons
 signal armor
@@ -67,9 +72,11 @@ func pause():
 	if not visible and not player.paused:
 		player.paused = true
 		visible = true
+		a_open.play()
 	else:
 		player.paused = false
 		visible = false
+		a_close.play()
 
 
 func _input(event):
@@ -167,74 +174,91 @@ func hide_hand():
 
 #debug
 func _on_inventory_button_mouse_entered():
+	a_move.play()
 	fdebug()
 	label_debug.text = "Inventory"
 
 func _on_stats_button_mouse_entered():
+	a_move.play()
 	fdebug()
 	label_debug.text = "Status"
 
 func _on_settings_button_mouse_entered():
+	a_move.play()
 	fdebug()
 	label_debug.text = "System"
 
 #weapons
 func _on_r_1_mouse_entered():
+	a_move.play()
 	fweapons()
 	label_weapons.text = "Right Hand"
 
 func _on_r_2_mouse_entered():
+	a_move.play()
 	fweapons()
 	label_weapons.text = "Right Hand"
 
 func _on_l_1_mouse_entered():
+	a_move.play()
 	fweapons()
 	label_weapons.text = "Left Hand"
 
 func _on_l_2_mouse_entered():
+	a_move.play()
 	fweapons()
 	label_weapons.text = "Left Hand"
 
 
 #armor
 func _on_head_mouse_entered():
+	a_move.play()
 	farmor()
 	label_armor.text = "Head"
 
 func _on_shoulders_mouse_entered():
+	a_move.play()
 	farmor()
 	label_armor.text = "Torso"
 
 func _on_knees_mouse_entered():
+	a_move.play()
 	farmor()
 	label_armor.text = "Arms"
 
 func _on_toes_mouse_entered():
+	a_move.play()
 	farmor()
 	label_armor.text = "Boots"
 
 #quickslots
 func _on_q_1_mouse_entered():
+	a_move.play()
 	fquickitems()
 	label_quick.text = label_quick_check(0)
 
 func _on_q_2_mouse_entered():
+	a_move.play()
 	fquickitems()
 	label_quick.text = label_quick_check(1)
 
 func _on_q_3_mouse_entered():
+	a_move.play()
 	fquickitems()
 	label_quick.text = label_quick_check(2)
 
 func _on_q_4_mouse_entered():
+	a_move.play()
 	fquickitems()
 	label_quick.text = label_quick_check(3)
 
 func _on_q_5_mouse_entered():
+	a_move.play()
 	fquickitems()
 	label_quick.text = label_quick_check(4)
 
 func _on_q_6_mouse_entered():
+	a_move.play()
 	fquickitems()
 	label_quick.text = label_quick_check(5)
 
@@ -245,21 +269,27 @@ func label_quick_check(slot):
 		return "Quick Items"
 
 func _on_q_1_pressed():
+	a_open.play()
 	add_quick(0)
 
 func _on_q_2_pressed():
+	a_open.play()
 	add_quick(1)
 
 func _on_q_3_pressed():
+	a_open.play()
 	add_quick(2)
 
 func _on_q_4_pressed():
+	a_open.play()
 	add_quick(3)
 
 func _on_q_5_pressed():
+	a_open.play()
 	add_quick(4)
 
 func _on_q_6_pressed():
+	a_open.play()
 	add_quick(5)
 #-----------------------------------------------------------------
 
@@ -298,6 +328,7 @@ func null_sprite():
 	sprites[g.slot].frame = 0
 
 func _on_inventory_button_pressed():
+	a_open.play()
 	visible = false
 	Inventory.visible = true
 	player.HUD.visible = false

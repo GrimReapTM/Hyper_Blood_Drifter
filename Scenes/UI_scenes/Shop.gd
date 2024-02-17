@@ -8,6 +8,9 @@ const item = preload("res://Scenes/UI_scenes/inventory_item.tscn")
 @export var container: VBoxContainer
 @export var HUD: Node2D
 
+@export var a_open: AudioStreamPlayer
+@export var a_close: AudioStreamPlayer
+
 func _ready():
 	messengers.open.connect(open)
 	player.pause_pressed.connect(close)
@@ -21,11 +24,13 @@ func _ready():
 		container.add_child(instance)
 
 func open():
+	a_open.play()
 	visible = true
 	HUD.visible = false
 	g.openShop.emit()
 
 func close():
+	a_close.play()
 	HUD.visible = true
 	messengers.disable.emit()
 	visible = false

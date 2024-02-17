@@ -1,6 +1,7 @@
-[gd_scene load_steps=41 format=3 uid="uid://brdakdtadahqx"]
+[gd_scene load_steps=42 format=3 uid="uid://brdakdtadahqx"]
 
 [ext_resource type="Texture2D" uid="uid://bodowo5fqv02g" path="res://sprites/tileset.png" id="1_fowpt"]
+[ext_resource type="PackedScene" uid="uid://buy61le6aimhl" path="res://Scenes/sfx.tscn" id="1_vtfbq"]
 [ext_resource type="Texture2D" uid="uid://c1namygqbemua" path="res://sprites/terrain_fence.png" id="2_boaiw"]
 [ext_resource type="Texture2D" uid="uid://bqy2lfk77rlo4" path="res://sprites/hunters_dream.png" id="3_c4kdp"]
 [ext_resource type="PackedScene" uid="uid://oycliuo8lo5y" path="res://Scenes/entity scenes/player.tscn" id="3_hbuen"]
@@ -387,6 +388,8 @@ shadow_offset = Vector2(2, 1)
 [node name="Area" type="Node2D"]
 y_sort_enabled = true
 
+[node name="SFX" parent="." instance=ExtResource("1_vtfbq")]
+
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
 scale = Vector2(4, 4)
@@ -506,7 +509,7 @@ scale = Vector2(4, 4)
 texture = ExtResource("22_gpy4t")
 hframes = 13
 
-[node name="HealthBar" type="TextureProgressBar" parent="Player/HUD_canvas/HUD/up_left" node_paths=PackedStringArray("player", "rallyBar", "deathscreen")]
+[node name="HealthBar" type="TextureProgressBar" parent="Player/HUD_canvas/HUD/up_left" node_paths=PackedStringArray("player", "rallyBar", "deathscreen", "sfx")]
 z_index = 1
 offset_left = 27.0
 offset_top = 7.0
@@ -524,6 +527,7 @@ script = ExtResource("5_mlqth")
 player = NodePath("../../../..")
 rallyBar = NodePath("../RallyBar")
 deathscreen = NodePath("../../../../../pause/DeathScreen")
+sfx = NodePath("../../../../../SFX")
 
 [node name="RallyBar" type="TextureProgressBar" parent="Player/HUD_canvas/HUD/up_left" node_paths=PackedStringArray("healthBar", "player")]
 offset_left = 27.0

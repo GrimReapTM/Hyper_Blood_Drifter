@@ -1,11 +1,14 @@
-[gd_scene load_steps=25 format=3 uid="uid://cn1bybip4vf4a"]
+[gd_scene load_steps=28 format=3 uid="uid://cn1bybip4vf4a"]
 
 [ext_resource type="Script" path="res://Scenes/UI_scenes/Paused.gd" id="1_qgrk8"]
 [ext_resource type="Texture2D" uid="uid://cwc5djmbg2s43" path="res://sprites/HUD/inventory/inventory.png" id="2_d473i"]
+[ext_resource type="AudioStream" uid="uid://hug8v3u8o4lv" path="res://Audio/SFX/Menu/CURSOL_MOVE.wav" id="2_lymfi"]
 [ext_resource type="Texture2D" uid="uid://dslevrh5ykwm6" path="res://sprites/HUD/inventory/inventory_item_name.png" id="3_4oykd"]
+[ext_resource type="AudioStream" uid="uid://vea6ii8d70lr" path="res://Audio/SFX/Menu/menu_open.wav" id="3_oyixr"]
 [ext_resource type="Texture2D" uid="uid://bdlusa566e306" path="res://sprites/HUD/inventory/buttons/inventory-button.png" id="3_riipk"]
 [ext_resource type="LabelSettings" uid="uid://c5u832t51ewlt" path="res://Scenes/label themes/Inventory_hand.tres" id="4_7xtp4"]
 [ext_resource type="Texture2D" uid="uid://3sj8u7pfo60q" path="res://sprites/HUD/inventory/buttons/inventory-button-hover.png" id="4_8fdqk"]
+[ext_resource type="AudioStream" uid="uid://bso7x6wk3cp8i" path="res://Audio/SFX/Menu/menu_close.wav" id="4_ph8ug"]
 [ext_resource type="Texture2D" uid="uid://xemdis74yigv" path="res://sprites/HUD/inventory/buttons/stats-button.png" id="6_f4inm"]
 [ext_resource type="Texture2D" uid="uid://jg2xy3mkbidi" path="res://sprites/HUD/inventory/buttons/stats-button-hover.png" id="7_3btgd"]
 [ext_resource type="Texture2D" uid="uid://d4ksqqqj2x2se" path="res://sprites/HUD/inventory/buttons/settings-button.png" id="9_wrabq"]
@@ -25,7 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://76xipu43624j" path="res://sprites/HUD/inventory/buttons/armor-legs-button-hover.png" id="24_7qv6u"]
 [ext_resource type="Texture2D" uid="uid://dhky2u6sekqy1" path="res://sprites/HUD/inventory/consumable-small-sheet.png" id="24_8up1n"]
 
-[node name="PauseMenu" type="Control" node_paths=PackedStringArray("hand_debug", "hand_weapons", "hand_armor", "hand_quick_items", "label_debug", "label_weapons", "label_armor", "label_quick", "Q1Sprite", "Q2Sprite", "Q3Sprite", "Q4Sprite", "Q5Sprite", "Q6Sprite")]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("hand_debug", "hand_weapons", "hand_armor", "hand_quick_items", "label_debug", "label_weapons", "label_armor", "label_quick", "Q1Sprite", "Q2Sprite", "Q3Sprite", "Q4Sprite", "Q5Sprite", "Q6Sprite", "a_open", "a_close", "a_move")]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 19.0
@@ -45,6 +48,24 @@ Q3Sprite = NodePath("inventory/QuickItems/Q3/Q3Sprite")
 Q4Sprite = NodePath("inventory/QuickItems/Q4/Q4Sprite")
 Q5Sprite = NodePath("inventory/QuickItems/Q5/Q5Sprite")
 Q6Sprite = NodePath("inventory/QuickItems/Q6/Q6Sprite")
+a_open = NodePath("open")
+a_close = NodePath("close")
+a_move = NodePath("MOVE")
+
+[node name="MOVE" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_lymfi")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="open" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_oyixr")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="close" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ph8ug")
+volume_db = -20.0
+bus = &"SFX"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0

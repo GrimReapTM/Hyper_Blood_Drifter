@@ -3,6 +3,9 @@ extends StaticBody2D
 @export var ID = "blood"
 @export var player: CharacterBody2D
 
+@export var a_laugh: AudioStreamPlayer2D
+@export var a_cry: AudioStreamPlayer2D
+
 var activated = false
 var isActivating = false
 var inTrigger = false
@@ -11,6 +14,7 @@ signal open
 signal disable
 
 func _ready():
+	a_cry.play()
 	disable.connect(close)
 
 func _on_interaction_area_entered(area):
@@ -38,6 +42,7 @@ func interact():
 		player.paused = true
 		activated = true
 		open.emit()
+		a_laugh.play()
 
 func close():
 	if activated:

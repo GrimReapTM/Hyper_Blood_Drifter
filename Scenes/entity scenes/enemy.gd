@@ -9,6 +9,7 @@ const bullet = preload("res://Scenes/entity scenes/bullet.tscn")
 @export var speed = 300
 @onready var raycast = $vision_raycast
 
+@export var sfx: Node2D
 @export var fireParticles: AnimatedSprite2D
 @export var default_pos: Marker2D
 @onready var nav_agent = $CollisionShape2D/navigation_agent as NavigationAgent2D
@@ -35,6 +36,10 @@ func _on_hurtbox_area_entered(area):
 				damaged = true
 			$damagedTimer.start()
 			hp -= g.melee_damage
+			sfx.damage("damage")
+			if staggered:
+				hp -= g.melee_damage * 2
+				staggered = false
 			if g.fire_damage == true:
 				fireParticles.visible = true
 				$Fire.start()
@@ -62,6 +67,7 @@ func _on_hurtbox_area_entered(area):
 
 
 	if hp <= 0:
+		sfx.damage("kill")
 		queue_free()
 		g.score += 52
 		g.b_echoes += 52
@@ -142,6 +148,7 @@ func attack_melee(index):
 	else:
 		animations.play("attack_" + attackAnimations[index])
 		combo = true
+	sfx.action("swing")
 	$combo.stop()
 	global_index = index
 	animPlay = true
@@ -180,6 +187,7 @@ func _on_combo_timeout():
 func attack_ranged(index):
 	# animation
 	animations.play("ranged_" + attackAnimations[index])
+	sfx.gun("shoot")
 	animPlay = true
 	$rangedTimer.start()
 	await animations.animation_finished
@@ -394,8 +402,15 @@ func long_range():
 			target = g.position
 			rounds = 2
 
-func _on_stagger_body_entered(body):
-	pass # Replace with function body
+
+func _on_stagger_area_entered(area):
+	if area.name == "bullet_hitbox":
+		staggered = true
+		$staggerTimer.start()
+
+func _on_stagger_timer_timeout():
+	staggered = false
+	$staggerTimer.stop()
 
 func _process(delta):
 	if raycast.enabled:

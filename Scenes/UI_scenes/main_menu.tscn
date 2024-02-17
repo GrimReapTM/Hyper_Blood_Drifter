@@ -1,10 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://ftxp4shodc50"]
+[gd_scene load_steps=18 format=3 uid="uid://ftxp4shodc50"]
 
 [ext_resource type="Script" path="res://Scenes/UI_scenes/main_menu.gd" id="1_oemx4"]
 [ext_resource type="Texture2D" uid="uid://k0iffxp6fqkw" path="res://sprites/HUD/pause_buttons/main_menu_button_hover.png" id="1_urdqv"]
 [ext_resource type="FontFile" uid="uid://cflm7ac265lwi" path="res://fonts/pixelgeorgia.ttf" id="3_e1s5g"]
 [ext_resource type="Texture2D" uid="uid://bkm55hfckjxon" path="res://sprites/HUD/main menu/main menu-Sheet.png" id="5_pbmkf"]
+[ext_resource type="AudioStream" uid="uid://hug8v3u8o4lv" path="res://Audio/SFX/Menu/CURSOL_MOVE.wav" id="6_qkybr"]
+[ext_resource type="AudioStream" uid="uid://sqje2q0djoo1" path="res://Audio/SFX/Menu/CURSOL_SELECT.wav" id="7_4ewre"]
 [ext_resource type="Script" path="res://Scenes/UI_scenes/Title.gd" id="7_mb7mv"]
+[ext_resource type="AudioStream" uid="uid://cvl4xunh1pyk8" path="res://Audio/SFX/Menu/CURSOL_OK.wav" id="8_j8wmi"]
+[ext_resource type="AudioStream" uid="uid://caxvwsanlkksl" path="res://Audio/SFX/Menu/CURSOL_CANCEL.wav" id="9_xpg1h"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_318ya"]
 font = ExtResource("3_e1s5g")
@@ -102,11 +106,15 @@ font_color = Color(0.917647, 0.823529, 0.760784, 1)
 shadow_size = 7
 shadow_offset = Vector2(2, 1)
 
-[node name="Main_Menu" type="Control" node_paths=PackedStringArray("any_button")]
+[node name="Main_Menu" type="Control" node_paths=PackedStringArray("any_button", "a_move", "a_ok", "a_any_button", "a_cancel")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_oemx4")
 any_button = NodePath("any_button")
+a_move = NodePath("MOVE")
+a_ok = NodePath("OK")
+a_any_button = NodePath("ANYBUTTION")
+a_cancel = NodePath("CANCEL")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -181,5 +189,27 @@ scale = Vector2(0.35, 0.35)
 text = "Press Any Button"
 label_settings = SubResource("LabelSettings_isgec")
 
+[node name="MOVE" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_qkybr")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="OK" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_4ewre")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="ANYBUTTION" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_j8wmi")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="CANCEL" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_xpg1h")
+volume_db = -20.0
+bus = &"SFX"
+
+[connection signal="mouse_entered" from="buttons/play" to="." method="_on_play_mouse_entered"]
 [connection signal="pressed" from="buttons/play" to="." method="_on_play_pressed"]
+[connection signal="mouse_entered" from="buttons/quit" to="." method="_on_quit_mouse_entered"]
 [connection signal="pressed" from="buttons/quit" to="." method="_on_quit_pressed"]

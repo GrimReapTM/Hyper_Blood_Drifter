@@ -1,0 +1,228 @@
+[gd_scene load_steps=32 format=3 uid="uid://buy61le6aimhl"]
+
+[ext_resource type="Script" path="res://SFX.gd" id="1_1np7j"]
+[ext_resource type="AudioStream" uid="uid://clavn6b4wgqqm" path="res://Audio/SFX/damage/damage1.wav" id="2_rki52"]
+[ext_resource type="AudioStream" uid="uid://5dbrayyixe6q" path="res://Audio/SFX/damage/damage2.wav" id="3_pxl7e"]
+[ext_resource type="AudioStream" uid="uid://v861nevh68ug" path="res://Audio/SFX/damage/damage3.wav" id="4_s1i25"]
+[ext_resource type="AudioStream" uid="uid://hm074x7502tp" path="res://Audio/SFX/damage/damage_bolt.wav" id="5_w7vwy"]
+[ext_resource type="AudioStream" uid="uid://b5kxt8fwilfbn" path="res://Audio/SFX/damage/damage_fire.wav" id="6_srmvj"]
+[ext_resource type="AudioStream" uid="uid://3g5hqv3h6w7t" path="res://Audio/SFX/damage/kill1.wav" id="7_xvuot"]
+[ext_resource type="AudioStream" uid="uid://bla6djhinfnxi" path="res://Audio/SFX/damage/kill2.wav" id="8_5j7rr"]
+[ext_resource type="AudioStream" uid="uid://bnulvku0r0t42" path="res://Audio/SFX/damage/stagger.wav" id="9_wblpq"]
+[ext_resource type="AudioStream" uid="uid://cqctmk7bgskl4" path="res://Audio/SFX/effects/burning.wav" id="10_0fg4e"]
+[ext_resource type="AudioStream" uid="uid://b4qq3vcr2cf8i" path="res://Audio/SFX/effects/dead.wav" id="11_3tjq1"]
+[ext_resource type="AudioStream" uid="uid://cxusm71fd7p7h" path="res://Audio/SFX/effects/warp.wav" id="12_vwksy"]
+[ext_resource type="AudioStream" uid="uid://3mhqcych4euv" path="res://Audio/SFX/ground/walk_dirt_1.wav" id="13_dl7nx"]
+[ext_resource type="AudioStream" uid="uid://d3sl0ge4sbv86" path="res://Audio/SFX/ground/walk_dirt_2.wav" id="14_enlk7"]
+[ext_resource type="AudioStream" uid="uid://bon870s61w71r" path="res://Audio/SFX/ground/walk_dirt_3.wav" id="15_3hooh"]
+[ext_resource type="AudioStream" uid="uid://cjmetqpy7touk" path="res://Audio/SFX/ground/walk_mud_1.wav" id="16_7uhgp"]
+[ext_resource type="AudioStream" uid="uid://bujtuyco5sbh7" path="res://Audio/SFX/ground/walk_mud_2.wav" id="17_djy53"]
+[ext_resource type="AudioStream" uid="uid://cyscp7rufv4xn" path="res://Audio/SFX/ground/walk_mud_3.wav" id="18_uj1pd"]
+[ext_resource type="AudioStream" uid="uid://ckwu50gjxbvcl" path="res://Audio/SFX/gun/gun_reload.wav" id="19_5crmm"]
+[ext_resource type="AudioStream" uid="uid://chxy2msjbr8ax" path="res://Audio/SFX/gun/gun_shoot.wav" id="20_ev6t7"]
+[ext_resource type="AudioStream" uid="uid://bab42kq8u4xj2" path="res://Audio/SFX/items/blood_dew.wav" id="21_nsst8"]
+[ext_resource type="AudioStream" uid="uid://cjglcmbhwnyy1" path="res://Audio/SFX/items/bolt_paper.wav" id="22_0omje"]
+[ext_resource type="AudioStream" uid="uid://bygakj7qcjyjx" path="res://Audio/SFX/items/finger.wav" id="23_vn5io"]
+[ext_resource type="AudioStream" uid="uid://c80rmn446h8mc" path="res://Audio/SFX/items/heal.wav" id="24_enodl"]
+[ext_resource type="AudioStream" uid="uid://ccnvwdiobcn42" path="res://Audio/SFX/items/ITEMGET.wav" id="25_n48wm"]
+[ext_resource type="AudioStream" uid="uid://jjc6l6yjva5x" path="res://Audio/SFX/items/madmans_knowledge.wav" id="26_dgxi3"]
+[ext_resource type="AudioStream" uid="uid://c7gw3m052v02w" path="res://Audio/SFX/items/use.wav" id="27_s6byk"]
+[ext_resource type="AudioStream" uid="uid://wc2hur2coyuk" path="res://Audio/SFX/weapon/swing1.wav" id="28_rcmnh"]
+[ext_resource type="AudioStream" uid="uid://3612736kpev6" path="res://Audio/SFX/weapon/swing2.wav" id="29_d753f"]
+[ext_resource type="AudioStream" uid="uid://dbqn58ald4ert" path="res://Audio/SFX/weapon/swing3.wav" id="30_fxhk3"]
+[ext_resource type="AudioStream" uid="uid://coq3arobhpqwr" path="res://Audio/SFX/weapon/throw.wav" id="31_qdawy"]
+
+[node name="SFX" type="Node2D" node_paths=PackedStringArray("damage1", "damage2", "damage3", "damage_bolt", "damage_fire", "kill1", "kill2", "stagger", "burn", "dead", "warp", "dirt1", "dirt2", "dirt3", "mud1", "mud2", "mud3", "reload", "shoot", "cold_blood_dew", "bolt_paper", "finger", "heal", "get_item", "madmans_knowledge", "use_item", "swing1", "swing2", "swing3", "throw")]
+script = ExtResource("1_1np7j")
+damage1 = NodePath("Damage/d1")
+damage2 = NodePath("Damage/d2")
+damage3 = NodePath("Damage/d3")
+damage_bolt = NodePath("Damage/db")
+damage_fire = NodePath("Damage/df")
+kill1 = NodePath("Damage/k1")
+kill2 = NodePath("Damage/k2")
+stagger = NodePath("Damage/stg")
+burn = NodePath("Effects/burn")
+dead = NodePath("Effects/dead")
+warp = NodePath("Effects/warp")
+dirt1 = NodePath("Ground/dt1")
+dirt2 = NodePath("Ground/dt2")
+dirt3 = NodePath("Ground/dt3")
+mud1 = NodePath("Ground/md1")
+mud2 = NodePath("Ground/md2")
+mud3 = NodePath("Ground/md3")
+reload = NodePath("Gun/rel")
+shoot = NodePath("Gun/sho")
+cold_blood_dew = NodePath("Items/b_dew")
+bolt_paper = NodePath("Items/bolt")
+finger = NodePath("Items/finger")
+heal = NodePath("Items/heal")
+get_item = NodePath("Items/get")
+madmans_knowledge = NodePath("Items/mad")
+use_item = NodePath("Items/use")
+swing1 = NodePath("Action/sw1")
+swing2 = NodePath("Action/sw2")
+swing3 = NodePath("Action/sw3")
+throw = NodePath("Action/thr")
+
+[node name="Damage" type="Node2D" parent="."]
+
+[node name="d1" type="AudioStreamPlayer2D" parent="Damage"]
+stream = ExtResource("2_rki52")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="d2" type="AudioStreamPlayer2D" parent="Damage"]
+stream = ExtResource("3_pxl7e")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="d3" type="AudioStreamPlayer2D" parent="Damage"]
+stream = ExtResource("4_s1i25")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="db" type="AudioStreamPlayer2D" parent="Damage"]
+stream = ExtResource("5_w7vwy")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="df" type="AudioStreamPlayer2D" parent="Damage"]
+stream = ExtResource("6_srmvj")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="k1" type="AudioStreamPlayer2D" parent="Damage"]
+stream = ExtResource("7_xvuot")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="k2" type="AudioStreamPlayer2D" parent="Damage"]
+stream = ExtResource("8_5j7rr")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="stg" type="AudioStreamPlayer2D" parent="Damage"]
+stream = ExtResource("9_wblpq")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="Effects" type="Node2D" parent="."]
+
+[node name="burn" type="AudioStreamPlayer2D" parent="Effects"]
+stream = ExtResource("10_0fg4e")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="dead" type="AudioStreamPlayer2D" parent="Effects"]
+stream = ExtResource("11_3tjq1")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="warp" type="AudioStreamPlayer2D" parent="Effects"]
+stream = ExtResource("12_vwksy")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="Ground" type="Node2D" parent="."]
+
+[node name="dt1" type="AudioStreamPlayer2D" parent="Ground"]
+stream = ExtResource("13_dl7nx")
+volume_db = -35.0
+bus = &"SFX"
+
+[node name="dt2" type="AudioStreamPlayer2D" parent="Ground"]
+stream = ExtResource("14_enlk7")
+volume_db = -35.0
+bus = &"SFX"
+
+[node name="dt3" type="AudioStreamPlayer2D" parent="Ground"]
+stream = ExtResource("15_3hooh")
+volume_db = -35.0
+bus = &"SFX"
+
+[node name="md1" type="AudioStreamPlayer2D" parent="Ground"]
+stream = ExtResource("16_7uhgp")
+volume_db = -35.0
+bus = &"SFX"
+
+[node name="md2" type="AudioStreamPlayer2D" parent="Ground"]
+stream = ExtResource("17_djy53")
+volume_db = -35.0
+bus = &"SFX"
+
+[node name="md3" type="AudioStreamPlayer2D" parent="Ground"]
+stream = ExtResource("18_uj1pd")
+volume_db = -35.0
+bus = &"SFX"
+
+[node name="Gun" type="Node2D" parent="."]
+
+[node name="rel" type="AudioStreamPlayer2D" parent="Gun"]
+stream = ExtResource("19_5crmm")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="sho" type="AudioStreamPlayer2D" parent="Gun"]
+stream = ExtResource("20_ev6t7")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="b_dew" type="AudioStreamPlayer2D" parent="Items"]
+stream = ExtResource("21_nsst8")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="bolt" type="AudioStreamPlayer2D" parent="Items"]
+stream = ExtResource("22_0omje")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="finger" type="AudioStreamPlayer2D" parent="Items"]
+stream = ExtResource("23_vn5io")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="heal" type="AudioStreamPlayer2D" parent="Items"]
+stream = ExtResource("24_enodl")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="get" type="AudioStreamPlayer2D" parent="Items"]
+stream = ExtResource("25_n48wm")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="mad" type="AudioStreamPlayer2D" parent="Items"]
+stream = ExtResource("26_dgxi3")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="use" type="AudioStreamPlayer2D" parent="Items"]
+stream = ExtResource("27_s6byk")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="Action" type="Node2D" parent="."]
+
+[node name="sw1" type="AudioStreamPlayer2D" parent="Action"]
+stream = ExtResource("28_rcmnh")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="sw2" type="AudioStreamPlayer2D" parent="Action"]
+stream = ExtResource("29_d753f")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="sw3" type="AudioStreamPlayer2D" parent="Action"]
+stream = ExtResource("30_fxhk3")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="thr" type="AudioStreamPlayer2D" parent="Action"]
+stream = ExtResource("31_qdawy")
+volume_db = -20.0
+bus = &"SFX"

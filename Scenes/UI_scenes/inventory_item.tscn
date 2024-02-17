@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://1unf66fmmj27"]
+[gd_scene load_steps=10 format=3 uid="uid://1unf66fmmj27"]
 
 [ext_resource type="Texture2D" uid="uid://cdagsl4j7tie5" path="res://sprites/HUD/inventory/consumables-Sheet.png" id="1_2w271"]
 [ext_resource type="Script" path="res://Scenes/UI_scenes/inventory_item.gd" id="1_s5hrp"]
 [ext_resource type="FontFile" uid="uid://cflm7ac265lwi" path="res://fonts/pixelgeorgia.ttf" id="2_5eid7"]
 [ext_resource type="LabelSettings" uid="uid://crg3mknke8m6b" path="res://Scenes/label themes/HUD.tres" id="3_driq3"]
 [ext_resource type="Texture2D" uid="uid://byulu31xs7hcw" path="res://sprites/HUD/inventory/hunters_mark.png" id="5_3iisp"]
+[ext_resource type="AudioStream" uid="uid://sqje2q0djoo1" path="res://Audio/SFX/Menu/CURSOL_SELECT.wav" id="6_64ani"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_m57no"]
 font = ExtResource("2_5eid7")
@@ -26,7 +27,7 @@ font_size = 70
 shadow_size = 7
 shadow_offset = Vector2(2, 1)
 
-[node name="Inventory_item" type="Control" node_paths=PackedStringArray("Sprite", "Amount", "Description", "Name", "button", "Price", "currency")]
+[node name="Inventory_item" type="Control" node_paths=PackedStringArray("Sprite", "Amount", "Description", "Name", "button", "Price", "currency", "a_select")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,6 +44,7 @@ Name = NodePath("name")
 button = NodePath("Button")
 Price = NodePath("price")
 currency = NodePath("currency_BE")
+a_select = NodePath("Select")
 metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -109,5 +111,10 @@ visible = false
 position = Vector2(754, 21)
 scale = Vector2(3, 3)
 texture = ExtResource("5_3iisp")
+
+[node name="Select" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_64ani")
+volume_db = -20.0
+bus = &"SFX"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

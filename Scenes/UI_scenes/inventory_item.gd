@@ -9,6 +9,9 @@ extends Control
 @export var currency: Sprite2D
 @export var ID = ""
 @export var type = "inventory"
+
+@export var a_select: AudioStreamPlayer
+
 var price = 0
 
 func _ready():
@@ -53,6 +56,7 @@ func _on_button_pressed():
 			g.old_slot = index
 			g.changeSprite.emit()
 		g.showHud.emit()
+		a_select.play()
 	else:
 		if g.b_echoes - price >= 0:
 			g.b_echoes -= price
@@ -65,3 +69,4 @@ func _on_button_pressed():
 			g.next_item = ID
 			g.addItem.emit()
 			g.beChanged.emit()
+			a_select.play()

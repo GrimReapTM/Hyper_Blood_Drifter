@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dkcjy0yklpqk2"]
+[gd_scene load_steps=14 format=3 uid="uid://dkcjy0yklpqk2"]
 
 [ext_resource type="Script" path="res://Scenes/entity scenes/bath_messengers.gd" id="1_6kqyc"]
 [ext_resource type="Texture2D" uid="uid://datij8q1h6lbk" path="res://sprites/entities/bath messengers-Sheet.png" id="1_w7y7i"]
 [ext_resource type="PackedScene" uid="uid://co5ia265a1f5q" path="res://Scenes/entity scenes/e.tscn" id="2_te6si"]
+[ext_resource type="AudioStream" uid="uid://blmo3c0hsq40s" path="res://Audio/SFX/messenger/sprj_messenger_laugh.wav" id="4_uf5p2"]
+[ext_resource type="AudioStream" uid="uid://chge5ivwehodn" path="res://Audio/SFX/messenger/sprj_haka_messenger_loop.wav" id="5_1ks55"]
 
 [sub_resource type="Animation" id="Animation_vov6h"]
 length = 0.001
@@ -102,8 +104,10 @@ size = Vector2(80, 52)
 [sub_resource type="CircleShape2D" id="CircleShape2D_epog6"]
 radius = 177.003
 
-[node name="StaticBody2D" type="StaticBody2D"]
+[node name="StaticBody2D" type="StaticBody2D" node_paths=PackedStringArray("a_laugh", "a_cry")]
 script = ExtResource("1_6kqyc")
+a_laugh = NodePath("Laugh")
+a_cry = NodePath("Cry")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -128,6 +132,17 @@ shape = SubResource("CircleShape2D_epog6")
 
 [node name="E" parent="." instance=ExtResource("2_te6si")]
 position = Vector2(0, -120)
+
+[node name="Laugh" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_uf5p2")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="Cry" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_1ks55")
+volume_db = -25.0
+autoplay = true
+bus = &"SFX"
 
 [connection signal="area_entered" from="interaction" to="." method="_on_interaction_area_entered"]
 [connection signal="area_exited" from="interaction" to="." method="_on_interaction_area_exited"]

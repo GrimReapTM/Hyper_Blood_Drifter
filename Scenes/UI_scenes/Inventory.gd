@@ -5,6 +5,8 @@ const Item = preload("res://Scenes/UI_scenes/inventory_item.tscn")
 @export var player: CharacterBody2D
 @export var Paused: Control
 
+@export var a_close: AudioStreamPlayer
+
 var inventory = []
 var child_inventory = []
 
@@ -41,6 +43,7 @@ func add_item(item):
 
 func close():
 	if visible:
+		a_close.play()
 		visible = false
 		Paused.visible = true
 		player.HUD.visible = true
