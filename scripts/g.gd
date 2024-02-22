@@ -36,7 +36,7 @@ signal openShop
 # player
 var position
 var fire_damage
-var b_echoes = 727
+var b_echoes = 7270
 signal beChanged
 var insight = 0
 signal iChanged
@@ -44,6 +44,15 @@ var hp
 signal hpChanged
 var stamina
 signal stChanged
+
+#Stats
+var Level = 1
+
+var Vitality = 10
+var Endurance = 10
+var Strength = 10
+var Bloodtinge = 10
+
 
 
 
@@ -95,7 +104,7 @@ func get_item(parameter, action):
 			price = 200
 		"hunters_mark":
 			item_name = "Bold Hunter's Mark"
-			item_description = "Allows you to reawaken at a lamp without losing your Blood Echoes."
+			item_description = "Allows you to reawaken at a lamp without losing your\nBlood Echoes."
 			item_frame = 5
 			price = 400
 		"bolt_paper":

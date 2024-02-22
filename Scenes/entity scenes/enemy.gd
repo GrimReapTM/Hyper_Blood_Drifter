@@ -81,8 +81,6 @@ func _on_vision_body_entered(body):
 	if body.name == "Player" and not aggro:
 		raycast.enabled = true
 
-
-
 func _on_vision_body_exited(body):
 	if body.name == "Player":
 		raycast.enabled = false

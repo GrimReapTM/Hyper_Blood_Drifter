@@ -15,6 +15,8 @@ const effect_scene = preload("res://Scenes/UI_scenes/status_effect.tscn")
 @export var beastBloodParticles: AnimatedSprite2D
 @export var pauseMenu: Control
 @export var HUD: Node2D
+@export var HUD_up_left: Node2D
+@export var HUD_up_right: Node2D
 @export var StatusEffectContainer: HBoxContainer
 
 var paused = false

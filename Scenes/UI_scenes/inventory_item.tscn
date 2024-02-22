@@ -1,16 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://1unf66fmmj27"]
+[gd_scene load_steps=11 format=3 uid="uid://1unf66fmmj27"]
 
 [ext_resource type="Texture2D" uid="uid://cdagsl4j7tie5" path="res://sprites/HUD/inventory/consumables-Sheet.png" id="1_2w271"]
 [ext_resource type="Script" path="res://Scenes/UI_scenes/inventory_item.gd" id="1_s5hrp"]
 [ext_resource type="FontFile" uid="uid://cflm7ac265lwi" path="res://fonts/pixelgeorgia.ttf" id="2_5eid7"]
+[ext_resource type="Texture2D" uid="uid://drpl7l0mvkicg" path="res://sprites/HUD/inventory/inventory_item.png" id="2_fdmdb"]
 [ext_resource type="LabelSettings" uid="uid://crg3mknke8m6b" path="res://Scenes/label themes/HUD.tres" id="3_driq3"]
 [ext_resource type="Texture2D" uid="uid://byulu31xs7hcw" path="res://sprites/HUD/inventory/hunters_mark.png" id="5_3iisp"]
 [ext_resource type="AudioStream" uid="uid://sqje2q0djoo1" path="res://Audio/SFX/Menu/CURSOL_SELECT.wav" id="6_64ani"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_m57no"]
+[sub_resource type="LabelSettings" id="LabelSettings_nbpmx"]
 font = ExtResource("2_5eid7")
 font_size = 70
-font_color = Color(0.6, 0.588235, 0.180392, 1)
+font_color = Color(0.784314, 0.768627, 0.376471, 1)
 shadow_size = 7
 shadow_offset = Vector2(2, 1)
 
@@ -47,24 +48,23 @@ currency = NodePath("currency_BE")
 a_select = NodePath("Select")
 metadata/_edit_lock_ = true
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_right = 779.0
-offset_bottom = 102.0
-color = Color(0, 0, 0, 0.745098)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(333, 51)
+scale = Vector2(4, 4)
+texture = ExtResource("2_fdmdb")
 
 [node name="name" type="Label" parent="."]
 layout_mode = 0
-offset_left = 94.0
-offset_top = 10.0
-offset_right = 1069.0
-offset_bottom = 80.0
+offset_left = 122.0
+offset_top = 9.0
+offset_right = 1097.0
+offset_bottom = 79.0
 scale = Vector2(0.35, 0.35)
 text = "Item"
-label_settings = SubResource("LabelSettings_m57no")
+label_settings = SubResource("LabelSettings_nbpmx")
 
 [node name="item" type="Sprite2D" parent="."]
-position = Vector2(40, 41)
+position = Vector2(51, 51)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("1_2w271")
 hframes = 13
@@ -81,18 +81,20 @@ label_settings = SubResource("LabelSettings_thnla")
 
 [node name="description" type="Label" parent="."]
 layout_mode = 0
-offset_left = 121.0
-offset_top = 51.0
-offset_right = 1456.0
-offset_bottom = 121.0
-scale = Vector2(0.25, 0.25)
+offset_left = 115.0
+offset_top = 58.0
+offset_right = 1450.0
+offset_bottom = 128.0
+scale = Vector2(0.22, 0.22)
 text = "meow meow meow meow mewo"
 label_settings = ExtResource("3_driq3")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_right = 781.0
-offset_bottom = 103.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 662.0
+offset_bottom = 98.0
 disabled = true
 flat = true
 

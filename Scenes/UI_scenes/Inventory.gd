@@ -5,10 +5,29 @@ const Item = preload("res://Scenes/UI_scenes/inventory_item.tscn")
 @export var player: CharacterBody2D
 @export var Paused: Control
 
+@export var InvQuick: Label
 @export var a_close: AudioStreamPlayer
+
+@export var Lv: Label
+@export var Be: Label
+@export var In: Label
+@export var Vit: Label
+@export var End: Label
+@export var Str: Label
+@export var Bld: Label
 
 var inventory = []
 var child_inventory = []
+
+func update():
+	Lv.text = str(g.Level)
+	Be.text = str(g.b_echoes)
+	In.text = str(g.insight)
+	Vit.text = str(g.Vitality)
+	End.text = str(g.Endurance)
+	Str.text = str(g.Strength)
+	Bld.text = str(g.Bloodtinge)
+
 
 func _ready():
 	player.pause_pressed.connect(close)

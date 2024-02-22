@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfnicevbagtf4"]
+
+[ext_resource type="Script" path="res://Scenes/UI_scenes/system.gd" id="1_mux74"]
+
+[node name="System" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mux74")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1281.0
+offset_bottom = 723.0
+color = Color(0, 0, 0, 0.745098)
+metadata/_edit_lock_ = true
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 597.0
+offset_top = 511.0
+offset_right = 654.0
+offset_bottom = 546.0
+scale = Vector2(2, 2)
+text = "Quit"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 454.0
+offset_top = 115.0
+offset_right = 651.0
+offset_bottom = 141.0
+scale = Vector2(2, 2)
+text = "System nastavení nevim"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

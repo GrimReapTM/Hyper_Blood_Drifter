@@ -305,6 +305,8 @@ func add_quick(slot):
 				add_quick(slot)
 			j += 1
 		visible = false
+		Inventory.InvQuick.text = "Quick Items - " + str(slot)
+		Inventory.update()
 		Inventory.visible = true
 		hud.visible = false
 		g.next_slot = slot
@@ -330,6 +332,8 @@ func null_sprite():
 func _on_inventory_button_pressed():
 	a_open.play()
 	visible = false
+	Inventory.InvQuick.text = "Inventory"
+	Inventory.update()
 	Inventory.visible = true
 	player.HUD.visible = false
 

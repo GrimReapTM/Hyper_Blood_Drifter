@@ -6,10 +6,10 @@
 
 [node name="Area" instance=ExtResource("1_kvvk4")]
 
-[node name="TileMap" parent="." index="0"]
+[node name="TileMap" parent="." index="1"]
 layer_0/tile_data = PackedInt32Array(917525, 524290, 8, 2097187, 0, 0, 1, 0, 0)
 
-[node name="Player" parent="." index="1"]
+[node name="Player" parent="." index="2"]
 position = Vector2(1424, 1468)
 
 [node name="current_item" parent="Player/HUD_canvas/HUD/up_left/container" index="0"]
@@ -33,12 +33,12 @@ metadata/_edit_use_anchors_ = true
 [node name="b_echoes" parent="Player/HUD_canvas/HUD/up_right/insight" index="1"]
 metadata/_edit_use_anchors_ = true
 
-[node name="Shop" parent="pause" index="1" node_paths=PackedStringArray("messengers")]
-messengers = NodePath("../../Bath_messenger")
-
 [node name="Bath_messenger" parent="." index="3" node_paths=PackedStringArray("player") instance=ExtResource("2_0n4ii")]
 position = Vector2(890, 1372)
 player = NodePath("../Player")
 
 [node name="lamp" parent="." index="4" instance=ExtResource("3_4eu3t")]
 position = Vector2(1335, 1339)
+
+[node name="Shop" parent="pause" index="1" node_paths=PackedStringArray("messengers")]
+messengers = NodePath("../../Bath_messenger")
