@@ -578,7 +578,7 @@ position = Vector2(1120, 67)
 scale = Vector2(4, 4)
 texture = ExtResource("22_gxxrj")
 
-[node name="insight" type="Label" parent="Player/HUD_canvas/HUD/up_right/insight" node_paths=PackedStringArray("player")]
+[node name="insight" type="Label" parent="Player/HUD_canvas/HUD/up_right/insight"]
 offset_left = 1.75
 offset_top = 3.5
 offset_right = 260.75
@@ -588,9 +588,8 @@ text = "0"
 label_settings = SubResource("LabelSettings_cjyqp")
 horizontal_alignment = 2
 script = ExtResource("23_hvg7x")
-player = NodePath("../../../../..")
 
-[node name="b_echoes" type="Label" parent="Player/HUD_canvas/HUD/up_right/insight" node_paths=PackedStringArray("player")]
+[node name="b_echoes" type="Label" parent="Player/HUD_canvas/HUD/up_right/insight"]
 offset_left = -0.5
 offset_top = -9.25
 offset_right = 288.5
@@ -600,7 +599,6 @@ text = "727"
 label_settings = SubResource("LabelSettings_nk24u")
 horizontal_alignment = 2
 script = ExtResource("24_mwgwg")
-player = NodePath("../../../../..")
 
 [node name="pause" type="CanvasLayer" parent="."]
 

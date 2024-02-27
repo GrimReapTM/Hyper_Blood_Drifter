@@ -19,7 +19,12 @@ var old_slot = null
 var player_position = Vector2()
 
 var vials = 20
+var max_vials
+signal vialsChanged
+
 var bullets = 20
+var max_bullets
+signal bulletsChanged
 
 var next_item = ""
 
@@ -38,12 +43,19 @@ var position
 var fire_damage
 var b_echoes = 7270
 signal beChanged
+signal maxvialsChanged
+signal maxbulletsChanged
 var insight = 0
 signal iChanged
 var hp
+var maxhp
 signal hpChanged
+signal maxhpChanged
 var stamina
+var maxst
 signal stChanged
+signal maxstChanged
+
 
 #Stats
 var Level = 1

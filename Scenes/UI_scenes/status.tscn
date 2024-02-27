@@ -10,3 +10,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bo287")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1287.0
+offset_bottom = 724.0
+color = Color(0.0470588, 0.0470588, 0.0470588, 0.933333)

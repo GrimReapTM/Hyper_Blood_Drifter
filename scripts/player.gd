@@ -38,6 +38,7 @@ var paused = false
 @export var b_bullets = 0
 @export var maxBullets = 20
 
+
 signal healthChanged
 signal bulletsChanged
 signal attacked

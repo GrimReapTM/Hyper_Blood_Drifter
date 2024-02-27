@@ -67,7 +67,7 @@ label_settings = SubResource("LabelSettings_nbpmx")
 position = Vector2(51, 51)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("1_2w271")
-hframes = 13
+hframes = 15
 frame = 1
 
 [node name="amount" type="Label" parent="."]

@@ -10,6 +10,9 @@ extends Control
 @export var ID = ""
 @export var type = "inventory"
 
+var vial = false
+var bullet = false
+
 @export var a_select: AudioStreamPlayer
 
 var price = 0
@@ -61,12 +64,17 @@ func _on_button_pressed():
 		if g.b_echoes - price >= 0:
 			g.b_echoes -= price
 			g.beChanged.emit()
-			if ID in g.inventory:
-				g.inventory[ID] += 1
-			else:
-				g.inventory[ID] = 1
-			Amount.text = str(g.inventory[ID])
-			g.next_item = ID
-			g.addItem.emit()
-			g.beChanged.emit()
-			a_select.play()
+			if not vial and not bullet:
+				if ID in g.inventory:
+					g.inventory[ID] += 1
+				else:
+					g.inventory[ID] = 1
+				Amount.text = str(g.inventory[ID])
+				g.next_item = ID
+				g.addItem.emit()
+				g.beChanged.emit()
+				a_select.play()
+			if bullet:
+				if g.bullets + 1 <= g.max_bullets:
+					g.bullets += 1
+					g.bullet

@@ -1,10 +1,8 @@
 extends Label
 
-@export var player: CharacterBody2D
-
 func _ready():
-	player.b_echoesChanged.connect(update)
+	g.b_echoesChanged.connect(update)
 	update()
 
 func update():
-	text = str(player.b_echoes)
+	text = str(g.b_echoes)
