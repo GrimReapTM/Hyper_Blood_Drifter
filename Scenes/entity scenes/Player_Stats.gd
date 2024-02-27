@@ -1,6 +1,6 @@
 extends Node
 
-@export var player: CharacterBody2D
+'''@export var player: CharacterBody2D
 
 
 func _ready():
@@ -50,3 +50,4 @@ func _process(_delta):
 	g.insight = player.insight
 	g.hp = player.healthPoints
 	g.stamina = player.stamina
+'''

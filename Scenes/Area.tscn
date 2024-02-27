@@ -436,7 +436,7 @@ scale = Vector2(4, 4)
 texture = ExtResource("6_hxxsu")
 hframes = 6
 
-[node name="Blood_vials" type="Label" parent="Player/HUD_canvas/HUD/up_left/vials" node_paths=PackedStringArray("player", "vials")]
+[node name="Blood_vials" type="Label" parent="Player/HUD_canvas/HUD/up_left/vials" node_paths=PackedStringArray("vials")]
 offset_left = 5.75
 offset_top = 1.0
 offset_right = 103.75
@@ -445,7 +445,6 @@ scale = Vector2(0.1, 0.1)
 text = "20"
 label_settings = SubResource("LabelSettings_5qghj")
 script = ExtResource("13_cxkx6")
-player = NodePath("../../../../..")
 vials = NodePath("..")
 metadata/_edit_use_anchors_ = true
 
@@ -455,7 +454,7 @@ scale = Vector2(4, 4)
 texture = ExtResource("18_ri28g")
 hframes = 2
 
-[node name="Bullets" type="Label" parent="Player/HUD_canvas/HUD/up_left/bullets" node_paths=PackedStringArray("player")]
+[node name="Bullets" type="Label" parent="Player/HUD_canvas/HUD/up_left/bullets"]
 offset_left = 6.0
 offset_top = -0.25
 offset_right = 100.0
@@ -465,7 +464,6 @@ theme_override_font_sizes/font_size = 35
 text = "20"
 label_settings = SubResource("LabelSettings_rf8n4")
 script = ExtResource("6_2yv2p")
-player = NodePath("../../../../..")
 metadata/_edit_use_anchors_ = true
 
 [node name="Blood_bullets" type="Label" parent="Player/HUD_canvas/HUD/up_left/bullets" node_paths=PackedStringArray("player", "bullets")]
@@ -531,7 +529,7 @@ rallyBar = NodePath("../RallyBar")
 deathscreen = NodePath("../../../../../pause/DeathScreen")
 sfx = NodePath("../../../../../SFX")
 
-[node name="RallyBar" type="TextureProgressBar" parent="Player/HUD_canvas/HUD/up_left" node_paths=PackedStringArray("healthBar", "player")]
+[node name="RallyBar" type="TextureProgressBar" parent="Player/HUD_canvas/HUD/up_left" node_paths=PackedStringArray("healthBar")]
 offset_left = 27.0
 offset_top = 7.0
 offset_right = 126.0
@@ -548,12 +546,11 @@ texture_under = ExtResource("7_51q1n")
 texture_progress = ExtResource("9_0ughq")
 script = ExtResource("6_77vkd")
 healthBar = NodePath("../HealthBar")
-player = NodePath("../../../..")
 
 [node name="RallyTimer" type="Timer" parent="Player/HUD_canvas/HUD/up_left/RallyBar"]
 wait_time = 0.2
 
-[node name="StaminaBar" type="TextureProgressBar" parent="Player/HUD_canvas/HUD/up_left" node_paths=PackedStringArray("player")]
+[node name="StaminaBar" type="TextureProgressBar" parent="Player/HUD_canvas/HUD/up_left"]
 offset_left = 27.0
 offset_top = 27.0
 offset_right = 89.0
@@ -569,7 +566,6 @@ stretch_margin_bottom = 8
 texture_under = ExtResource("12_i100k")
 texture_progress = ExtResource("13_ipx0o")
 script = ExtResource("14_48s20")
-player = NodePath("../../../..")
 
 [node name="up_right" type="Node2D" parent="Player/HUD_canvas/HUD"]
 

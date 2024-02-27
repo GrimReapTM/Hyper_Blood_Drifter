@@ -1,14 +1,12 @@
 extends Label
 
-@export var player: CharacterBody2D
-
 func _ready():
-	player.bulletsChanged.connect(update)
+	g.bulletsChanged.connect(update)
 	update()
 
 func update():
-	text = str(player.bullets)
-	if player.bullets == player.maxBullets:
+	text = str(g.bullets)
+	if g.bullets == g.max_bullets:
 		label_settings.font_color = Color("87b5ed")
 	else:
 		label_settings.font_color = Color("fefcf6")

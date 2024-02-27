@@ -42,6 +42,7 @@ func interact():
 		player.paused = true
 		activated = true
 		open.emit()
+		g.openShop.emit()
 		a_laugh.play()
 
 func close():

@@ -30,6 +30,7 @@ func update():
 
 
 func _ready():
+	player.pause_pressed.connect(update)
 	player.pause_pressed.connect(close)
 	if is_inventory_empty_by_any_chance():
 		for i in g.inventory:

@@ -1,10 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://dt6mxkqwcdxxv"]
+[gd_scene load_steps=10 format=3 uid="uid://dt6mxkqwcdxxv"]
 
 [ext_resource type="Script" path="res://Scenes/UI_scenes/Shop.gd" id="1_f4xth"]
 [ext_resource type="AudioStream" uid="uid://vea6ii8d70lr" path="res://Audio/SFX/Menu/menu_open.wav" id="2_1cgnw"]
+[ext_resource type="Texture2D" uid="uid://dx2w3fwbsjgyl" path="res://sprites/HUD/inventory/in-Inventory.png" id="2_3jwgc"]
+[ext_resource type="Theme" uid="uid://bumqfw5ibw0nk" path="res://Scenes/UI_scenes/Inventory.tres" id="2_x2je3"]
 [ext_resource type="AudioStream" uid="uid://bso7x6wk3cp8i" path="res://Audio/SFX/Menu/menu_close.wav" id="3_23c2s"]
+[ext_resource type="FontFile" uid="uid://cflm7ac265lwi" path="res://fonts/pixelgeorgia.ttf" id="4_aj1fp"]
+[ext_resource type="LabelSettings" uid="uid://cp635qsd3tqd2" path="res://fonts/stats.tres" id="4_clpa1"]
+[ext_resource type="LabelSettings" uid="uid://dt5s1nkwovr4v" path="res://fonts/stat_numbers.tres" id="5_i2v31"]
 
-[node name="Shop" type="Control" node_paths=PackedStringArray("container", "a_open", "a_close")]
+[sub_resource type="LabelSettings" id="LabelSettings_44iri"]
+font = ExtResource("4_aj1fp")
+font_size = 70
+font_color = Color(0.862745, 0.690196, 0.407843, 1)
+shadow_size = 7
+shadow_offset = Vector2(2, 1)
+
+[node name="Shop" type="Control" node_paths=PackedStringArray("container", "a_open", "a_close", "Lv", "Be", "In", "Vit", "End", "Str", "Bld")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -13,6 +25,13 @@ script = ExtResource("1_f4xth")
 container = NodePath("ScrollContainer/VBoxContainer")
 a_open = NodePath("open")
 a_close = NodePath("close")
+Lv = NodePath("Right_Side/Level/Level_num")
+Be = NodePath("Right_Side/BE/BloodEchoes_num")
+In = NodePath("Right_Side/IN/Insight_num")
+Vit = NodePath("Right_Side/Stats/Vitality/Vitality_num")
+End = NodePath("Right_Side/Stats/Endurance/Endurance_num")
+Str = NodePath("Right_Side/Stats/Strength/Strength_num")
+Bld = NodePath("Right_Side/Stats/Bloodtinge/Bloodtinge_num")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -21,32 +40,22 @@ offset_bottom = 721.0
 color = Color(0.0196078, 0.0196078, 0.0862745, 0.839216)
 metadata/_edit_lock_ = true
 
-[node name="vial" type="Button" parent="."]
-layout_mode = 0
-offset_left = 905.0
-offset_top = 136.0
-offset_right = 1015.0
-offset_bottom = 176.0
-text = "Blood vial"
-
-[node name="bullets" type="Button" parent="."]
-layout_mode = 0
-offset_left = 918.0
-offset_top = 217.0
-offset_right = 1004.0
-offset_bottom = 258.0
-text = "Bullets"
-
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 0
-offset_left = 79.0
-offset_top = 48.0
-offset_right = 867.0
-offset_bottom = 691.0
+offset_left = 66.0
+offset_top = 163.0
+offset_right = 780.0
+offset_bottom = 636.0
+theme = ExtResource("2_x2je3")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 105
+
+[node name="Inventory" type="Sprite2D" parent="."]
+position = Vector2(641, 361)
+scale = Vector2(4, 4)
+texture = ExtResource("2_3jwgc")
 
 [node name="open" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_1cgnw")
@@ -58,5 +67,148 @@ stream = ExtResource("3_23c2s")
 volume_db = -20.0
 bus = &"SFX"
 
-[connection signal="pressed" from="vial" to="." method="_on_vial_pressed"]
-[connection signal="pressed" from="bullets" to="." method="_on_bullets_pressed"]
+[node name="Shop" type="Label" parent="."]
+offset_left = 68.0
+offset_top = 78.0
+offset_right = 479.0
+offset_bottom = 148.0
+scale = Vector2(0.5, 0.5)
+text = "Buy"
+label_settings = SubResource("LabelSettings_44iri")
+
+[node name="Right_Side" type="Node2D" parent="."]
+
+[node name="Level" type="Node2D" parent="Right_Side"]
+
+[node name="Level" type="Label" parent="Right_Side/Level"]
+offset_left = 836.0
+offset_top = 179.0
+offset_right = 974.0
+offset_bottom = 209.0
+text = "Level"
+label_settings = ExtResource("4_clpa1")
+
+[node name="Level_num" type="Label" parent="Right_Side/Level"]
+offset_left = 1105.0
+offset_top = 180.0
+offset_right = 1211.0
+offset_bottom = 210.0
+text = "1"
+label_settings = ExtResource("5_i2v31")
+horizontal_alignment = 2
+
+[node name="BE" type="Node2D" parent="Right_Side"]
+
+[node name="BloodEchoes" type="Label" parent="Right_Side/BE"]
+offset_left = 834.0
+offset_top = 240.0
+offset_right = 1118.0
+offset_bottom = 270.0
+text = "Blood Echoes"
+label_settings = ExtResource("4_clpa1")
+
+[node name="BloodEchoes_num" type="Label" parent="Right_Side/BE"]
+offset_left = 1064.0
+offset_top = 240.0
+offset_right = 1213.0
+offset_bottom = 270.0
+text = "123"
+label_settings = ExtResource("5_i2v31")
+horizontal_alignment = 2
+
+[node name="IN" type="Node2D" parent="Right_Side"]
+
+[node name="Insight" type="Label" parent="Right_Side/IN"]
+offset_left = 834.0
+offset_top = 336.0
+offset_right = 1049.0
+offset_bottom = 366.0
+text = "Insight"
+label_settings = ExtResource("4_clpa1")
+
+[node name="Insight_num" type="Label" parent="Right_Side/IN"]
+offset_left = 1039.0
+offset_top = 335.0
+offset_right = 1212.0
+offset_bottom = 365.0
+text = "12"
+label_settings = ExtResource("5_i2v31")
+horizontal_alignment = 2
+
+[node name="Stats" type="Node2D" parent="Right_Side"]
+
+[node name="Vitality" type="Node2D" parent="Right_Side/Stats"]
+
+[node name="Vitality" type="Label" parent="Right_Side/Stats/Vitality"]
+offset_left = 834.0
+offset_top = 411.0
+offset_right = 1015.0
+offset_bottom = 444.0
+text = "Vitality"
+label_settings = ExtResource("4_clpa1")
+
+[node name="Vitality_num" type="Label" parent="Right_Side/Stats/Vitality"]
+offset_left = 1091.0
+offset_top = 409.0
+offset_right = 1212.0
+offset_bottom = 439.0
+text = "10"
+label_settings = ExtResource("5_i2v31")
+horizontal_alignment = 2
+
+[node name="Endurance" type="Node2D" parent="Right_Side/Stats"]
+
+[node name="Endurance" type="Label" parent="Right_Side/Stats/Endurance"]
+offset_left = 835.0
+offset_top = 472.0
+offset_right = 1024.0
+offset_bottom = 502.0
+text = "Endurance"
+label_settings = ExtResource("4_clpa1")
+
+[node name="Endurance_num" type="Label" parent="Right_Side/Stats/Endurance"]
+offset_left = 1172.0
+offset_top = 469.0
+offset_right = 1212.0
+offset_bottom = 499.0
+text = "5"
+label_settings = ExtResource("5_i2v31")
+horizontal_alignment = 2
+
+[node name="Strength" type="Node2D" parent="Right_Side/Stats"]
+
+[node name="Strength" type="Label" parent="Right_Side/Stats/Strength"]
+offset_left = 835.0
+offset_top = 532.0
+offset_right = 991.0
+offset_bottom = 562.0
+text = "Strength"
+label_settings = ExtResource("4_clpa1")
+
+[node name="Strength_num" type="Label" parent="Right_Side/Stats/Strength"]
+offset_left = 1171.0
+offset_top = 528.0
+offset_right = 1211.0
+offset_bottom = 558.0
+text = "10"
+label_settings = ExtResource("5_i2v31")
+horizontal_alignment = 2
+
+[node name="Bloodtinge" type="Node2D" parent="Right_Side/Stats"]
+
+[node name="Bloodtinge" type="Label" parent="Right_Side/Stats/Bloodtinge"]
+offset_left = 834.0
+offset_top = 592.0
+offset_right = 1014.0
+offset_bottom = 622.0
+text = "Bloodtinge"
+label_settings = ExtResource("4_clpa1")
+
+[node name="Bloodtinge_num" type="Label" parent="Right_Side/Stats/Bloodtinge"]
+offset_left = 1170.0
+offset_top = 589.0
+offset_right = 1210.0
+offset_bottom = 619.0
+text = "10"
+label_settings = ExtResource("5_i2v31")
+horizontal_alignment = 2

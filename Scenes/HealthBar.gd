@@ -8,25 +8,25 @@ extends TextureProgressBar
 var dead = false
 
 func _ready():
-	player.healthChanged.connect(update)
+	g.hpChanged.connect(update)
 	player.attacked.connect(rally)
 	update()
 	rally()
 
 func update():
-	value = player.healthPoints * 100 / player.maxHealthPoints
-	if player.healthPoints < 1 and not dead:
+	value = g.hp * 100 / g.maxhp
+	if g.hp < 1 and not dead:
 		death()
-		player.b_echoes -= player.b_echoes / 2
+		g.b_echoes -= g.b_echoes / 2
 
 func rally():
 	if value < rallyBar.value:
-		if value + player.maxHealthPoints / 100 * 7 <= rallyBar.value:
-			value += player.maxHealthPoints / 100 * 5
-			player.healthPoints += player.maxHealthPoints / 100 * 5
+		if value + g.maxhp / 100 * 7 <= rallyBar.value:
+			value += g.maxhp / 100 * 5
+			g.hp += g.maxhp / 100 * 5
 		else:
 			value = rallyBar.value
-			player.healthPoints = player.maxHealthPoints / 100 * value
+			g.hp = g.maxhp / 100 * value
 
 func death():
 	player.dead = true

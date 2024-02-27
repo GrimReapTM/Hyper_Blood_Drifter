@@ -1,47 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://boslml73whuhw"]
+[gd_scene load_steps=9 format=3 uid="uid://boslml73whuhw"]
 
 [ext_resource type="Script" path="res://Scenes/UI_scenes/Inventory.gd" id="1_lm2t2"]
-[ext_resource type="Texture2D" uid="uid://4fvi8jsiu2vu" path="res://sprites/HUD/inventory/scroll over.png" id="2_pdltr"]
 [ext_resource type="AudioStream" uid="uid://bso7x6wk3cp8i" path="res://Audio/SFX/Menu/menu_close.wav" id="2_tli63"]
+[ext_resource type="Theme" uid="uid://bumqfw5ibw0nk" path="res://Scenes/UI_scenes/Inventory.tres" id="2_wambr"]
 [ext_resource type="Texture2D" uid="uid://dx2w3fwbsjgyl" path="res://sprites/HUD/inventory/in-Inventory.png" id="3_frllk"]
-[ext_resource type="Texture2D" uid="uid://bp4r73wmiklfc" path="res://sprites/HUD/inventory/scroll under.png" id="3_nlpih"]
 [ext_resource type="FontFile" uid="uid://cflm7ac265lwi" path="res://fonts/pixelgeorgia.ttf" id="6_m5bkl"]
 [ext_resource type="LabelSettings" uid="uid://cp635qsd3tqd2" path="res://fonts/stats.tres" id="7_27e8g"]
 [ext_resource type="LabelSettings" uid="uid://dt5s1nkwovr4v" path="res://fonts/stat_numbers.tres" id="8_fymny"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u5cd8"]
-texture = ExtResource("2_pdltr")
-texture_margin_top = 5.0
-texture_margin_bottom = 5.0
-expand_margin_top = 5.0
-expand_margin_bottom = 5.0
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f25j2"]
-texture = ExtResource("2_pdltr")
-texture_margin_top = 5.0
-texture_margin_bottom = 5.0
-expand_margin_top = 5.0
-expand_margin_bottom = 5.0
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vyr0l"]
-texture = ExtResource("2_pdltr")
-texture_margin_top = 5.0
-texture_margin_bottom = 5.0
-expand_margin_top = 5.0
-expand_margin_bottom = 5.0
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i8knj"]
-texture = ExtResource("3_nlpih")
-texture_margin_left = 28.0
-texture_margin_top = 5.0
-texture_margin_right = 36.0
-texture_margin_bottom = 5.0
-
-[sub_resource type="Theme" id="Theme_lrqw8"]
-VScrollBar/styles/grabber = SubResource("StyleBoxTexture_u5cd8")
-VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_f25j2")
-VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_vyr0l")
-VScrollBar/styles/scroll = SubResource("StyleBoxTexture_i8knj")
 
 [sub_resource type="LabelSettings" id="LabelSettings_xoyvj"]
 font = ExtResource("6_m5bkl")
@@ -78,7 +43,7 @@ metadata/_edit_lock_ = true
 layout_mode = 0
 offset_right = 1282.0
 offset_bottom = 721.0
-color = Color(0.0823529, 0.0823529, 0.0823529, 0.933333)
+color = Color(0.0705882, 0.0705882, 0.0901961, 0.945098)
 metadata/_edit_lock_ = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
@@ -87,7 +52,7 @@ offset_left = 68.0
 offset_top = 164.0
 offset_right = 782.0
 offset_bottom = 637.0
-theme = SubResource("Theme_lrqw8")
+theme = ExtResource("2_wambr")
 horizontal_scroll_mode = 3
 metadata/_edit_lock_ = true
 

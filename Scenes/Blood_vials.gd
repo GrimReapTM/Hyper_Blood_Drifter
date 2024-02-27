@@ -1,30 +1,29 @@
 extends Label
 
-@export var player: CharacterBody2D
 @export var vials: Sprite2D
 
 func _ready():
-	text = str(player.b_vials)
-	player.vialsChanged.connect(update)
+	text = str(g.vials)
+	g.vialsChanged.connect(update)
 	update()
 
 func update():
-	var fifth = int(player.max_b_vials/5)
-	text = str(player.b_vials)
-	if player.b_vials == player.max_b_vials:
+	var fifth = int(g.max_vials/5)
+	text = str(g.vials)
+	if g.vials == g.max_vials:
 		label_settings.font_color = Color("87b5ed")
 	else:
 		label_settings.font_color = Color("fefcf6")
 	
-	if player.b_vials == 0:
+	if g.vials == 0:
 		vials.frame = 5
-	elif player.b_vials == fifth:
+	elif g.vials == fifth:
 		vials.frame = 4
-	elif player.b_vials == 2*fifth:
+	elif g.vials == 2*fifth:
 		vials.frame = 3
-	elif player.b_vials == 3*fifth:
+	elif g.vials == 3*fifth:
 		vials.frame = 2
-	elif player.b_vials == 4*fifth:
+	elif g.vials == 4*fifth:
 		vials.frame = 1
-	elif player.b_vials == 5*fifth:
+	elif g.vials == 5*fifth:
 		vials.frame = 0

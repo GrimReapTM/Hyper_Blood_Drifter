@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt6mxkqwcdxxv"]
+
+[ext_resource type="Script" path="res://Scenes/UI_scenes/Shop.gd" id="1_f4xth"]
+[ext_resource type="AudioStream" uid="uid://vea6ii8d70lr" path="res://Audio/SFX/Menu/menu_open.wav" id="2_1cgnw"]
+[ext_resource type="AudioStream" uid="uid://bso7x6wk3cp8i" path="res://Audio/SFX/Menu/menu_close.wav" id="3_23c2s"]
+
+[node name="Shop" type="Control" node_paths=PackedStringArray("container", "a_open", "a_close")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_f4xth")
+container = NodePath("ScrollContainer/VBoxContainer")
+a_open = NodePath("open")
+a_close = NodePath("close")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1281.0
+offset_bottom = 721.0
+color = Color(0.0196078, 0.0196078, 0.0862745, 0.839216)
+metadata/_edit_lock_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 79.0
+offset_top = 48.0
+offset_right = 867.0
+offset_bottom = 691.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 105
+
+[node name="open" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_1cgnw")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="close" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_23c2s")
+volume_db = -20.0
+bus = &"SFX"

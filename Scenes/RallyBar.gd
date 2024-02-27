@@ -1,13 +1,12 @@
 extends TextureProgressBar
 
 @export var healthBar: TextureProgressBar
-@export var player: CharacterBody2D
 @export var stop = true
 
 
 func _ready():
-	value = player.healthPoints * 100 / player.maxHealthPoints
-	player.healthChanged.connect(update)
+	value = g.hp * 100 / g.maxhp
+	g.hpChanged.connect(update)
 	update()
 
 
@@ -23,7 +22,7 @@ func _on_rally_timer_timeout():
 func _process(delta):
 	if not stop:
 		if value >= healthBar.value:
-			value -= player.maxHealthPoints / 100 * delta * 7
+			value -= g.maxhp / 100 * delta * 7
 		else:
 			value = healthBar.value
 			stop = true

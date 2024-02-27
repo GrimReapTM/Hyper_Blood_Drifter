@@ -19,11 +19,11 @@ var old_slot = null
 var player_position = Vector2()
 
 var vials = 20
-var max_vials
+var max_vials = 20
 signal vialsChanged
 
 var bullets = 20
-var max_bullets
+var max_bullets = 20
 signal bulletsChanged
 
 var next_item = ""
@@ -40,19 +40,22 @@ signal openShop
 
 # player
 var position
-var fire_damage
+var fire_damage = false
 var b_echoes = 7270
 signal beChanged
 signal maxvialsChanged
 signal maxbulletsChanged
+
 var insight = 0
 signal iChanged
-var hp
-var maxhp
+
+var hp = 200
+var maxhp = 200
 signal hpChanged
 signal maxhpChanged
-var stamina
-var maxst
+
+var stamina = 75
+var maxst = 75
 signal stChanged
 signal maxstChanged
 
@@ -154,7 +157,19 @@ func get_item(parameter, action):
 			item_description = "Consume to gain insight, so they say, eyes on the inside"
 			item_frame = 12
 			price = 3000
-	
+		"vial":
+			item_name = "Blood Vial"
+			item_description = "Special blood used in ministration. Restores HP"
+			item_frame = 13
+			price = 20
+		"bullet":
+			item_name = "Quicksilver Bullet"
+			item_description = "Special bullets used with hunter firearms."
+			item_frame = 14
+			price = 20
+
+
+
 	match action:
 		"name":
 			return item_name

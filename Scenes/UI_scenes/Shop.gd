@@ -11,12 +11,45 @@ const item = preload("res://Scenes/UI_scenes/inventory_item.tscn")
 @export var a_open: AudioStreamPlayer
 @export var a_close: AudioStreamPlayer
 
+@export var Lv: Label
+@export var Be: Label
+@export var In: Label
+@export var Vit: Label
+@export var End: Label
+@export var Str: Label
+@export var Bld: Label
+
+func update():
+	Lv.text = str(g.Level)
+	Be.text = str(g.b_echoes)
+	In.text = str(g.insight)
+	Vit.text = str(g.Vitality)
+	End.text = str(g.Endurance)
+	Str.text = str(g.Strength)
+	Bld.text = str(g.Bloodtinge)
+
+
 func _ready():
+	g.beChanged.connect(update)
+	g.iChanged.connect(update)
+	messengers.open.connect(update)
 	messengers.open.connect(open)
 	player.pause_pressed.connect(close)
 	g.addItem.connect(add_item)
 	
 	var instance
+	
+	var vb = ["vial", "bullet"]
+	for i in vb:
+		instance = item.instantiate()
+		instance.type = "shop"
+		instance.ID = i
+		if i == "vial":
+			instance.vial = true
+		else:
+			instance.bullet = true
+		container.add_child(instance)
+	
 	for i in g.item_ids:
 		instance = item.instantiate()
 		instance.type = "shop"
@@ -38,21 +71,3 @@ func close():
 
 func add_item():
 	Inventory.add_item(g.next_item)
-
-
-func _on_vial_pressed():
-	if player.b_echoes - 20 > 0 and player.b_vials != player.max_b_vials:
-		player.b_echoes -= 20
-		player.b_echoesChanged.emit()
-		player.b_vials += 1
-		g.vials += 1
-		player.vialsChanged.emit()
-
-
-func _on_bullets_pressed():
-	if player.b_echoes - 20 > 0 and player.bullets != player.maxBullets:
-		player.b_echoes -= 20
-		player.b_echoesChanged.emit()
-		player.bullets += 1
-		g.bullets += 1
-		player.bulletsChanged.emit()

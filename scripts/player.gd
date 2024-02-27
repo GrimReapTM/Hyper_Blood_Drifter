@@ -21,33 +21,11 @@ const effect_scene = preload("res://Scenes/UI_scenes/status_effect.tscn")
 
 var paused = false
 
-#player stats
-@export var healthPoints = 200
-@export var maxHealthPoints = 200
-@export var b_vials = g.vials
-@export var max_b_vials = 20
-
-@export var stamina = 75
-@export var maxStamina = 75
-
-@export var b_echoes = g.b_echoes
-@export var insight = g.insight
-
-@export var damage = 4
-@export var bullets = g.bullets
 @export var b_bullets = 0
-@export var maxBullets = 20
 
-
-signal healthChanged
-signal bulletsChanged
 signal attacked
-signal staminaChanged
 signal b_bulletsChanged
-signal vialsChanged
 signal pause_pressed
-signal insightChanged
-signal b_echoesChanged
 signal beastBloodChanged
 
 #variables for movement
@@ -96,12 +74,12 @@ func _input(event):
 			pause_pressed.emit()
 		if not paused and not action:
 			if event.is_action_pressed("attackMelee"):
-				if not action and stamina > 5 and not paused:
+				if not action and g.stamina > 5 and not paused:
 					action = true
 					global_index = attack_calculation()
 					attack_melee(global_index)
 			elif event.is_action_pressed("attackRanged"):
-				if not action and stamina > 1 and bullets > 0 and not paused:
+				if not action and g.stamina > 1 and g.bullets > 0 and not paused:
 					global_index = attack_calculation()
 					attack_ranged(global_index)
 			elif event.is_action_pressed("blood_bullet"):
@@ -111,26 +89,25 @@ func _input(event):
 					sfx.items("finger")
 					await animations.animation_finished
 					animations.play("RESET")
-					healthPoints -= 65
-					healthChanged.emit()
+					g.hp -= 65
+					g.hpChanged.emit()
 					b_bullets += 5
 					b_bulletsChanged.emit()
 					action = false
 			elif event.is_action_pressed("heal"):
-				if b_vials > 0:
+				if g.vials > 0:
 					action = true
 					animations.play("heal")
 					sfx.items("heal")
 					await animations.animation_finished
 					animations.play("RESET")
-					if healthPoints + 50 <= maxHealthPoints:
-						healthPoints += 40
+					if g.hp + 50 <= g.maxhp:
+						g.hp += 40
 					else:
-						healthPoints = maxHealthPoints
-					healthChanged.emit()
-					b_vials -= 1
+						g.hp = g.maxhp
+					g.hpChanged.emit()
 					g.vials -= 1
-					vialsChanged.emit()
+					g.vialsChanged.emit()
 					action = false
 			elif event.is_action_pressed("quick_use") and not paused:
 				if g.equiped_slot != null:
@@ -162,8 +139,8 @@ func _input(event):
 							animations.play("consume")
 							sfx.items("cold_blood_dew")
 							await animations.animation_finished
-							b_echoes += 1000
-							b_echoesChanged.emit()
+							g.b_echoes += 1000
+							g.beChanged.emit()
 						"fire_paper":
 							animations.play("paper")
 							sfx.items("use_item")
@@ -177,20 +154,20 @@ func _input(event):
 						"iosefka_blood":
 							animations.play("drink")
 							await animations.animation_finished
-							healthPoints += 60
-							healthChanged.emit()
+							g.hp += 60
+							g.hpChanged.emit()
 						"madmans_knowledge":
 							animations.play("consume")
 							sfx.items("madmans_knowledge")
 							await animations.animation_finished
-							insight += 1
-							insightChanged.emit()
+							g.insight += 1
+							g.iChanged.emit()
 						"umbilical_cord":
 							animations.play("consume")
 							sfx.items("madmans_knowledge")
 							await animations.animation_finished
-							insight += 3
-							insightChanged.emit() 
+							g.insight += 3
+							g.iChanged.emit() 
 					if g.equiped_slot != "lantern":
 						g.inventory[g.equiped_slot] -= 1
 						g.itemAmount.emit()
@@ -214,13 +191,12 @@ func on_fire():
 	$StatusEffects/Fire.start()
 	$StatusEffects/FireDamage.start()
 
-var fire_damage = false
 func paper(effect):
 	
 	match effect:
 		"fire":
 			g.bonus_damage = 3
-			fire_damage = true
+			g.fire_damage = true
 		"bolt":
 			g.bonus_damage = 15
 
@@ -338,10 +314,8 @@ func instance_bullet():
 		b_bullets -= 1
 		b_bulletsChanged.emit()
 	else:
-		bullets -= 1
 		g.bullets -= 1
-		bulletsChanged.emit()
-
+		g.bulletsChanged.emit()
 var throw_item_
 
 func throw_item(item, index):
@@ -367,16 +341,16 @@ func _on_throw_timer_timeout():
 func _on_player_hurtbox_area_entered(area):
 	match area.name:
 		"enemy_attack":
-			healthPoints -= 40 + resist
-			healthChanged.emit()
+			g.hp -= 40 + resist
+			g.hpChanged.emit()
 		"bullet_hitbox":
 			if area.owner.ID == "enemy":
-				healthPoints -= 20 + resist
-				healthChanged.emit()
+				g.hp -= 20 + resist
+				g.hpChanged.emit()
 		"fire_hitbox":
 			status_effect("fire", 3, 9)
-			healthPoints -= 1 + resist
-			healthChanged.emit()
+			g.hp -= 1 + resist
+			g.hpChanged.emit()
 			on_fire()
 
 # this is how you move
@@ -400,7 +374,7 @@ func movement(delta):
 			savedDirection = moveDirection
 			
 		if attacking == false:
-			if Input.is_action_just_pressed("dash") and not action and stamina > 8:
+			if Input.is_action_just_pressed("dash") and not action and g.stamina > 8:
 				action = true
 				dashing = true
 				staminaChange("dash")
@@ -453,7 +427,7 @@ func staminaChange(value):
 		"dash":
 			staminaSubtract(12)
 	staminaStop = true
-	staminaChanged.emit()
+	g.stChanged.emit()
 	$staminaStop.start()
 
 func _on_stamina_stop_timeout():
@@ -461,17 +435,17 @@ func _on_stamina_stop_timeout():
 
 
 func staminaSubtract(num):
-	if stamina - num >= 0:
-		stamina -= num
+	if g.stamina - num >= 0:
+		g.stamina -= num
 	else:
-		stamina = 0
+		g.stamina = 0
 
 
 
 func staminaRecovery(delta):
-	if stamina < maxStamina and not staminaStop:
-		stamina += 1 * delta * 20
-		staminaChanged.emit()
+	if g.stamina < g.maxst and not staminaStop:
+		g.stamina += 1 * delta * 20
+		g.stChanged.emit()
 		
 
 
@@ -493,13 +467,13 @@ func _on_fire_timeout():
 	$StatusEffects/FireDamage.stop()
 
 func _on_fire_damage_timeout():
-	healthPoints -= 5 - resist
-	healthChanged.emit()
+	g.hp -= 5 - resist
+	g.hpChanged.emit()
 
 
 func _on_paper_timer_timeout():
 	g.bonus_damage = 0
-	fire_damage = false
+	g.fire_damage = false
 
 
 func _on_beast_blood_timer_timeout():

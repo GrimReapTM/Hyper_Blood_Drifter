@@ -1,7 +1,7 @@
 extends Label
 
 func _ready():
-	g.insightChanged.connect(update)
+	g.iChanged.connect(update)
 	update()
 
 func update():

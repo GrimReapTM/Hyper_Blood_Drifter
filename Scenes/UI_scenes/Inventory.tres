@@ -1,0 +1,38 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://bumqfw5ibw0nk"]
+
+[ext_resource type="Texture2D" uid="uid://4fvi8jsiu2vu" path="res://sprites/HUD/inventory/scroll over.png" id="1_0pckb"]
+[ext_resource type="Texture2D" uid="uid://bp4r73wmiklfc" path="res://sprites/HUD/inventory/scroll under.png" id="2_1pn6w"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u5cd8"]
+texture = ExtResource("1_0pckb")
+texture_margin_top = 5.0
+texture_margin_bottom = 5.0
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f25j2"]
+texture = ExtResource("1_0pckb")
+texture_margin_top = 5.0
+texture_margin_bottom = 5.0
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vyr0l"]
+texture = ExtResource("1_0pckb")
+texture_margin_top = 5.0
+texture_margin_bottom = 5.0
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i8knj"]
+texture = ExtResource("2_1pn6w")
+texture_margin_left = 28.0
+texture_margin_top = 5.0
+texture_margin_right = 36.0
+texture_margin_bottom = 5.0
+
+[resource]
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_u5cd8")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_f25j2")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_vyr0l")
+VScrollBar/styles/scroll = SubResource("StyleBoxTexture_i8knj")
