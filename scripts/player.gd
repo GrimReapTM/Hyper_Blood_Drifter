@@ -80,6 +80,7 @@ func _input(event):
 					attack_melee(global_index)
 			elif event.is_action_pressed("attackRanged"):
 				if not action and g.stamina > 1 and g.bullets > 0 and not paused:
+					action = true
 					global_index = attack_calculation()
 					attack_ranged(global_index)
 			elif event.is_action_pressed("blood_bullet"):
@@ -111,6 +112,7 @@ func _input(event):
 					action = false
 			elif event.is_action_pressed("quick_use") and not paused:
 				if g.equiped_slot != null:
+					action = true
 					match g.equiped_slot:
 						"molotov_cocktail":
 							throw_item(molotov, attack_calculation())
@@ -119,53 +121,71 @@ func _input(event):
 						"throwing_knife":
 							throw_item(knife, attack_calculation())
 						"beast_pellet":
+							action = true
 							animations.play("consume")
 							sfx.items("use_item")
 							await animations.animation_finished
+							action = false
 							status_effect("beast_pellet", 0, 60)
 							beast_blood_pellet()
 						"hunters_mark":
+							action = true
 							animations.play("consume")
 							sfx.items("use_item")
 							await animations.animation_finished
+							action = false
 							#teleport
 						"bolt_paper":
+							action = true
 							animations.play("paper")
 							sfx.items("bolt_paper")
 							await animations.animation_finished
+							action = false
 							status_effect("bolt_paper", 1, 45)
 							paper("bolt")
 						"coldblood_dew":
+							action = true
 							animations.play("consume")
 							sfx.items("cold_blood_dew")
 							await animations.animation_finished
+							action = false
 							g.b_echoes += 1000
 							g.beChanged.emit()
 						"fire_paper":
+							action = true
 							animations.play("paper")
 							sfx.items("use_item")
 							await animations.animation_finished
+							action = false
 							status_effect("fire_paper", 2, 45)
 							paper("fire")
 						"lantern":
+							action = true
 							animations.play("lantern")
 							await animations.animation_finished
+							action = false
 							#light
 						"iosefka_blood":
+							action = true
 							animations.play("drink")
 							await animations.animation_finished
+							action = false
 							g.hp += 60
 							g.hpChanged.emit()
 						"madmans_knowledge":
+							action = true
 							animations.play("consume")
 							sfx.items("madmans_knowledge")
 							await animations.animation_finished
+							action = false
 							g.insight += 1
 							g.iChanged.emit()
 						"umbilical_cord":
+							action = true
 							animations.play("consume")
 							sfx.items("madmans_knowledge")
 							await animations.animation_finished
+							action = false
 							g.insight += 3
 							g.iChanged.emit() 
 					if g.equiped_slot != "lantern":
@@ -319,6 +339,7 @@ func instance_bullet():
 var throw_item_
 
 func throw_item(item, index):
+	action = true
 	throw_item_ = item
 	animations.play("throw_" + attackAnimations[index])
 	sfx.action("throw")
@@ -333,6 +354,7 @@ func _on_throw_timer_timeout():
 	instance.position = position
 	owner.add_child(instance)
 	await animations.animation_finished
+	action = false
 	attacking = false
 	animPlay = false
 
