@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfnicevbagtf4"]
+[gd_scene load_steps=3 format=3 uid="uid://bfnicevbagtf4"]
 
 [ext_resource type="Script" path="res://Scenes/UI_scenes/system.gd" id="1_mux74"]
+[ext_resource type="AudioStream" uid="uid://bso7x6wk3cp8i" path="res://Audio/SFX/Menu/menu_close.wav" id="2_xinc4"]
 
-[node name="System" type="Control"]
+[node name="System" type="Control" node_paths=PackedStringArray("a_close")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,6 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mux74")
+a_close = NodePath("close")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -35,5 +37,10 @@ offset_right = 651.0
 offset_bottom = 141.0
 scale = Vector2(2, 2)
 text = "System nastavení nevim"
+
+[node name="close" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_xinc4")
+volume_db = -40.0
+bus = &"SFX"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cu77hnp5aj673"]
+[gd_scene load_steps=3 format=3 uid="uid://cu77hnp5aj673"]
 
 [ext_resource type="Script" path="res://Scenes/UI_scenes/status.gd" id="1_bo287"]
+[ext_resource type="AudioStream" uid="uid://bso7x6wk3cp8i" path="res://Audio/SFX/Menu/menu_close.wav" id="2_g68ru"]
 
-[node name="Status" type="Control"]
+[node name="Status" type="Control" node_paths=PackedStringArray("a_close")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,9 +11,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bo287")
+a_close = NodePath("close")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
 offset_right = 1287.0
 offset_bottom = 724.0
 color = Color(0.0470588, 0.0470588, 0.0470588, 0.933333)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 517.0
+offset_top = 364.0
+offset_right = 795.0
+offset_bottom = 482.0
+text = "máš level 1 nebo něco idk"
+
+[node name="close" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_g68ru")
+volume_db = -40.0
+bus = &"SFX"

@@ -1,5 +1,7 @@
 extends Control
 @export var Inventory: Control
+@export var Status: Control
+@export var System: Control
 
 @export var player: CharacterBody2D
 @export var hud: Node2D
@@ -329,6 +331,9 @@ func change_sprite():
 func null_sprite():
 	sprites[g.slot].frame = 0
 
+
+
+
 func _on_inventory_button_pressed():
 	a_open.play()
 	visible = false
@@ -337,3 +342,15 @@ func _on_inventory_button_pressed():
 	Inventory.visible = true
 	player.HUD.visible = false
 
+
+func _on_stats_button_pressed():
+	a_open.play()
+	visible = false
+	Status.visible = true
+	player.HUD.visible = false
+
+func _on_settings_button_pressed():
+	a_open.play()
+	visible = false
+	System.visible = true
+	player.HUD.visible = false

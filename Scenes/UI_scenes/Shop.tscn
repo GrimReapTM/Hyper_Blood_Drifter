@@ -64,10 +64,11 @@ bus = &"SFX"
 
 [node name="close" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_23c2s")
-volume_db = -20.0
+volume_db = -40.0
 bus = &"SFX"
 
 [node name="Shop" type="Label" parent="."]
+layout_mode = 0
 offset_left = 68.0
 offset_top = 78.0
 offset_right = 479.0

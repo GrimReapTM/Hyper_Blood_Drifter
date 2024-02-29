@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://brdakdtadahqx"]
+[gd_scene load_steps=44 format=3 uid="uid://brdakdtadahqx"]
 
 [ext_resource type="Texture2D" uid="uid://bodowo5fqv02g" path="res://sprites/tileset.png" id="1_fowpt"]
 [ext_resource type="PackedScene" uid="uid://buy61le6aimhl" path="res://Scenes/sfx.tscn" id="1_vtfbq"]
@@ -30,6 +30,8 @@
 [ext_resource type="PackedScene" uid="uid://dt6mxkqwcdxxv" path="res://Scenes/UI_scenes/Shop.tscn" id="26_ml5kp"]
 [ext_resource type="PackedScene" uid="uid://boslml73whuhw" path="res://Scenes/UI_scenes/Inventory.tscn" id="27_sc78j"]
 [ext_resource type="PackedScene" uid="uid://dko3rmb7ykws3" path="res://Scenes/UI_scenes/death_screen.tscn" id="29_gaxrt"]
+[ext_resource type="PackedScene" uid="uid://cu77hnp5aj673" path="res://Scenes/UI_scenes/status.tscn" id="31_wj3m6"]
+[ext_resource type="PackedScene" uid="uid://bfnicevbagtf4" path="res://Scenes/UI_scenes/system.tscn" id="32_whnv3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y8bg1"]
 texture = ExtResource("1_fowpt")
@@ -598,9 +600,11 @@ script = ExtResource("24_mwgwg")
 
 [node name="pause" type="CanvasLayer" parent="."]
 
-[node name="PauseMenu" parent="pause" node_paths=PackedStringArray("Inventory", "player", "hud", "Item_name", "Item_sprite", "Item_amount") instance=ExtResource("15_p4no6")]
+[node name="PauseMenu" parent="pause" node_paths=PackedStringArray("Inventory", "Status", "System", "player", "hud", "Item_name", "Item_sprite", "Item_amount") instance=ExtResource("15_p4no6")]
 visible = false
 Inventory = NodePath("../Inventory")
+Status = NodePath("../Status")
+System = NodePath("../System")
 player = NodePath("../../Player")
 hud = NodePath("../../Player/HUD_canvas/HUD")
 Item_name = NodePath("../../Player/HUD_canvas/HUD/up_left/container/current_item")
@@ -624,5 +628,15 @@ pause = NodePath("../PauseMenu")
 shop = NodePath("../Shop")
 inventory = NodePath("../Inventory")
 HUD = NodePath("../../Player/HUD_canvas/HUD")
+
+[node name="Status" parent="pause" node_paths=PackedStringArray("player", "Paused") instance=ExtResource("31_wj3m6")]
+visible = false
+player = NodePath("../../Player")
+Paused = NodePath("../PauseMenu")
+
+[node name="System" parent="pause" node_paths=PackedStringArray("player", "Paused") instance=ExtResource("32_whnv3")]
+visible = false
+player = NodePath("../../Player")
+Paused = NodePath("../PauseMenu")
 
 [connection signal="timeout" from="Player/HUD_canvas/HUD/up_left/RallyBar/RallyTimer" to="Player/HUD_canvas/HUD/up_left/RallyBar" method="_on_rally_timer_timeout"]

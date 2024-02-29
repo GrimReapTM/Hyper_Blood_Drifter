@@ -1,11 +1,15 @@
 extends Control
 
+@export var player: CharacterBody2D
+@export var a_close: AudioStreamPlayer
+@export var Paused: Control
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	player.pause_pressed.connect(close)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func close():
+	a_close.play()
+	visible = false
+	Paused.visible = true
+	player.HUD.visible = true
+	player.paused = true
