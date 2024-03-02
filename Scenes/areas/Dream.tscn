@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cj4wtg2yxabc7"]
+[gd_scene load_steps=6 format=3 uid="uid://cj4wtg2yxabc7"]
 
 [ext_resource type="PackedScene" uid="uid://brdakdtadahqx" path="res://Scenes/Area.tscn" id="1_kvvk4"]
 [ext_resource type="PackedScene" uid="uid://dkcjy0yklpqk2" path="res://Scenes/entity scenes/bath_messengers.tscn" id="2_0n4ii"]
 [ext_resource type="PackedScene" uid="uid://4xw8kh1f8odo" path="res://Scenes/entity scenes/lamp.tscn" id="3_4eu3t"]
+[ext_resource type="PackedScene" uid="uid://84s35u1w0bss" path="res://Scenes/UI_scenes/level_up.tscn" id="4_78rrv"]
+[ext_resource type="PackedScene" uid="uid://kkom0w51lvma" path="res://Scenes/entity scenes/doll.tscn" id="4_wxb6l"]
 
 [node name="Area" instance=ExtResource("1_kvvk4")]
 
@@ -10,7 +12,7 @@
 layer_0/tile_data = PackedInt32Array(917525, 524290, 8, 2097187, 0, 0, 1, 0, 0)
 
 [node name="Player" parent="." index="2"]
-position = Vector2(1424, 1468)
+position = Vector2(1277, 1510)
 
 [node name="current_item" parent="Player/HUD_canvas/HUD/up_left/container" index="0"]
 metadata/_edit_use_anchors_ = true
@@ -40,5 +42,15 @@ player = NodePath("../Player")
 [node name="lamp" parent="." index="4" instance=ExtResource("3_4eu3t")]
 position = Vector2(1335, 1339)
 
+[node name="Doll" parent="." index="5" node_paths=PackedStringArray("player", "lvlup") instance=ExtResource("4_wxb6l")]
+position = Vector2(1569, 1334)
+player = NodePath("../Player")
+lvlup = NodePath("../pause/LevelUp")
+
 [node name="Shop" parent="pause" index="1" node_paths=PackedStringArray("messengers")]
 messengers = NodePath("../../Bath_messenger")
+
+[node name="LevelUp" parent="pause" index="6" node_paths=PackedStringArray("player", "Paused") instance=ExtResource("4_78rrv")]
+visible = false
+player = NodePath("../../Player")
+Paused = NodePath("../PauseMenu")

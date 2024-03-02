@@ -1,9 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://cu77hnp5aj673"]
+[gd_scene load_steps=8 format=3 uid="uid://cu77hnp5aj673"]
 
 [ext_resource type="Script" path="res://Scenes/UI_scenes/status.gd" id="1_bo287"]
 [ext_resource type="AudioStream" uid="uid://bso7x6wk3cp8i" path="res://Audio/SFX/Menu/menu_close.wav" id="2_g68ru"]
+[ext_resource type="Texture2D" uid="uid://dfrjlykqban0n" path="res://sprites/HUD/inventory/Status.png" id="3_eju74"]
+[ext_resource type="FontFile" uid="uid://cflm7ac265lwi" path="res://fonts/pixelgeorgia.ttf" id="4_11cam"]
+[ext_resource type="LabelSettings" uid="uid://cp635qsd3tqd2" path="res://fonts/stats.tres" id="4_lo5s7"]
+[ext_resource type="LabelSettings" uid="uid://dt5s1nkwovr4v" path="res://fonts/stat_numbers.tres" id="5_8uyly"]
 
-[node name="Status" type="Control" node_paths=PackedStringArray("a_close")]
+[sub_resource type="LabelSettings" id="LabelSettings_rls57"]
+font = ExtResource("4_11cam")
+font_size = 70
+font_color = Color(0.862745, 0.690196, 0.407843, 1)
+shadow_size = 7
+shadow_offset = Vector2(2, 1)
+
+[node name="Status" type="Control" node_paths=PackedStringArray("a_close", "HP", "ST", "W1", "W2", "Beast", "Lv", "Be", "In", "Vit", "End", "Str", "Bld")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,22 +23,303 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bo287")
 a_close = NodePath("close")
+HP = NodePath("Right/HP/HP_num")
+ST = NodePath("Right/Stamina/ST_num")
+W1 = NodePath("Right/Weapon1/W1_num")
+W2 = NodePath("Right/Weapon2/W2_num")
+Beast = NodePath("Right/Beasthood/Beast_num")
+Lv = NodePath("Left/Level/Level_num")
+Be = NodePath("Left/BE/BloodEchoes_num")
+In = NodePath("Left/IN/Insight_num")
+Vit = NodePath("Left/Stats/Vitality/Vitality_num")
+End = NodePath("Left/Stats/Endurance/Endurance_num")
+Str = NodePath("Left/Stats/Strength/Strength_num")
+Bld = NodePath("Left/Stats/Bloodtinge/Bloodtinge_num")
+metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
 offset_right = 1287.0
 offset_bottom = 724.0
 color = Color(0.0470588, 0.0470588, 0.0470588, 0.933333)
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 517.0
-offset_top = 364.0
-offset_right = 795.0
-offset_bottom = 482.0
-text = "máš level 1 nebo něco idk"
+metadata/_edit_lock_ = true
 
 [node name="close" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_g68ru")
 volume_db = -40.0
 bus = &"SFX"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(643, 360)
+scale = Vector2(4, 4)
+texture = ExtResource("3_eju74")
+
+[node name="Inventory_QuickItems" type="Label" parent="."]
+offset_left = 68.0
+offset_top = 78.0
+offset_right = 479.0
+offset_bottom = 148.0
+scale = Vector2(0.5, 0.5)
+text = "Stats"
+label_settings = SubResource("LabelSettings_rls57")
+
+[node name="W1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1011.0
+offset_top = 431.0
+offset_right = 1227.0
+offset_bottom = 461.0
+scale = Vector2(0.8, 0.8)
+text = "Saw Cleaver"
+label_settings = ExtResource("4_lo5s7")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1006.0
+offset_top = 503.0
+offset_right = 1237.0
+offset_bottom = 533.0
+scale = Vector2(0.8, 0.8)
+text = "Hunter Pistol"
+label_settings = ExtResource("4_lo5s7")
+
+[node name="Right" type="Node2D" parent="."]
+
+[node name="HP" type="Node2D" parent="Right"]
+
+[node name="HP" type="Label" parent="Right/HP"]
+offset_left = 585.0
+offset_top = 181.0
+offset_right = 657.0
+offset_bottom = 211.0
+text = "HP"
+label_settings = ExtResource("4_lo5s7")
+
+[node name="HP_num" type="Label" parent="Right/HP"]
+offset_left = 665.0
+offset_top = 180.0
+offset_right = 969.0
+offset_bottom = 210.0
+text = "320/654"
+label_settings = ExtResource("5_8uyly")
+horizontal_alignment = 2
+
+[node name="Stamina" type="Node2D" parent="Right"]
+position = Vector2(0, 50)
+
+[node name="ST" type="Label" parent="Right/Stamina"]
+offset_left = 585.0
+offset_top = 199.0
+offset_right = 821.0
+offset_bottom = 229.0
+text = "Stamina"
+label_settings = ExtResource("4_lo5s7")
+
+[node name="ST_num" type="Label" parent="Right/Stamina"]
+offset_left = 832.0
+offset_top = 199.0
+offset_right = 962.0
+offset_bottom = 229.0
+text = "75"
+label_settings = ExtResource("5_8uyly")
+horizontal_alignment = 2
+
+[node name="Weapon1" type="Node2D" parent="Right"]
+position = Vector2(0, 100)
+
+[node name="W1" type="Label" parent="Right/Weapon1"]
+offset_left = 585.0
+offset_top = 254.0
+offset_right = 821.0
+offset_bottom = 284.0
+text = "R-hand WPN"
+label_settings = ExtResource("4_lo5s7")
+
+[node name="W1_num" type="Label" parent="Right/Weapon1"]
+offset_left = 832.0
+offset_top = 254.0
+offset_right = 962.0
+offset_bottom = 284.0
+text = "25"
+label_settings = ExtResource("5_8uyly")
+horizontal_alignment = 2
+
+[node name="Weapon2" type="Node2D" parent="Right"]
+position = Vector2(0, 200)
+
+[node name="W2" type="Label" parent="Right/Weapon2"]
+offset_left = 585.0
+offset_top = 222.0
+offset_right = 821.0
+offset_bottom = 252.0
+text = "L-hand WPN"
+label_settings = ExtResource("4_lo5s7")
+
+[node name="W2_num" type="Label" parent="Right/Weapon2"]
+offset_left = 832.0
+offset_top = 222.0
+offset_right = 962.0
+offset_bottom = 252.0
+text = "5"
+label_settings = ExtResource("5_8uyly")
+horizontal_alignment = 2
+
+[node name="Beasthood" type="Node2D" parent="Right"]
+position = Vector2(0, 300)
+
+[node name="Beast" type="Label" parent="Right/Beasthood"]
+offset_left = 585.0
+offset_top = 191.0
+offset_right = 821.0
+offset_bottom = 221.0
+text = "Beasthood"
+label_settings = ExtResource("4_lo5s7")
+
+[node name="Beast_num" type="Label" parent="Right/Beasthood"]
+offset_left = 785.0
+offset_top = 191.0
+offset_right = 962.0
+offset_bottom = 221.0
+text = "203"
+label_settings = ExtResource("5_8uyly")
+horizontal_alignment = 2
+
+[node name="Left" type="Node2D" parent="."]
+position = Vector2(-703, 0)
+
+[node name="Level" type="Node2D" parent="Left"]
+
+[node name="Level" type="Label" parent="Left/Level"]
+offset_left = 836.0
+offset_top = 179.0
+offset_right = 974.0
+offset_bottom = 209.0
+text = "Level"
+label_settings = ExtResource("4_lo5s7")
+
+[node name="Level_num" type="Label" parent="Left/Level"]
+offset_left = 1105.0
+offset_top = 180.0
+offset_right = 1211.0
+offset_bottom = 210.0
+text = "1"
+label_settings = ExtResource("5_8uyly")
+horizontal_alignment = 2
+
+[node name="BE" type="Node2D" parent="Left"]
+
+[node name="BloodEchoes" type="Label" parent="Left/BE"]
+offset_left = 834.0
+offset_top = 240.0
+offset_right = 1118.0
+offset_bottom = 270.0
+text = "Blood Echoes"
+label_settings = ExtResource("4_lo5s7")
+
+[node name="BloodEchoes_num" type="Label" parent="Left/BE"]
+offset_left = 1064.0
+offset_top = 240.0
+offset_right = 1213.0
+offset_bottom = 270.0
+text = "123"
+label_settings = ExtResource("5_8uyly")
+horizontal_alignment = 2
+
+[node name="IN" type="Node2D" parent="Left"]
+
+[node name="Insight" type="Label" parent="Left/IN"]
+offset_left = 834.0
+offset_top = 336.0
+offset_right = 1049.0
+offset_bottom = 366.0
+text = "Insight"
+label_settings = ExtResource("4_lo5s7")
+
+[node name="Insight_num" type="Label" parent="Left/IN"]
+offset_left = 1039.0
+offset_top = 335.0
+offset_right = 1212.0
+offset_bottom = 365.0
+text = "12"
+label_settings = ExtResource("5_8uyly")
+horizontal_alignment = 2
+
+[node name="Stats" type="Node2D" parent="Left"]
+
+[node name="Vitality" type="Node2D" parent="Left/Stats"]
+
+[node name="Vitality" type="Label" parent="Left/Stats/Vitality"]
+offset_left = 834.0
+offset_top = 411.0
+offset_right = 1015.0
+offset_bottom = 444.0
+text = "Vitality"
+label_settings = ExtResource("4_lo5s7")
+
+[node name="Vitality_num" type="Label" parent="Left/Stats/Vitality"]
+offset_left = 1091.0
+offset_top = 409.0
+offset_right = 1212.0
+offset_bottom = 439.0
+text = "10"
+label_settings = ExtResource("5_8uyly")
+horizontal_alignment = 2
+
+[node name="Endurance" type="Node2D" parent="Left/Stats"]
+
+[node name="Endurance" type="Label" parent="Left/Stats/Endurance"]
+offset_left = 835.0
+offset_top = 472.0
+offset_right = 1024.0
+offset_bottom = 502.0
+text = "Endurance"
+label_settings = ExtResource("4_lo5s7")
+
+[node name="Endurance_num" type="Label" parent="Left/Stats/Endurance"]
+offset_left = 1172.0
+offset_top = 469.0
+offset_right = 1212.0
+offset_bottom = 499.0
+text = "5"
+label_settings = ExtResource("5_8uyly")
+horizontal_alignment = 2
+
+[node name="Strength" type="Node2D" parent="Left/Stats"]
+
+[node name="Strength" type="Label" parent="Left/Stats/Strength"]
+offset_left = 835.0
+offset_top = 532.0
+offset_right = 991.0
+offset_bottom = 562.0
+text = "Strength"
+label_settings = ExtResource("4_lo5s7")
+
+[node name="Strength_num" type="Label" parent="Left/Stats/Strength"]
+offset_left = 1171.0
+offset_top = 528.0
+offset_right = 1211.0
+offset_bottom = 558.0
+text = "10"
+label_settings = ExtResource("5_8uyly")
+horizontal_alignment = 2
+
+[node name="Bloodtinge" type="Node2D" parent="Left/Stats"]
+
+[node name="Bloodtinge" type="Label" parent="Left/Stats/Bloodtinge"]
+offset_left = 834.0
+offset_top = 592.0
+offset_right = 1014.0
+offset_bottom = 622.0
+text = "Bloodtinge"
+label_settings = ExtResource("4_lo5s7")
+
+[node name="Bloodtinge_num" type="Label" parent="Left/Stats/Bloodtinge"]
+offset_left = 1170.0
+offset_top = 589.0
+offset_right = 1210.0
+offset_bottom = 619.0
+text = "10"
+label_settings = ExtResource("5_8uyly")
+horizontal_alignment = 2
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

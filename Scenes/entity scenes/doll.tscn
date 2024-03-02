@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://kkom0w51lvma"]
+
+[ext_resource type="Script" path="res://Scenes/entity scenes/doll.gd" id="1_0ytx3"]
+[ext_resource type="Texture2D" uid="uid://bd703nbhd8w36" path="res://sprites/entities/doll.png" id="1_aiqwr"]
+[ext_resource type="Texture2D" uid="uid://dsqplp7a02t60" path="res://sprites/entities/E-Sheet.png" id="2_hn1d4"]
+[ext_resource type="AudioStream" uid="uid://vea6ii8d70lr" path="res://Audio/SFX/Menu/menu_open.wav" id="4_6dloe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ajnud"]
+size = Vector2(46, 59)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4gdml"]
+radius = 124.016
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bhc2"]
+atlas = ExtResource("2_hn1d4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qq4pa"]
+atlas = ExtResource("2_hn1d4")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhyqm"]
+atlas = ExtResource("2_hn1d4")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2laug"]
+atlas = ExtResource("2_hn1d4")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6slff"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3bhc2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qq4pa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vhyqm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2laug")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Doll" type="StaticBody2D" node_paths=PackedStringArray("a_open")]
+script = ExtResource("1_0ytx3")
+a_open = NodePath("open")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_aiqwr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 66)
+shape = SubResource("RectangleShape2D_ajnud")
+
+[node name="interaction" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interaction"]
+position = Vector2(0, 29)
+shape = SubResource("CircleShape2D_4gdml")
+
+[node name="E" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -103)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_6slff")
+
+[node name="open" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_6dloe")
+volume_db = -20.0
+bus = &"SFX"
+
+[connection signal="area_entered" from="interaction" to="." method="_on_interaction_area_entered"]
+[connection signal="area_exited" from="interaction" to="." method="_on_interaction_area_exited"]

@@ -8,11 +8,12 @@ func _ready():
 	player.pause_pressed.connect(close)
 
 func close():
-	a_close.play()
-	visible = false
-	Paused.visible = true
-	player.HUD.visible = true
-	player.paused = true
+	if visible:
+		a_close.play()
+		visible = false
+		Paused.visible = true
+		player.HUD.visible = true
+		player.paused = true
 
 
 #vypne hru 👍

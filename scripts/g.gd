@@ -46,7 +46,7 @@ signal beChanged
 signal maxvialsChanged
 signal maxbulletsChanged
 
-var insight = 0
+var insight = 20
 signal iChanged
 
 var hp = 200
@@ -68,8 +68,8 @@ var Endurance = 10
 var Strength = 10
 var Bloodtinge = 10
 
-
-
+var ReqInsight = 1
+var LevelQuo = 1.25
 
 func _ready():
 	itemAmount.connect(check_inv)

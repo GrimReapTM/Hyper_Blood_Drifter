@@ -1,0 +1,740 @@
+[gd_scene load_steps=31 format=3 uid="uid://84s35u1w0bss"]
+
+[ext_resource type="Script" path="res://Scenes/UI_scenes/level_up.gd" id="1_5qqx0"]
+[ext_resource type="Texture2D" uid="uid://dx07ktpbl4qsj" path="res://sprites/HUD/inventory/LevelUp/LevelUp.png" id="1_ca1ur"]
+[ext_resource type="Texture2D" uid="uid://04x8i302s0bf" path="res://sprites/HUD/inventory/LevelUp/LevelUp_confirm.png" id="2_ua5ie"]
+[ext_resource type="FontFile" uid="uid://cflm7ac265lwi" path="res://fonts/pixelgeorgia.ttf" id="3_qqt4g"]
+[ext_resource type="AudioStream" uid="uid://bso7x6wk3cp8i" path="res://Audio/SFX/Menu/menu_close.wav" id="4_2m8tg"]
+[ext_resource type="AudioStream" uid="uid://cvl4xunh1pyk8" path="res://Audio/SFX/Menu/CURSOL_OK.wav" id="5_fkc84"]
+[ext_resource type="LabelSettings" uid="uid://cp635qsd3tqd2" path="res://fonts/stats.tres" id="6_8o478"]
+[ext_resource type="AudioStream" uid="uid://sqje2q0djoo1" path="res://Audio/SFX/Menu/CURSOL_SELECT.wav" id="6_ii7hf"]
+[ext_resource type="Texture2D" uid="uid://duv5qj4t40oto" path="res://sprites/HUD/inventory/LevelUp/LevelUp_button.png" id="6_maw31"]
+[ext_resource type="Texture2D" uid="uid://bnyxgxqwd7mqv" path="res://sprites/HUD/inventory/LevelUp/LevelUp_button_blue.png" id="7_mmuyy"]
+[ext_resource type="LabelSettings" uid="uid://dt5s1nkwovr4v" path="res://fonts/stat_numbers.tres" id="7_trwi7"]
+[ext_resource type="Texture2D" uid="uid://c8itmx3p6bvms" path="res://sprites/HUD/inventory/LevelUp/level_up_button_bg.png" id="8_rawma"]
+[ext_resource type="Texture2D" uid="uid://df68o627vbmra" path="res://sprites/HUD/inventory/LevelUp/LevelDown_button.png" id="9_egiew"]
+[ext_resource type="Texture2D" uid="uid://cvfybeoc2nr8r" path="res://sprites/HUD/inventory/LevelUp/LevelUp_button_hover.png" id="9_yojqt"]
+[ext_resource type="Texture2D" uid="uid://b1tlndcfvtuy2" path="res://sprites/HUD/inventory/LevelUp/LevelDown_button_hover.png" id="11_36j56"]
+[ext_resource type="Texture2D" uid="uid://dq0uh7tykdrna" path="res://sprites/HUD/inventory/LevelUp/LevelDown_button_red.png" id="12_qdgpj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_foq1w"]
+font = ExtResource("3_qqt4g")
+font_size = 30
+font_color = Color(0.890196, 0.843137, 0.756863, 0.47451)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.129412)
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3eyn6"]
+font = ExtResource("3_qqt4g")
+font_size = 70
+font_color = Color(0.862745, 0.690196, 0.407843, 1)
+shadow_size = 7
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_occxd"]
+font = ExtResource("3_qqt4g")
+font_size = 30
+font_color = Color(0.933333, 0.901961, 0.847059, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.129412)
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ayjqn"]
+font = ExtResource("3_qqt4g")
+font_size = 30
+font_color = Color(0.933333, 0.901961, 0.847059, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.129412)
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fxj6c"]
+font = ExtResource("3_qqt4g")
+font_size = 30
+font_color = Color(0.933333, 0.901961, 0.847059, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.129412)
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yexwy"]
+font = ExtResource("3_qqt4g")
+font_size = 30
+font_color = Color(0.933333, 0.901961, 0.847059, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.129412)
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bgtcd"]
+font = ExtResource("3_qqt4g")
+font_size = 30
+font_color = Color(0.933333, 0.901961, 0.847059, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.129412)
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kn8vp"]
+font = ExtResource("3_qqt4g")
+font_size = 30
+font_color = Color(0.933333, 0.901961, 0.847059, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.129412)
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0287c"]
+font = ExtResource("3_qqt4g")
+font_size = 30
+font_color = Color(0.933333, 0.901961, 0.847059, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.129412)
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cxofl"]
+font = ExtResource("3_qqt4g")
+font_size = 30
+font_color = Color(0.933333, 0.901961, 0.847059, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.129412)
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_21tbf"]
+font = ExtResource("3_qqt4g")
+font_size = 30
+font_color = Color(0.933333, 0.901961, 0.847059, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.129412)
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5t4ml"]
+font = ExtResource("3_qqt4g")
+font_size = 30
+font_color = Color(0.933333, 0.901961, 0.847059, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.129412)
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rofu2"]
+font = ExtResource("3_qqt4g")
+font_size = 30
+font_color = Color(0.933333, 0.901961, 0.847059, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.129412)
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e51fx"]
+font = ExtResource("3_qqt4g")
+font_size = 30
+font_color = Color(0.933333, 0.901961, 0.847059, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.129412)
+shadow_offset = Vector2(2, 1)
+
+[node name="LevelUp" type="Control" node_paths=PackedStringArray("a_ok", "a_confirm", "a_close", "confirmButton", "confirm", "confirm_label", "HP", "ST", "W1", "W2", "Beast", "Lv", "In", "Req", "Vit", "End", "Str", "Bld", "HPpr", "STpr", "W1pr", "W2pr", "Beastpr", "Lvpr", "Inpr", "Reqpr", "Vitpr", "Endpr", "Strpr", "Bldpr", "VitBg", "EndBg", "StrBg", "BldBg", "VitUp", "VitDwn", "EndUp", "EndDwn", "StrUp", "StrDwn", "BldUp", "BldDwn")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5qqx0")
+a_ok = NodePath("ok")
+a_confirm = NodePath("Confirm")
+a_close = NodePath("close")
+confirmButton = NodePath("ConfirmButton")
+confirm = NodePath("ConfirmButton/Confirm")
+confirm_label = NodePath("ConfirmButton/Confirm_Label")
+HP = NodePath("Right/HP/HP_num")
+ST = NodePath("Right/Stamina/ST_num")
+W1 = NodePath("Right/Weapon1/W1_num")
+W2 = NodePath("Right/Weapon2/W2_num")
+Beast = NodePath("Right/Beasthood/Beast_num")
+Lv = NodePath("Left/Level/Level_num")
+In = NodePath("Left/IN/Insight_num")
+Req = NodePath("Left/INR/Req_num")
+Vit = NodePath("Left/Stats/Vitality/Vitality_num")
+End = NodePath("Left/Stats/Endurance/Endurance_num")
+Str = NodePath("Left/Stats/Strength/Strength_num")
+Bld = NodePath("Left/Stats/Bloodtinge/Bloodtinge_num")
+HPpr = NodePath("Right/HP/HP_prev")
+STpr = NodePath("Right/Stamina/ST_prev")
+W1pr = NodePath("Right/Weapon1/W1_prev")
+W2pr = NodePath("Right/Weapon2/W2_prev")
+Beastpr = NodePath("Right/Beasthood/Beast_prev")
+Lvpr = NodePath("Left/Level/Level_prev")
+Inpr = NodePath("Left/IN/Insight_prev")
+Reqpr = NodePath("Left/INR/Req_prev")
+Vitpr = NodePath("Left/Stats/Vitality/Vit_prev")
+Endpr = NodePath("Left/Stats/Endurance/End_prev")
+Strpr = NodePath("Left/Stats/Strength/Strength_prev")
+Bldpr = NodePath("Left/Stats/Bloodtinge/Bloodtinge_prev")
+VitBg = NodePath("Level_Buttons/Vit/Bg")
+EndBg = NodePath("Level_Buttons/End/Bg")
+StrBg = NodePath("Level_Buttons/Str/Bg")
+BldBg = NodePath("Level_Buttons/Bld/Bg")
+VitUp = NodePath("Level_Buttons/Vit/VitLvUp")
+VitDwn = NodePath("Level_Buttons/Vit/VitLvDown")
+EndUp = NodePath("Level_Buttons/End/EndLvUp")
+EndDwn = NodePath("Level_Buttons/End/EndLvDown")
+StrUp = NodePath("Level_Buttons/Str/StrLvUp")
+StrDwn = NodePath("Level_Buttons/Str/StrLvDown")
+BldUp = NodePath("Level_Buttons/Bld/BldLvUp")
+BldDwn = NodePath("Level_Buttons/Bld/BldLvDown")
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1284.0
+offset_bottom = 718.0
+color = Color(0.0470588, 0.0470588, 0.0470588, 0.933333)
+metadata/_edit_lock_ = true
+
+[node name="LevelUp" type="Sprite2D" parent="."]
+position = Vector2(640, 359)
+scale = Vector2(4, 4)
+texture = ExtResource("1_ca1ur")
+
+[node name="ConfirmButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 692.0
+offset_top = 559.0
+offset_right = 1141.0
+offset_bottom = 624.0
+disabled = true
+flat = true
+
+[node name="Confirm" type="Sprite2D" parent="ConfirmButton"]
+position = Vector2(226, 32)
+scale = Vector2(4, 4)
+texture = ExtResource("2_ua5ie")
+hframes = 2
+
+[node name="Confirm_Label" type="Label" parent="ConfirmButton"]
+offset_left = 145.0
+offset_top = 8.0
+offset_right = 295.0
+offset_bottom = 38.0
+text = "Confirm"
+label_settings = SubResource("LabelSettings_foq1w")
+
+[node name="Shop" type="Label" parent="."]
+offset_left = 68.0
+offset_top = 78.0
+offset_right = 479.0
+offset_bottom = 148.0
+scale = Vector2(0.5, 0.5)
+text = "Level Up"
+label_settings = SubResource("LabelSettings_3eyn6")
+
+[node name="close" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_2m8tg")
+volume_db = -30.0
+bus = &"SFX"
+
+[node name="Confirm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_fkc84")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="ok" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ii7hf")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="Level_Buttons" type="Node2D" parent="."]
+
+[node name="Vit" type="Node2D" parent="Level_Buttons"]
+
+[node name="Bg" type="Sprite2D" parent="Level_Buttons/Vit"]
+visible = false
+position = Vector2(610, 425)
+scale = Vector2(4, 4)
+texture = ExtResource("8_rawma")
+
+[node name="VitLvUp" type="TextureButton" parent="Level_Buttons/Vit"]
+offset_left = 588.0
+offset_top = 403.0
+offset_right = 599.0
+offset_bottom = 414.0
+scale = Vector2(4, 4)
+disabled = true
+keep_pressed_outside = true
+texture_normal = ExtResource("6_maw31")
+texture_pressed = ExtResource("7_mmuyy")
+texture_hover = ExtResource("9_yojqt")
+
+[node name="VitLvDown" type="TextureButton" parent="Level_Buttons/Vit"]
+visible = false
+offset_left = 473.0
+offset_top = 407.0
+offset_right = 481.0
+offset_bottom = 416.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("9_egiew")
+texture_pressed = ExtResource("12_qdgpj")
+texture_hover = ExtResource("11_36j56")
+
+[node name="End" type="Node2D" parent="Level_Buttons"]
+position = Vector2(0, 50)
+
+[node name="Bg" type="Sprite2D" parent="Level_Buttons/End"]
+visible = false
+position = Vector2(610, 435)
+scale = Vector2(4, 4)
+texture = ExtResource("8_rawma")
+
+[node name="EndLvUp" type="TextureButton" parent="Level_Buttons/End"]
+offset_left = 588.0
+offset_top = 413.0
+offset_right = 599.0
+offset_bottom = 424.0
+scale = Vector2(4, 4)
+disabled = true
+keep_pressed_outside = true
+texture_normal = ExtResource("6_maw31")
+texture_pressed = ExtResource("7_mmuyy")
+texture_hover = ExtResource("9_yojqt")
+
+[node name="EndLvDown" type="TextureButton" parent="Level_Buttons/End"]
+visible = false
+offset_left = 473.0
+offset_top = 417.0
+offset_right = 481.0
+offset_bottom = 426.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("9_egiew")
+texture_pressed = ExtResource("12_qdgpj")
+texture_hover = ExtResource("11_36j56")
+
+[node name="Str" type="Node2D" parent="Level_Buttons"]
+position = Vector2(0, 100)
+
+[node name="Bg" type="Sprite2D" parent="Level_Buttons/Str"]
+visible = false
+position = Vector2(610, 445)
+scale = Vector2(4, 4)
+texture = ExtResource("8_rawma")
+
+[node name="StrLvUp" type="TextureButton" parent="Level_Buttons/Str"]
+offset_left = 588.0
+offset_top = 423.0
+offset_right = 599.0
+offset_bottom = 434.0
+scale = Vector2(4, 4)
+disabled = true
+keep_pressed_outside = true
+texture_normal = ExtResource("6_maw31")
+texture_pressed = ExtResource("7_mmuyy")
+texture_hover = ExtResource("9_yojqt")
+
+[node name="StrLvDown" type="TextureButton" parent="Level_Buttons/Str"]
+visible = false
+offset_left = 473.0
+offset_top = 427.0
+offset_right = 481.0
+offset_bottom = 436.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("9_egiew")
+texture_pressed = ExtResource("12_qdgpj")
+texture_hover = ExtResource("11_36j56")
+
+[node name="Bld" type="Node2D" parent="Level_Buttons"]
+position = Vector2(0, 200)
+
+[node name="Bg" type="Sprite2D" parent="Level_Buttons/Bld"]
+visible = false
+position = Vector2(610, 405)
+scale = Vector2(4, 4)
+texture = ExtResource("8_rawma")
+
+[node name="BldLvUp" type="TextureButton" parent="Level_Buttons/Bld"]
+offset_left = 588.0
+offset_top = 383.0
+offset_right = 599.0
+offset_bottom = 394.0
+scale = Vector2(4, 4)
+disabled = true
+keep_pressed_outside = true
+texture_normal = ExtResource("6_maw31")
+texture_pressed = ExtResource("7_mmuyy")
+texture_hover = ExtResource("9_yojqt")
+
+[node name="BldLvDown" type="TextureButton" parent="Level_Buttons/Bld"]
+visible = false
+offset_left = 473.0
+offset_top = 387.0
+offset_right = 481.0
+offset_bottom = 396.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("9_egiew")
+texture_pressed = ExtResource("12_qdgpj")
+texture_hover = ExtResource("11_36j56")
+
+[node name="Right" type="Node2D" parent="."]
+position = Vector2(130, 0)
+
+[node name="HP" type="Node2D" parent="Right"]
+
+[node name="HP" type="Label" parent="Right/HP"]
+offset_left = 585.0
+offset_top = 181.0
+offset_right = 657.0
+offset_bottom = 211.0
+text = "HP"
+label_settings = ExtResource("6_8o478")
+
+[node name="HP_num" type="Label" parent="Right/HP"]
+offset_left = 914.0
+offset_top = 180.0
+offset_right = 1014.0
+offset_bottom = 210.0
+text = "654"
+label_settings = SubResource("LabelSettings_occxd")
+horizontal_alignment = 2
+
+[node name="HP_prev" type="Label" parent="Right/HP"]
+visible = false
+offset_left = 731.0
+offset_top = 180.0
+offset_right = 912.0
+offset_bottom = 210.0
+text = "640 >"
+label_settings = ExtResource("7_trwi7")
+horizontal_alignment = 2
+
+[node name="Stamina" type="Node2D" parent="Right"]
+position = Vector2(0, 50)
+
+[node name="ST" type="Label" parent="Right/Stamina"]
+offset_left = 585.0
+offset_top = 199.0
+offset_right = 821.0
+offset_bottom = 229.0
+text = "Stamina"
+label_settings = ExtResource("6_8o478")
+
+[node name="ST_num" type="Label" parent="Right/Stamina"]
+offset_left = 882.0
+offset_top = 199.0
+offset_right = 1012.0
+offset_bottom = 229.0
+text = "75"
+label_settings = SubResource("LabelSettings_ayjqn")
+horizontal_alignment = 2
+
+[node name="ST_prev" type="Label" parent="Right/Stamina"]
+visible = false
+offset_left = 759.0
+offset_top = 200.0
+offset_right = 910.0
+offset_bottom = 230.0
+text = "640 >"
+label_settings = ExtResource("7_trwi7")
+horizontal_alignment = 2
+
+[node name="Weapon1" type="Node2D" parent="Right"]
+position = Vector2(0, 100)
+
+[node name="W1" type="Label" parent="Right/Weapon1"]
+offset_left = 585.0
+offset_top = 254.0
+offset_right = 821.0
+offset_bottom = 284.0
+text = "R-hand WPN"
+label_settings = ExtResource("6_8o478")
+
+[node name="W1_num" type="Label" parent="Right/Weapon1"]
+offset_left = 883.0
+offset_top = 254.0
+offset_right = 1013.0
+offset_bottom = 284.0
+text = "25"
+label_settings = SubResource("LabelSettings_fxj6c")
+horizontal_alignment = 2
+
+[node name="W1_prev" type="Label" parent="Right/Weapon1"]
+visible = false
+offset_left = 806.0
+offset_top = 254.0
+offset_right = 910.0
+offset_bottom = 284.0
+text = "20 >"
+label_settings = ExtResource("7_trwi7")
+horizontal_alignment = 2
+
+[node name="Weapon2" type="Node2D" parent="Right"]
+position = Vector2(0, 200)
+
+[node name="W2" type="Label" parent="Right/Weapon2"]
+offset_left = 585.0
+offset_top = 222.0
+offset_right = 821.0
+offset_bottom = 252.0
+text = "L-hand WPN"
+label_settings = ExtResource("6_8o478")
+
+[node name="W2_num" type="Label" parent="Right/Weapon2"]
+offset_left = 884.0
+offset_top = 222.0
+offset_right = 1014.0
+offset_bottom = 252.0
+text = "5"
+label_settings = SubResource("LabelSettings_yexwy")
+horizontal_alignment = 2
+
+[node name="W2_prev" type="Label" parent="Right/Weapon2"]
+visible = false
+offset_left = 806.0
+offset_top = 222.0
+offset_right = 910.0
+offset_bottom = 252.0
+text = "20 >"
+label_settings = ExtResource("7_trwi7")
+horizontal_alignment = 2
+
+[node name="Beasthood" type="Node2D" parent="Right"]
+position = Vector2(0, 300)
+
+[node name="Beast" type="Label" parent="Right/Beasthood"]
+offset_left = 585.0
+offset_top = 191.0
+offset_right = 821.0
+offset_bottom = 221.0
+text = "Beasthood"
+label_settings = ExtResource("6_8o478")
+
+[node name="Beast_num" type="Label" parent="Right/Beasthood"]
+offset_left = 835.0
+offset_top = 191.0
+offset_right = 1012.0
+offset_bottom = 221.0
+text = "203"
+label_settings = SubResource("LabelSettings_bgtcd")
+horizontal_alignment = 2
+
+[node name="Beast_prev" type="Label" parent="Right/Beasthood"]
+visible = false
+offset_left = 806.0
+offset_top = 191.0
+offset_right = 910.0
+offset_bottom = 221.0
+text = "20 >"
+label_settings = ExtResource("7_trwi7")
+horizontal_alignment = 2
+
+[node name="Left" type="Node2D" parent="."]
+position = Vector2(-703, 0)
+
+[node name="Level" type="Node2D" parent="Left"]
+
+[node name="Level" type="Label" parent="Left/Level"]
+offset_left = 836.0
+offset_top = 179.0
+offset_right = 974.0
+offset_bottom = 209.0
+text = "Level"
+label_settings = ExtResource("6_8o478")
+
+[node name="Level_num" type="Label" parent="Left/Level"]
+offset_left = 1176.0
+offset_top = 180.0
+offset_right = 1282.0
+offset_bottom = 210.0
+text = "1"
+label_settings = SubResource("LabelSettings_kn8vp")
+horizontal_alignment = 2
+
+[node name="Level_prev" type="Label" parent="Left/Level"]
+visible = false
+offset_left = 1066.0
+offset_top = 178.0
+offset_right = 1170.0
+offset_bottom = 208.0
+text = "20 >"
+label_settings = ExtResource("7_trwi7")
+horizontal_alignment = 2
+
+[node name="IN" type="Node2D" parent="Left"]
+
+[node name="Insight" type="Label" parent="Left/IN"]
+offset_left = 834.0
+offset_top = 240.0
+offset_right = 1118.0
+offset_bottom = 270.0
+text = "Insight"
+label_settings = ExtResource("6_8o478")
+
+[node name="Insight_num" type="Label" parent="Left/IN"]
+offset_left = 1135.0
+offset_top = 240.0
+offset_right = 1284.0
+offset_bottom = 270.0
+text = "123"
+label_settings = SubResource("LabelSettings_0287c")
+horizontal_alignment = 2
+
+[node name="Insight_prev" type="Label" parent="Left/IN"]
+visible = false
+offset_left = 1066.0
+offset_top = 239.0
+offset_right = 1170.0
+offset_bottom = 269.0
+text = "20 >"
+label_settings = ExtResource("7_trwi7")
+horizontal_alignment = 2
+
+[node name="INR" type="Node2D" parent="Left"]
+
+[node name="Required" type="Label" parent="Left/INR"]
+offset_left = 834.0
+offset_top = 299.0
+offset_right = 1049.0
+offset_bottom = 329.0
+text = "Required"
+label_settings = ExtResource("6_8o478")
+
+[node name="Req_num" type="Label" parent="Left/INR"]
+offset_left = 1110.0
+offset_top = 298.0
+offset_right = 1283.0
+offset_bottom = 328.0
+text = "12"
+label_settings = SubResource("LabelSettings_cxofl")
+horizontal_alignment = 2
+
+[node name="Req_prev" type="Label" parent="Left/INR"]
+visible = false
+offset_left = 1066.0
+offset_top = 298.0
+offset_right = 1170.0
+offset_bottom = 328.0
+text = "20 >"
+label_settings = ExtResource("7_trwi7")
+horizontal_alignment = 2
+
+[node name="Stats" type="Node2D" parent="Left"]
+
+[node name="Vitality" type="Node2D" parent="Left/Stats"]
+
+[node name="Vitality" type="Label" parent="Left/Stats/Vitality"]
+offset_left = 834.0
+offset_top = 411.0
+offset_right = 1015.0
+offset_bottom = 444.0
+text = "Vitality"
+label_settings = ExtResource("6_8o478")
+
+[node name="Vitality_num" type="Label" parent="Left/Stats/Vitality"]
+offset_left = 1214.0
+offset_top = 410.0
+offset_right = 1283.0
+offset_bottom = 440.0
+text = "10"
+label_settings = SubResource("LabelSettings_21tbf")
+horizontal_alignment = 2
+
+[node name="Vit_prev" type="Label" parent="Left/Stats/Vitality"]
+visible = false
+offset_left = 1066.0
+offset_top = 410.0
+offset_right = 1170.0
+offset_bottom = 440.0
+text = "20 >"
+label_settings = ExtResource("7_trwi7")
+horizontal_alignment = 2
+
+[node name="Endurance" type="Node2D" parent="Left/Stats"]
+
+[node name="Endurance" type="Label" parent="Left/Stats/Endurance"]
+offset_left = 835.0
+offset_top = 472.0
+offset_right = 1024.0
+offset_bottom = 502.0
+text = "Endurance"
+label_settings = ExtResource("6_8o478")
+
+[node name="Endurance_num" type="Label" parent="Left/Stats/Endurance"]
+offset_left = 1243.0
+offset_top = 469.0
+offset_right = 1283.0
+offset_bottom = 499.0
+text = "5"
+label_settings = SubResource("LabelSettings_5t4ml")
+horizontal_alignment = 2
+
+[node name="End_prev" type="Label" parent="Left/Stats/Endurance"]
+visible = false
+offset_left = 1066.0
+offset_top = 471.0
+offset_right = 1170.0
+offset_bottom = 501.0
+text = "20 >"
+label_settings = ExtResource("7_trwi7")
+horizontal_alignment = 2
+
+[node name="Strength" type="Node2D" parent="Left/Stats"]
+
+[node name="Strength" type="Label" parent="Left/Stats/Strength"]
+offset_left = 835.0
+offset_top = 532.0
+offset_right = 991.0
+offset_bottom = 562.0
+text = "Strength"
+label_settings = ExtResource("6_8o478")
+
+[node name="Strength_num" type="Label" parent="Left/Stats/Strength"]
+offset_left = 1242.0
+offset_top = 528.0
+offset_right = 1282.0
+offset_bottom = 558.0
+text = "10"
+label_settings = SubResource("LabelSettings_rofu2")
+horizontal_alignment = 2
+
+[node name="Strength_prev" type="Label" parent="Left/Stats/Strength"]
+visible = false
+offset_left = 1066.0
+offset_top = 531.0
+offset_right = 1170.0
+offset_bottom = 561.0
+text = "20 >"
+label_settings = ExtResource("7_trwi7")
+horizontal_alignment = 2
+
+[node name="Bloodtinge" type="Node2D" parent="Left/Stats"]
+
+[node name="Bloodtinge" type="Label" parent="Left/Stats/Bloodtinge"]
+offset_left = 834.0
+offset_top = 592.0
+offset_right = 1014.0
+offset_bottom = 622.0
+text = "Bloodtinge"
+label_settings = ExtResource("6_8o478")
+
+[node name="Bloodtinge_num" type="Label" parent="Left/Stats/Bloodtinge"]
+offset_left = 1241.0
+offset_top = 589.0
+offset_right = 1281.0
+offset_bottom = 619.0
+text = "10"
+label_settings = SubResource("LabelSettings_e51fx")
+horizontal_alignment = 2
+
+[node name="Bloodtinge_prev" type="Label" parent="Left/Stats/Bloodtinge"]
+visible = false
+offset_left = 1066.0
+offset_top = 591.0
+offset_right = 1170.0
+offset_bottom = 621.0
+text = "20 >"
+label_settings = ExtResource("7_trwi7")
+horizontal_alignment = 2
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="ConfirmButton" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="Level_Buttons/Vit/VitLvUp" to="." method="_on_vit_lv_up_pressed"]
+[connection signal="pressed" from="Level_Buttons/Vit/VitLvDown" to="." method="_on_vit_lv_down_pressed"]
+[connection signal="pressed" from="Level_Buttons/End/EndLvUp" to="." method="_on_end_lv_up_pressed"]
+[connection signal="pressed" from="Level_Buttons/End/EndLvDown" to="." method="_on_end_lv_down_pressed"]
+[connection signal="pressed" from="Level_Buttons/Str/StrLvUp" to="." method="_on_str_lv_up_pressed"]
+[connection signal="pressed" from="Level_Buttons/Str/StrLvDown" to="." method="_on_str_lv_down_pressed"]
+[connection signal="pressed" from="Level_Buttons/Bld/BldLvUp" to="." method="_on_bld_lv_up_pressed"]
+[connection signal="pressed" from="Level_Buttons/Bld/BldLvDown" to="." method="_on_bld_lv_down_pressed"]
