@@ -208,6 +208,7 @@ texture = ExtResource("2_ua5ie")
 hframes = 2
 
 [node name="Confirm_Label" type="Label" parent="ConfirmButton"]
+layout_mode = 0
 offset_left = 145.0
 offset_top = 8.0
 offset_right = 295.0
@@ -216,6 +217,7 @@ text = "Confirm"
 label_settings = SubResource("LabelSettings_foq1w")
 
 [node name="Shop" type="Label" parent="."]
+layout_mode = 0
 offset_left = 68.0
 offset_top = 78.0
 offset_right = 479.0
