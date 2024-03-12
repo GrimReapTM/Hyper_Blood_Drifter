@@ -1,7 +1,8 @@
-[gd_scene load_steps=44 format=3 uid="uid://brdakdtadahqx"]
+[gd_scene load_steps=46 format=3 uid="uid://brdakdtadahqx"]
 
 [ext_resource type="Texture2D" uid="uid://bodowo5fqv02g" path="res://sprites/tileset.png" id="1_fowpt"]
 [ext_resource type="PackedScene" uid="uid://buy61le6aimhl" path="res://Scenes/sfx.tscn" id="1_vtfbq"]
+[ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="1_ysnd0"]
 [ext_resource type="Texture2D" uid="uid://c1namygqbemua" path="res://sprites/terrain_fence.png" id="2_boaiw"]
 [ext_resource type="Texture2D" uid="uid://bqy2lfk77rlo4" path="res://sprites/hunters_dream.png" id="3_c4kdp"]
 [ext_resource type="PackedScene" uid="uid://oycliuo8lo5y" path="res://Scenes/entity scenes/player.tscn" id="3_hbuen"]
@@ -32,6 +33,12 @@
 [ext_resource type="PackedScene" uid="uid://dko3rmb7ykws3" path="res://Scenes/UI_scenes/death_screen.tscn" id="29_gaxrt"]
 [ext_resource type="PackedScene" uid="uid://cu77hnp5aj673" path="res://Scenes/UI_scenes/status.tscn" id="31_wj3m6"]
 [ext_resource type="PackedScene" uid="uid://bfnicevbagtf4" path="res://Scenes/UI_scenes/system.tscn" id="32_whnv3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mk6wj"]
+shader = ExtResource("1_ysnd0")
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.6
+shader_parameter/vignette_rgb = Vector4(0, 0, 0, 1)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y8bg1"]
 texture = ExtResource("1_fowpt")
@@ -389,6 +396,20 @@ shadow_offset = Vector2(2, 1)
 
 [node name="Area" type="Node2D"]
 y_sort_enabled = true
+
+[node name="ShaderLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="ShaderLayer"]
+material = SubResource("ShaderMaterial_mk6wj")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(1, 1, 1, 0)
+metadata/_edit_lock_ = true
 
 [node name="SFX" parent="." instance=ExtResource("1_vtfbq")]
 

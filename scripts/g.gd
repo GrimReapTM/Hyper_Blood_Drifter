@@ -109,7 +109,7 @@ func get_item(parameter, action):
 			price = 30
 		"throwing_knife":
 			item_name = "Throwing Knife"
-			item_description = "Finely serrated throwing knife"
+			item_description = "Finely serrated throwing knife."
 			item_frame = 3
 			price = 40
 		"beast_pellet":
@@ -149,17 +149,17 @@ func get_item(parameter, action):
 			price = 150
 		"madmans_knowledge":
 			item_name = "Madman's Knowledge"
-			item_description = "Use to gain 1 Insight"
+			item_description = "Use to gain 1 Insight."
 			item_frame = 11
 			price = 1000
 		"umbilical_cord":
 			item_name = "One Third of Umbilical Cord"
-			item_description = "Consume to gain insight, so they say, eyes on the inside"
+			item_description = "Consume to gain insight, so they say, eyes on the inside."
 			item_frame = 12
 			price = 3000
 		"vial":
 			item_name = "Blood Vial"
-			item_description = "Special blood used in ministration. Restores HP"
+			item_description = "Special blood used in ministration. Restores HP."
 			item_frame = 13
 			price = 20
 		"bullet":

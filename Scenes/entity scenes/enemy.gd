@@ -45,18 +45,18 @@ func _on_hurtbox_area_entered(area):
 				$Fire.start()
 				$FireDamage.start()
 			healthChanged.emit()
-			knockback(to_local(g.position), 10)
+			knockback(to_local(g.player_position), 10)
 		"bullet_hitbox":
 			if area.owner.ID == "player":
 				aggro = true
 				hp -= g.ranged_damage
 				healthChanged.emit()
-				knockback(to_local(g.position), 30)
+				knockback(to_local(g.player_position), 30)
 		"knife_hitbox":
 			aggro = true
 			hp -= 15
 			healthChanged.emit()
-			knockback(to_local(g.position), 30)
+			knockback(to_local(g.player_position), 30)
 		"fire_hitbox":
 			aggro = true
 			hp -= 1
@@ -123,7 +123,7 @@ var saved_index = -1
 var global_index = 0
 
 func attack_calculation():
-	var player_pos = g.position
+	var player_pos = g.player_position
 	var base = 999999999
 	var move_pos = 0
 	var index = 0
@@ -202,7 +202,7 @@ func instance_bullet():
 	var instance = bullet.instantiate()
 	instance.ID = "enemy"
 	instance.position = position
-	instance.direction = instance.position.direction_to(g.position)
+	instance.direction = instance.position.direction_to(g.player_position)
 	get_parent().call_deferred("add_child", instance)
 
 func movementAnimation():
@@ -300,7 +300,7 @@ func circle():
 		2:
 			target = position + circle_vectors2[attack_calculation()]
 	if not nav_agent.is_target_reachable():
-		target = g.position
+		target = g.player_position
 
 func back_off():
 	target = position + back_off_vectors[attack_calculation()]
@@ -343,7 +343,7 @@ func _on_action_timer_timeout():
 					long_range()
 			"follow":
 				new_round(true)
-				target = g.position
+				target = g.player_position
 
 func new_round(bol):
 	if bol:
@@ -366,7 +366,7 @@ func close_range():
 			back_off()
 
 func mid_range():
-	if target == g.position and dice_roll() >= 11:
+	if target == g.player_position and dice_roll() >= 11:
 		rounds = 1
 		return
 	else:
@@ -378,13 +378,13 @@ func mid_range():
 		4:
 			circle()
 		5,6,7,8,9,10,11:
-			target = g.position
+			target = g.player_position
 			rounds = 1
 		12:
 			back_off()
 
 func long_range():
-	if target == g.position and dice_roll() >= 4:
+	if target == g.player_position and dice_roll() >= 4:
 		rounds = 3
 		return
 	else:
@@ -397,7 +397,7 @@ func long_range():
 		5:
 			circle()
 		6,7,8,9,10,11,12:
-			target = g.position
+			target = g.player_position
 			rounds = 2
 
 
@@ -412,7 +412,7 @@ func _on_stagger_timer_timeout():
 
 func _process(delta):
 	if raycast.enabled:
-		raycast.target_position = Vector2(g.position.x, g.position.y + 60) - position
+		raycast.target_position = Vector2(g.player_position.x, g.player_position.y + 60) - position
 		if raycast.is_colliding() and "Player" in str(raycast.get_collider()):
 			aggro = true
 			raycast.enabled = false

@@ -55,6 +55,7 @@ scale = Vector2(4, 4)
 texture = ExtResource("3_eju74")
 
 [node name="Inventory_QuickItems" type="Label" parent="."]
+layout_mode = 0
 offset_left = 68.0
 offset_top = 78.0
 offset_right = 479.0
