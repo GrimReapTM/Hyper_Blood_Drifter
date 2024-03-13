@@ -513,7 +513,7 @@ func _on_walk_timer_timeout():
 # this just happens or something
 var tick = 20
 func _physics_process(delta):
-	g.position = position
+	g.player_position = position
 	movement(delta)
 	move_and_slide()
 	movementAnimation()

@@ -39,7 +39,6 @@ signal openShop
 
 
 # player
-var position
 var fire_damage = false
 var b_echoes = 7270
 signal beChanged

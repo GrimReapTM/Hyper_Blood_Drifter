@@ -223,9 +223,9 @@ func movementAnimation():
 # direction states
 var target = null
 
-func walk_to(t, delta):
+func walk_to(t):
 	if t != null:
-		velocity = to_local(nav_agent.get_next_path_position()).normalized() * speed * delta
+		velocity = to_local(nav_agent.get_next_path_position()).normalized() * speed * get_physics_process_delta_time()
 		if nav_agent.is_target_reached():
 			target = null
 			velocity = Vector2(0,0)
@@ -417,7 +417,7 @@ func _process(delta):
 			aggro = true
 			raycast.enabled = false
 
-	walk_to(target, delta)
+	walk_to(target)
 	move_and_slide()
 	attack_calculation()
 	movementAnimation()
