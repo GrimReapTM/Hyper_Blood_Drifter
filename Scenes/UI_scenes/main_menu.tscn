@@ -1,28 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://ftxp4shodc50"]
+[gd_scene load_steps=15 format=3 uid="uid://ftxp4shodc50"]
 
 [ext_resource type="Script" path="res://Scenes/UI_scenes/main_menu.gd" id="1_oemx4"]
 [ext_resource type="Texture2D" uid="uid://k0iffxp6fqkw" path="res://sprites/HUD/pause_buttons/main_menu_button_hover.png" id="1_urdqv"]
-[ext_resource type="FontFile" uid="uid://cflm7ac265lwi" path="res://fonts/pixelgeorgia.ttf" id="3_e1s5g"]
+[ext_resource type="LabelSettings" uid="uid://c28wx78vj7ejo" path="res://fonts/settings.tres" id="3_mlye4"]
 [ext_resource type="Texture2D" uid="uid://bkm55hfckjxon" path="res://sprites/HUD/main menu/main menu-Sheet.png" id="5_pbmkf"]
 [ext_resource type="AudioStream" uid="uid://hug8v3u8o4lv" path="res://Audio/SFX/Menu/CURSOL_MOVE.wav" id="6_qkybr"]
 [ext_resource type="AudioStream" uid="uid://sqje2q0djoo1" path="res://Audio/SFX/Menu/CURSOL_SELECT.wav" id="7_4ewre"]
 [ext_resource type="Script" path="res://Scenes/UI_scenes/Title.gd" id="7_mb7mv"]
 [ext_resource type="AudioStream" uid="uid://cvl4xunh1pyk8" path="res://Audio/SFX/Menu/CURSOL_OK.wav" id="8_j8wmi"]
 [ext_resource type="AudioStream" uid="uid://caxvwsanlkksl" path="res://Audio/SFX/Menu/CURSOL_CANCEL.wav" id="9_xpg1h"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_318ya"]
-font = ExtResource("3_e1s5g")
-font_size = 30
-font_color = Color(0.996078, 0.988235, 0.964706, 1)
-shadow_size = 7
-shadow_offset = Vector2(2, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_mjaw7"]
-font = ExtResource("3_e1s5g")
-font_size = 30
-font_color = Color(0.996078, 0.988235, 0.964706, 1)
-shadow_size = 7
-shadow_offset = Vector2(2, 1)
 
 [sub_resource type="Animation" id="Animation_75iwr"]
 length = 0.001
@@ -99,13 +85,6 @@ _data = {
 "woke_idle": SubResource("Animation_u65iu")
 }
 
-[sub_resource type="LabelSettings" id="LabelSettings_isgec"]
-font = ExtResource("3_e1s5g")
-font_size = 70
-font_color = Color(0.917647, 0.823529, 0.760784, 1)
-shadow_size = 7
-shadow_offset = Vector2(2, 1)
-
 [node name="Main_Menu" type="Control" node_paths=PackedStringArray("any_button", "a_move", "a_ok", "a_any_button", "a_cancel")]
 layout_mode = 3
 anchors_preset = 0
@@ -118,50 +97,49 @@ a_cancel = NodePath("CANCEL")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = -5.0
-offset_top = -8.0
-offset_right = 1288.0
-offset_bottom = 728.0
+offset_right = 1280.0
+offset_bottom = 720.0
 color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
 
 [node name="buttons" type="Node2D" parent="."]
 visible = false
 
 [node name="play" type="TextureButton" parent="buttons"]
-offset_left = 504.0
-offset_top = 512.0
-offset_right = 568.0
-offset_bottom = 544.0
+offset_left = 512.0
+offset_top = 528.0
+offset_right = 576.0
+offset_bottom = 546.0
 scale = Vector2(4, 4)
 texture_hover = ExtResource("1_urdqv")
 
 [node name="play_label" type="Label" parent="buttons/play"]
 layout_mode = 0
-offset_left = 20.25
-offset_top = 10.75
-offset_right = 98.25
-offset_bottom = 40.75
+offset_left = 19.25
+offset_top = 4.5
+offset_right = 97.25
+offset_bottom = 34.5
 scale = Vector2(0.35, 0.35)
 text = "Play"
-label_settings = SubResource("LabelSettings_318ya")
+label_settings = ExtResource("3_mlye4")
 
 [node name="quit" type="TextureButton" parent="buttons"]
-offset_left = 504.0
-offset_top = 593.0
-offset_right = 568.0
-offset_bottom = 625.0
+offset_left = 512.0
+offset_top = 624.0
+offset_right = 576.0
+offset_bottom = 642.0
 scale = Vector2(4, 4)
 texture_hover = ExtResource("1_urdqv")
 
 [node name="quit label" type="Label" parent="buttons/quit"]
 layout_mode = 0
-offset_left = 19.75
-offset_top = 11.0
-offset_right = 97.75
-offset_bottom = 41.0
+offset_left = 18.25
+offset_top = 4.5
+offset_right = 96.25
+offset_bottom = 34.5
 scale = Vector2(0.35, 0.35)
 text = "Quit"
-label_settings = SubResource("LabelSettings_mjaw7")
+label_settings = ExtResource("3_mlye4")
 horizontal_alignment = 1
 
 [node name="Title" type="Sprite2D" parent="." node_paths=PackedStringArray("menu", "buttons")]
@@ -181,13 +159,13 @@ libraries = {
 
 [node name="any_button" type="Label" parent="."]
 layout_mode = 0
-offset_left = 514.0
-offset_top = 612.0
-offset_right = 1205.0
-offset_bottom = 682.0
-scale = Vector2(0.35, 0.35)
+offset_left = 492.0
+offset_top = 608.0
+offset_right = 789.0
+offset_bottom = 638.0
 text = "Press Any Button"
-label_settings = SubResource("LabelSettings_isgec")
+label_settings = ExtResource("3_mlye4")
+horizontal_alignment = 1
 
 [node name="MOVE" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_qkybr")
