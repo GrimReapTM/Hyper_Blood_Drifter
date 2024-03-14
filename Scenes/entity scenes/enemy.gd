@@ -225,7 +225,7 @@ var target = null
 
 func walk_to(t):
 	if t != null:
-		velocity = to_local(nav_agent.get_next_path_position()).normalized() * speed * get_physics_process_delta_time()
+		velocity = to_local(nav_agent.get_next_path_position()).normalized() * speed * 50 * get_physics_process_delta_time()
 		if nav_agent.is_target_reached():
 			target = null
 			velocity = Vector2(0,0)
