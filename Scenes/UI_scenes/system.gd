@@ -51,7 +51,6 @@ func close():
 #vypne hru 👍
 func _on_quit_game_pressed():
 	a_quit.play()
-	await a_quit.finished
 	get_tree().quit()
 
 

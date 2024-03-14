@@ -1767,7 +1767,7 @@ collision_mask = 3
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_0s70u")
-speed = 30000
+speed = 350
 sfx = NodePath("SFX")
 fireParticles = NodePath("FireParticles")
 
