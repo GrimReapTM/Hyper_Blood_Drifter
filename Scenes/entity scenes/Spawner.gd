@@ -6,7 +6,7 @@ const beast = preload("res://Scenes/entity scenes/beast.tscn")
 var rng = RandomNumberGenerator.new()
 
 @export var timer: Timer
-@export var interval = 5
+@export var interval = 4
 
 func _ready():
 	timer.wait_time = interval
@@ -21,9 +21,17 @@ func _on_timer_timeout():
 			1: 
 				enemy = hunter.instantiate()
 		if enemy != null:
-			enemy.position = position
-			enemy.aggro = true
+			enemy.position = Vector2(position.x + random(), position.y + random())
+			if rng.randi_range(0,1) > 0:
+				enemy.aggro = true
 			owner.add_child(enemy)
+
+func random():
+	match rng.randi_range(0,1):
+		0:
+			return 30
+		1:
+			return -30
 
 
 func _on_wave_timer_timeout():
