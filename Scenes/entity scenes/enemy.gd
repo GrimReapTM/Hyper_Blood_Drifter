@@ -320,9 +320,7 @@ func _on_path_timer_timeout():
 var rounds = 0
 
 func dice_roll():
-	var die1 = rng.randi_range(1, 6)
-	var die2 = rng.randi_range(1, 6)
-	return die1 + die2
+	return rng.randi_range(1, 12)
 
 func _on_action_timer_timeout():
 	new_round(false)

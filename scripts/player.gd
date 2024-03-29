@@ -235,7 +235,7 @@ var saved_index = -1
 var global_index = 0
 
 func attack_calculation():
-		# we start attacking and setup the for loop below using the position in function above
+		# sets up the calculation with bunch of numbers (ignore base)
 	attacking = true
 	var mouse_pos = get_global_mouse_position()
 	var base = 999999999
@@ -243,9 +243,7 @@ func attack_calculation():
 	var index = 0
 	var quadrants = updateMousepos()
 		
-	#ok so this part does a really funny thing, it takes the points that are defined above and it
-	#calculates which point around the player is the closest to your cursor, and uses that point in the
-	# next function (the next function is dumb af)
+	# calculates the nearest point to cursor -> returns index -> that's the direction
 	for i in quadrants:
 		var pos = mouse_pos.distance_to(i)
 		if pos <= base:
@@ -255,7 +253,7 @@ func attack_calculation():
 	return move_pos
 
 
-# actually does the attacking (the function above is boring af ^^^^)
+# actually does the attacking
 func attack_melee(index):
 	#ani maishn :3
 	if saved_index == index and combo:
@@ -336,6 +334,8 @@ func instance_bullet():
 	else:
 		g.bullets -= 1
 		g.bulletsChanged.emit()
+
+
 var throw_item_
 
 func throw_item(item, index):
@@ -468,8 +468,6 @@ func staminaRecovery(delta):
 	if g.stamina < g.maxst and not staminaStop:
 		g.stamina += 1 * delta * 20
 		g.stChanged.emit()
-		
-
 
 func _on_melee_hitboxes_area_entered(area):
 	if area.name == "enemy_hurtbox":

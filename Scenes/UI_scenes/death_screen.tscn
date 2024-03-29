@@ -102,19 +102,19 @@ label_settings = ExtResource("2_63x2o")
 
 [node name="Restart" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 283.0
-offset_top = 471.0
-offset_right = 347.0
-offset_bottom = 503.0
+offset_left = 278.0
+offset_top = 504.0
+offset_right = 342.0
+offset_bottom = 522.0
 scale = Vector2(4, 4)
 texture_hover = ExtResource("3_4te1r")
 
 [node name="Label" type="Label" parent="Restart"]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 9.0
-offset_right = 297.0
-offset_bottom = 79.0
+offset_left = 4.5
+offset_top = 2.75
+offset_right = 298.5
+offset_bottom = 72.75
 scale = Vector2(0.2, 0.2)
 text = "Restart
 "
@@ -123,18 +123,18 @@ label_settings = SubResource("LabelSettings_mfekl")
 [node name="Quit" type="TextureButton" parent="."]
 layout_mode = 0
 offset_left = 763.0
-offset_top = 472.0
+offset_top = 506.0
 offset_right = 827.0
-offset_bottom = 504.0
+offset_bottom = 524.0
 scale = Vector2(4, 4)
 texture_hover = ExtResource("3_4te1r")
 
 [node name="Label" type="Label" parent="Quit"]
 layout_mode = 0
 offset_left = 14.75
-offset_top = 8.0
+offset_top = 1.75
 offset_right = 195.75
-offset_bottom = 78.0
+offset_bottom = 71.75
 scale = Vector2(0.2, 0.2)
 text = "Quit"
 label_settings = SubResource("LabelSettings_iudh8")

@@ -8,23 +8,39 @@
 
 [node name="Area" instance=ExtResource("1_kvvk4")]
 
-[node name="TileMap" parent="." index="2"]
-layer_0/tile_data = PackedInt32Array(917525, 524290, 8, 2097187, 0, 0, 1, 0, 0)
+[node name="goofy ahh hitbox" type="StaticBody2D" parent="." index="1"]
 
-[node name="Bath_messenger" parent="." index="3" node_paths=PackedStringArray("player") instance=ExtResource("2_0n4ii")]
-position = Vector2(890, 1372)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="goofy ahh hitbox" index="0"]
+position = Vector2(106, 186)
+polygon = PackedVector2Array(300, 1177, 238, 1096, 207, 1092, 205, 965, 334, 966, 334, 946, 379, 946, 378, 898, 702, 898, 702, 946, 746, 946, 746, 966, 870, 966, 870, 946, 914, 946, 914, 898, 1150, 898, 1141, 988, 1141, 1055, 1328, 1050, 1430, 987, 1454, 862, 1458, 716, 164, 806, 152, 1149, 162, 1263, 181, 1674, 228, 1865, 647, 2038, 1044, 2034, 1501, 2036, 2095, 2053, 1905, 1910, 1891, 1710, 2076, 1655, 2124, 1491, 2103, 1177, 2100, 1051, 2022, 856, 1869, 768, 1679, 733, 1627, 661, 1486, 686, 1471, 834, 1591, 835, 1704, 836, 1789, 862, 1866, 904, 1865, 1012, 1857, 1128, 1862, 1225, 1838, 1297, 1838, 1370, 1866, 1412, 1836, 1452, 1835, 1612, 1850, 1644, 1858, 1896, 1141, 1891, 671, 1872, 547, 1795, 500, 1728, 429, 1618, 349, 1570, 322, 1455, 301, 1367, 346, 1285)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="goofy ahh hitbox" index="1"]
+polygon = PackedVector2Array(1185, 1817, 1239, 1813, 1280, 1820, 1308, 1815, 1357, 1813, 1384, 1817, 1398, 1827, 1431, 1831, 1457, 1863, 1458, 1880, 1437, 1899, 1368, 1911, 1286, 1913, 1261, 1897, 1250, 1904, 1184, 1902, 1160, 1875, 1157, 1847, 1167, 1824)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="goofy ahh hitbox" index="2"]
+polygon = PackedVector2Array(867, 1788, 841, 1785, 812, 1749, 781, 1740, 742, 1730, 714, 1706, 687, 1692, 684, 1663, 695, 1653, 668, 1633, 660, 1612, 648, 1595, 646, 1536, 664, 1514, 652, 1490, 656, 1351, 672, 1297, 686, 1251, 721, 1207, 760, 1199, 810, 1214, 826, 1243, 844, 1250, 934, 1252, 1149, 1247, 1282, 1243, 1484, 1240, 1565, 1159, 1568, 1065, 1672, 1070, 1723, 1149, 1728, 1352, 1726, 1436, 1690, 1436, 1647, 1556, 1441, 1558, 1385, 1504, 1136, 1503, 1136, 1499, 754, 1495, 744, 1527, 761, 1587, 759, 1637, 792, 1666, 802, 1680, 837, 1685, 849, 1699, 878, 1704, 891, 1714, 916, 1720, 938, 1744, 936, 1774, 931, 1789, 900, 1792)
+
+[node name="TileMap" parent="." index="3"]
+layer_0/tile_data = PackedInt32Array(0, 9699331, 0, 262147, 2293760, 0, 2228257, 2293760, 0, 1179668, 7274499, 0)
+layer_1/tile_data = PackedInt32Array(0, 3, 0)
+layer_3/tile_data = PackedInt32Array(0, 4849667, 0)
+layer_4/tile_data = PackedInt32Array(0, 3, 0)
+layer_5/tile_data = PackedInt32Array(0, 2424835, 0)
+
+[node name="Bath_messenger" parent="." index="4" node_paths=PackedStringArray("player") instance=ExtResource("2_0n4ii")]
+position = Vector2(861, 1543)
 player = NodePath("../Player")
 
-[node name="lamp" parent="." index="4" instance=ExtResource("3_4eu3t")]
-position = Vector2(1335, 1339)
+[node name="lamp" parent="." index="5" instance=ExtResource("3_4eu3t")]
+position = Vector2(1222, 1468)
 
-[node name="Doll" parent="." index="5" node_paths=PackedStringArray("player", "lvlup") instance=ExtResource("4_wxb6l")]
-position = Vector2(1569, 1334)
+[node name="Doll" parent="." index="6" node_paths=PackedStringArray("player", "lvlup") instance=ExtResource("4_wxb6l")]
+position = Vector2(1579, 1513)
 player = NodePath("../Player")
 lvlup = NodePath("../pause/LevelUp")
 
-[node name="Player" parent="." index="6"]
-position = Vector2(1277, 1510)
+[node name="Player" parent="." index="7"]
+position = Vector2(1287, 1703)
 
 [node name="current_item" parent="Player/HUD_canvas/HUD/up_left/container" index="0"]
 metadata/_edit_use_anchors_ = true

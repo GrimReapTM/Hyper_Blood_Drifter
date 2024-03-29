@@ -32,8 +32,9 @@ func update():
 func _ready():
 	g.beChanged.connect(update)
 	g.iChanged.connect(update)
-	messengers.open.connect(update)
-	messengers.open.connect(open)
+	if messengers != null:
+		messengers.open.connect(update)
+		messengers.open.connect(open)
 	player.pause_pressed.connect(close)
 	g.addItem.connect(add_item)
 	
