@@ -1,4 +1,4 @@
-# Hyper_Blood_Drifter
-uhhh uh,m usaghdfkjhasbfgljkhsdb
+# Hyper Blood Drifter
 
-čau
+Hyper Blood Drifter is a combination of Hyper Light Drifter and Bloodborne
+It barely works as either of them, but it's kinda enough
