@@ -40,12 +40,12 @@ signal openShop
 
 # player
 var fire_damage = false
-var b_echoes = 7270
+var b_echoes = 0
 signal beChanged
 signal maxvialsChanged
 signal maxbulletsChanged
 
-var insight = 20
+var insight = 0
 signal iChanged
 
 var hp = 200
