@@ -1,6 +1,6 @@
 extends Area2D
 
-const Fire = preload("res://Scenes/entity scenes/fire.tscn")
+const fire_scene = preload("res://Scenes/entity scenes/fire.tscn")
 
 
 var rng = RandomNumberGenerator.new()
@@ -47,7 +47,7 @@ func _on_gravity_timeout():
 
 func combust():
 	for i in range(rng.randi_range(20,40)):
-		var fire = Fire.instantiate()
+		var fire = fire_scene.instantiate()
 		fire.position = position
 		get_parent().call_deferred("add_child", fire)
 	queue_free()

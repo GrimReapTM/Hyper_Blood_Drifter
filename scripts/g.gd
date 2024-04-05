@@ -10,12 +10,14 @@ var bonus_damage = 0
 var melee_damage = 22 + bonus_damage + beast_damage
 var ranged_damage = 4
 
-var inventory = {}
+var inventory = {"pebble":3, "molotov_cocktail":12}
 var quick_slots = [null, null, null, null, null, null]
 var equiped_slot = null
+var old_slot = null
 var slot = 0
 var next_slot = 0
-var old_slot = null
+
+
 var player_position = Vector2()
 
 var vials = 20
@@ -40,12 +42,12 @@ signal openShop
 
 # player
 var fire_damage = false
-var b_echoes = 7270
+var b_echoes = 0
 signal beChanged
 signal maxvialsChanged
 signal maxbulletsChanged
 
-var insight = 20
+var insight = 0
 signal iChanged
 
 var hp = 200
