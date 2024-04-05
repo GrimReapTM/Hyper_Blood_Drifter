@@ -25,6 +25,9 @@ func update():
 func _on_restart_pressed():
 	get_tree().change_scene_to_file("res://Scenes/areas/Dream.tscn")
 	g.dead = false
+	visible = false
+	g.b_echoes = 0
+	g.hp = g.maxhp
 
 
 func _on_quit_pressed():
