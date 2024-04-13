@@ -469,7 +469,6 @@ scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_dy7t6")
 format = 2
 layer_0/name = "ground"
-layer_0/z_index = -1
 layer_1/name = "objects"
 layer_1/y_sort_enabled = true
 layer_1/tile_data = PackedInt32Array()
@@ -480,6 +479,7 @@ layer_3/tile_data = PackedInt32Array()
 layer_4/name = "dream_fence"
 layer_4/tile_data = PackedInt32Array()
 layer_5/name = "dream_stair"
+layer_5/y_sort_enabled = true
 layer_5/tile_data = PackedInt32Array()
 
 [node name="Player" parent="." node_paths=PackedStringArray("pauseMenu", "HUD", "HUD_up_left", "HUD_up_right", "StatusEffectContainer") instance=ExtResource("3_hbuen")]

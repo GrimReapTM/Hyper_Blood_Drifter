@@ -7,6 +7,7 @@ func _ready():
 	g.vialsChanged.connect(update)
 	update()
 
+# changes the label color and sprite depending on vial amount
 func update():
 	var fifth = int(g.max_vials/5)
 	text = str(g.vials)

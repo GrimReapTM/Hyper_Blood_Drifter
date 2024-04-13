@@ -10,7 +10,7 @@ var bonus_damage = 0
 var melee_damage = 22 + bonus_damage + beast_damage
 var ranged_damage = 4
 
-var inventory = {"pebble":3, "molotov_cocktail":12}
+var inventory = {}
 var quick_slots = [null, null, null, null, null, null]
 var equiped_slot = null
 var old_slot = null
